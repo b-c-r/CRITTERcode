@@ -1,7 +1,7 @@
 *C*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater
 p*r*edators (CRITTER, Code Repository)
 ================
-2025-02-19
+2025-02-20
 
 ## Summary
 
@@ -10,6 +10,8 @@ al. (unpublished) investigating the effect of habitat complexity on the
 feeding functional response of two freshwater invertebrate predators.
 You will find details on the methodology in the cited publication. We
 will link to it after we make it publicly available.
+
+**Note that this code is still under construction!**
 
 ## License
 
@@ -55,11 +57,17 @@ This code is published under a [**GNU General Public License
 
 - [Data on GitHub](https://github.com/b-c-r/CRITTERdata)
 
+- [R-Code on Zenodo](https://doi.org/10.5281/zenodo.14894598)
+  (**RallEtAl2025ComplexityReducesFeedingCode?**)
+
+- [R-Code on GitHub](https://github.com/b-c-r/CRITTERdata)
+
+- [Statistical Report on
+  GitHub](https://github.com/b-c-r/CRITTERstatistics)
+
+- Statistical Report on Zenodo (link tba)
+
 - Scientific Preprint Paper (link tba)
-
-- R-Code on Zenodo (link tba)
-
-- Supplementary Statistical Report (link tba)
 
 ## Brief Code Description
 
