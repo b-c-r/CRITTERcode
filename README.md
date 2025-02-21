@@ -310,6 +310,24 @@ Required packages to be attached:
 - `dplyr` (Wickham et al., 2023)
 - `foreach` (Microsoft & Weston, 2022b)
 
+#### `gen_fr_table`
+
+**`gen_fr_table`** creates a nice-looking table using the output from
+`gen_fr_fit_all`. Hard-coded and only useful in this project.
+
+Required packages and their dependencies to be installed:
+
+- `bbmle` (Bolker et al., 2023)
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `kableExtra` (Zhu, 2024)
+- `knitr` (Xie, 2024)
+
+Required packages to be attached:
+
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+
 ## Funding Information
 
 - Mireia Aranbarri was funded by the **Investigo Programm funded by the
@@ -528,6 +546,13 @@ Williams, R. J., & Martinez, N. D. (2004). Stabilization of chaotic and
 non-permanent food-web dynamics. *The European Physical Journal B:
 Condensed Matter and Complex Systems*, *38*(2), 297–303.
 <https://doi.org/10.1140/epjb/e2004-00122-1>
+
+</div>
+
+<div id="ref-Xie2024KnitrGeneralpurposePackage" class="csl-entry">
+
+Xie, Y. (2024). *Knitr: A general-purpose package for dynamic report
+generation in R*. <https://yihui.org/knitr/>
 
 </div>
 

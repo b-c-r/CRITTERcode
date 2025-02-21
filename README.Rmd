@@ -210,6 +210,22 @@ Required packages to be attached:
 - `dplyr` [@WickhamEtAl2023DplyrGrammarData]
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 
+#### `gen_fr_table`
+
+**`gen_fr_table`** creates a nice-looking table using the output from `gen_fr_fit_all`. Hard-coded and only useful in this project.
+
+Required packages and their dependencies to be installed:
+
+- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+- `kableExtra` [@Zhu2024KableExtraConstructComplex]
+- `knitr` [@Xie2024KnitrGeneralpurposePackage]
+
+Required packages to be attached:
+
+- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 
 ## Funding Information
 
