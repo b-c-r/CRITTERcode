@@ -24,10 +24,10 @@
 #'     the CRITTER project.
 #'     
 #'     Required packages and their dependencies to be installed:
-#'     - `foreach` (Microsoft and Weston 2022)
-#'     - `kableExtra` (Zhu et al. 2024)
+#'       - `foreach` (Microsoft and Weston 2022)
+#'       - `kableExtra` (Zhu et al. 2024)
 #'     Required packages to be attached:
-#'     - `foreach` (Microsoft and Weston 2022)
+#'       - `foreach` (Microsoft and Weston 2022)
 #'
 #' @references Microsoft and Weston (2022) foreach: provides foreach looping
 #'     construct. Version 1.5.2. https://doi.org/10.32614/CRAN.package.foreach

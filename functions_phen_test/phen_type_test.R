@@ -31,13 +31,13 @@
 #'     topic.
 #'     
 #'     Required packages and their dependencies to be installed:
-#'     - `dplyr` (Wickham et al. 2023)
-#'     - `purrr` (Wickham and Henry 2025)
-#'     - `foreach` (Microsoft and Weston 2022)
-#'     - `frair` (Pritchard et al. 2017b)
+#'       - `dplyr` (Wickham et al. 2023)
+#'       - `purrr` (Wickham and Henry 2025)
+#'       - `foreach` (Microsoft and Weston 2022)
+#'       - `frair` (Pritchard et al. 2017b)
 #'     Required packages to be attached:
-#'     - `dplyr` (Wickham et al. 2023)
-#'     - `foreach` (Microsoft and Weston 2022)
+#'       - `dplyr` (Wickham et al. 2023)
+#'       - `foreach` (Microsoft and Weston 2022)
 #' 
 #' @references Crawley (2012) The R Book. Wiley, Chichester, West Sussex, UK
 #' @references Juliano (2001) Nonlinear curve fitting: predation and functional
