@@ -42,7 +42,7 @@
 #'     
 #'     Required packages and their dependencies to be installed:
 #'       
-#'       - `odin` [@FitzJohn2024OdinODEGeneration]
+#'       - `odin` (FitzJohn and Jombart 2024)
 #'     
 #'     Required packages to be attached:
 #'       

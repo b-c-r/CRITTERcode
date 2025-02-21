@@ -34,7 +34,7 @@
 #'     'kable' and pipe syntax. Version 1.4.0.
 #'     https://doi.org/10.32614/CRAN.package.kableExtra
 #'
-#' @include functions_phen_test/phen_type_test.R
+#' @include phen_type_test.R
 #'
 #' @param phen_test_results a object created by create_phen_test
 #'
