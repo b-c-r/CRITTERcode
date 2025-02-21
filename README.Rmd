@@ -1,7 +1,7 @@
 ---
 title: "*C*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater p*r*edators (CRITTER, Code Repository)"
 bibliography: references/CRITTERcode.bib
-csl: references/methods-in-ecology-and-evolution.csl
+# csl: references/methods-in-ecology-and-evolution.csl
 date: "`r Sys.Date()`"
 output: github_document
 ---
@@ -116,6 +116,18 @@ Required packages to be attached:
 
 - None
 
+**`gen_fr_sim`** simulates time series across different initial prey densities. It returns only the number of initial prey items and the number of prey eaten at the end of the time series, mimicking common functional response laboratory experiments. The underlying functional response model is the generalized functional response model [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional]. Note that not integers, but floating numbers are returned by **`gen_fr_sim`**. **`gen_fr_sim`** depends on **`gen_fr_compile`**. Please find more details there.
+
+
+Required packages and their dependencies to be installed:
+
+- `odin` [@FitzJohn2024OdinODEGeneration]
+
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+
+Required packages to be attached:
+
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 
 ## Funding Information
 
