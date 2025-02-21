@@ -1,7 +1,7 @@
 *C*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater
 p*r*edators (CRITTER, Code Repository)
 ================
-2025-02-20
+2025-02-21
 
 ## Summary
 
@@ -75,7 +75,7 @@ This code is published under a [**GNU General Public License
 
 - Scientific Preprint Paper (link tba)
 
-## Brief Code Description
+## Code Description
 
 We predominantly used functions to organize our R code for this project.
 Each function is saved in a separate \*.R-file and documented
@@ -124,6 +124,47 @@ Required packages to be attached:
 
 - `foreach` (Microsoft & Weston, 2022)
 
+### Generalized Functional Response Model Functions
+
+The functions are located in `/functions_gen_fr/`.
+
+**`gen_fr_compile`** compiles the ordinary differential equation (ODE)
+describing the decay of resource items over time during a feeding
+functional response trial. The functional response model has a free
+shape parameter (Real, 1977, 1979), allowing a continuous shift of the
+shape of a classic type II functional response (Holling, 1959a) to a
+type III functional response (Holling, 1959b). The feeding rate, $F$,
+depends on the resource density, $N$, and the parameters of the model
+are the maximum feeding rate, $F_{max}$, the half saturation density,
+$N_{half}$, and the shape parameter $q$ (Vucic-Pestic et al., 2010;
+Williams & Martinez, 2004):
+
+$$
+F = \frac{F_{max}  N^{(1+q)}}{N_{half}^{(1+q)} + N^{(1+q)}}.
+$$
+
+The resulting ODE, describing the decay of the resource over time,
+$dN/dt$, is:
+
+$$
+\frac{dN}{dt} =  \frac{-F_{max}  N^{(1+q)}}{N_{half}^{(1+q)} + N^{(1+q)}}.
+$$
+
+A numerical simulation is required as there is no analytical solution
+for this problem (Rosenbaum & Rall, 2018). We use the R package “odin”
+(FitzJohn, 2024) to create a fast simulation model in C. This model can
+be used to estimate the exact shape of the functional response or test
+if a functional response is type II or type III (Rosenbaum & Rall,
+2018).
+
+Required packages and their dependencies to be installed:
+
+- `odin` (FitzJohn, 2024)
+
+Required packages to be attached:
+
+- None
+
 ## Funding Information
 
 - Mireia Aranbarri was funded by the **Investigo Programm funded by the
@@ -148,6 +189,13 @@ Crawley, M. J. (2012). *The R Book* (2. ed.). Wiley.
 
 </div>
 
+<div id="ref-FitzJohn2024OdinODEGeneration" class="csl-entry">
+
+FitzJohn, R. (2024). *Odin: ODE generation and integration*.
+<https://doi.org/10.32614/CRAN.package.odin>
+
+</div>
+
 <div id="ref-FloresEtAl2025ComplexityReducesFeedingData"
 class="csl-entry">
 
@@ -155,6 +203,23 @@ Flores, L., Reiss, J., Larrañaga, A., Rall, B. C., Aranbarri, M., &
 Guzmán, I. de. (2025). *Complexity reduces feeding strength of
 freshwater predators (CRITTER) Data*. Zenodo.
 <https://doi.org/10.5281/zenodo.14891980>
+
+</div>
+
+<div id="ref-Holling1959CharacteristicsSimpleTypes" class="csl-entry">
+
+Holling, C. S. (1959a). Some characteristics of simple types of
+predation and parasitism. *The Canadian Entomologist*, *91*(7), 385–398.
+<https://doi.org/10.4039/Ent91385-7>
+
+</div>
+
+<div id="ref-Holling1959ComponentsPredationRevealed" class="csl-entry">
+
+Holling, C. S. (1959b). The components of predation as revealed by a
+study of small-mammal predation of the european pine sawfly. *The
+Canadian Entomologist*, *91*(5), 293–320.
+<https://doi.org/10.4039/Ent91293-5>
 
 </div>
 
@@ -192,6 +257,41 @@ functional responses. *Methods in Ecology and Evolution*, *8*(11),
 
 </div>
 
+<div id="ref-Real1977KineticsFunctionalResponse" class="csl-entry">
+
+Real, L. A. (1977). The kinetics of functional response. *The American
+Naturalist*, *111*(978), 289–300. <https://doi.org/10.1086/283161>
+
+</div>
+
+<div id="ref-Real1979EcologicalDeterminantsFunctional"
+class="csl-entry">
+
+Real, L. A. (1979). Ecological determinants of functional response.
+*Ecology*, *60*(3), 481–485. <https://doi.org/10.2307/1936067>
+
+</div>
+
+<div id="ref-RosenbaumRall2018FittingFunctionalResponses"
+class="csl-entry">
+
+Rosenbaum, B., & Rall, B. C. (2018). Fitting functional responses:
+Direct parameter estimation by simulating differential equations.
+*Methods in Ecology and Evolution*, *9*(10), 2076–2090.
+<https://doi.org/10.1111/2041-210X.13039>
+
+</div>
+
+<div id="ref-Vucic-PesticEtAl2010AllometricFunctionalResponse"
+class="csl-entry">
+
+Vucic-Pestic, O., Rall, B. C., Kalinkat, G., & Brose, U. (2010).
+Allometric functional response model: Body masses constrain interaction
+strengths. *Journal of Animal Ecology*, *79*(1), 249–256.
+<https://doi.org/10.1111/j.1365-2656.2009.01622.x>
+
+</div>
+
 <div id="ref-WickhamEtAl2024Roxygen2InLineDocumentation"
 class="csl-entry">
 
@@ -214,6 +314,16 @@ class="csl-entry">
 
 Wickham, H., & Henry, L. (2025). *Purrr: Functional programming tools*.
 <https://doi.org/10.32614/CRAN.package.purrr>
+
+</div>
+
+<div id="ref-WilliamsMartinez2004StabilizationChaoticNonpermanent"
+class="csl-entry">
+
+Williams, R. J., & Martinez, N. D. (2004). Stabilization of chaotic and
+non-permanent food-web dynamics. *The European Physical Journal B:
+Condensed Matter and Complex Systems*, *38*(2), 297–303.
+<https://doi.org/10.1140/epjb/e2004-00122-1>
 
 </div>
 

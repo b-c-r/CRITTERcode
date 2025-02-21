@@ -57,7 +57,7 @@ This code is published under a [**GNU General Public License 3**](https://www.gn
 
 -   Scientific Preprint Paper (link tba)
 
-## Brief Code Description
+## Code Description
 
 We predominantly used functions to organize our R code for this project. Each function is saved in a separate \*.R-file and documented approximately in roxygen2 style [@WickhamEtAl2024Roxygen2InLineDocumentation]. The functions depend mostly hierarchically on each other. All functions are saved in the project's sub folder called functions_*.
 
@@ -89,6 +89,33 @@ Required packages and their dependencies to be installed:
 Required packages to be attached:
 
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+
+### Generalized Functional Response Model Functions
+
+The functions are located in `/functions_gen_fr/`.
+
+**`gen_fr_compile`** compiles the ordinary differential equation (ODE) describing the decay of resource items over time during a feeding functional response trial. The functional response model has a free shape parameter [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional], allowing a continuous shift of the shape of a classic type II functional response [@Holling1959CharacteristicsSimpleTypes] to a type III functional response [@Holling1959ComponentsPredationRevealed]. The feeding rate, $F$, depends on the resource density, $N$, and the parameters of the model are the maximum feeding rate, $F_{max}$, the half saturation density, $N_{half}$, and the shape parameter $q$ [@WilliamsMartinez2004StabilizationChaoticNonpermanent; @Vucic-PesticEtAl2010AllometricFunctionalResponse]:
+
+$$
+F = \frac{F_{max}  N^{(1+q)}}{N_{half}^{(1+q)} + N^{(1+q)}}.
+$$
+
+The resulting ODE, describing the decay of the resource over time, $dN/dt$, is:
+
+$$
+\frac{dN}{dt} =  \frac{-F_{max}  N^{(1+q)}}{N_{half}^{(1+q)} + N^{(1+q)}}.
+$$
+
+A numerical simulation is required as there is no analytical solution for this problem [@RosenbaumRall2018FittingFunctionalResponses]. We use the R package “odin” [@FitzJohn2024OdinODEGeneration] to create a fast simulation model in C. This model can be used to estimate the exact shape of the functional response or test if a functional response is type II or type III [@RosenbaumRall2018FittingFunctionalResponses].
+
+Required packages and their dependencies to be installed:
+
+- `odin` [@FitzJohn2024OdinODEGeneration]
+
+Required packages to be attached:
+
+- None
+
 
 ## Funding Information
 
