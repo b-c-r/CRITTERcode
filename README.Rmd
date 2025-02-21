@@ -180,11 +180,30 @@ Required packages to be attached:
 
 Required packages and their dependencies to be installed:
 
-. `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
 - `dplyr` [@WickhamEtAl2023DplyrGrammarData]
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 - `lhs` [@Carnell2024LhsLatinHypercubea]
 - `odin` [@FitzJohn2024OdinODEGeneration]
+
+Required packages to be attached:
+
+- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+
+#### `gen_fr_fit_all`
+
+**`gen_fr_fit_all`** fits the generalized functional response model [@Real1977KineticsFunctionalResponse; @RosenbaumRall2018FittingFunctionalResponses] by running `gen_fr_fit` for all treatments in parallel.
+
+Required packages and their dependencies to be installed:
+
+- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+- `doParallel` [@MicrosoftWeston2022DoParallelForeachParallel]
+- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+- `lhs` [@Carnell2024LhsLatinHypercubea]
+- `odin` [@FitzJohn2024OdinODEGeneration]
+- `purrr` [@WickhamHenry2025PurrrFunctionalProgramming]
 
 Required packages to be attached:
 

@@ -104,13 +104,13 @@ Required packages and their dependencies to be installed:
 
 - `dplyr` (Wickham et al., 2023)
 - `purrr` (Wickham & Henry, 2025)
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 - `frair` (Pritchard, Barrios-O’Neill, et al., 2017)
 
 Required packages to be attached:
 
 - `dplyr` (Wickham et al., 2023)
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 
 #### `phen_type_table`
 
@@ -122,12 +122,12 @@ project.
 
 Required packages and their dependencies to be installed:
 
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 - `kableExtra` (Zhu, 2024)
 
 Required packages to be attached:
 
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 
 ### Generalized Functional Response Model Functions
 
@@ -187,11 +187,11 @@ Required packages and their dependencies to be installed:
 
 - `odin` (FitzJohn, 2024)
 
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 
 Required packages to be attached:
 
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 
 #### `gen_fr_nll`
 
@@ -231,11 +231,11 @@ that the function returns `NA` (Bolker, 2008).
 Required packages and their dependencies to be installed:
 
 - `odin` (FitzJohn, 2024)
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 
 Required packages to be attached:
 
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 
 #### `gen_fr_parms_scan`
 
@@ -257,13 +257,13 @@ possible, it is recommended to use Latin hypercube sampling.
 
 Required packages and their dependencies to be installed:
 
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 - `lhs` (Carnell, 2024)
 - `odin` (FitzJohn, 2024)
 
 Required packages to be attached:
 
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
 
 #### `gen_fr_fit`
 
@@ -278,14 +278,37 @@ you can enter t_end = 24.
 
 Required packages and their dependencies to be installed:
 
-. `bbmle` (Bolker et al., 2023) - `dplyr` (Wickham et al., 2023) -
-`foreach` (Microsoft & Weston, 2022) - `lhs` (Carnell, 2024) - `odin`
-(FitzJohn, 2024)
+- `bbmle` (Bolker et al., 2023)
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `lhs` (Carnell, 2024)
+- `odin` (FitzJohn, 2024)
 
 Required packages to be attached:
 
 - `dplyr` (Wickham et al., 2023)
-- `foreach` (Microsoft & Weston, 2022)
+- `foreach` (Microsoft & Weston, 2022b)
+
+#### `gen_fr_fit_all`
+
+**`gen_fr_fit_all`** fits the generalized functional response model
+(Real, 1977; Rosenbaum & Rall, 2018) by running `gen_fr_fit` for all
+treatments in parallel.
+
+Required packages and their dependencies to be installed:
+
+- `bbmle` (Bolker et al., 2023)
+- `doParallel` (Microsoft & Weston, 2022a)
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `lhs` (Carnell, 2024)
+- `odin` (FitzJohn, 2024)
+- `purrr` (Wickham & Henry, 2025)
+
+Required packages to be attached:
+
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
 
 ## Funding Information
 
@@ -384,10 +407,19 @@ Hall.
 
 </div>
 
+<div id="ref-MicrosoftWeston2022DoParallelForeachParallel"
+class="csl-entry">
+
+Microsoft, & Weston, S. (2022a).
+*<span class="nocase">doParallel</span>: Foreach parallel adaptor for
+the ’parallel’ package*. <https://CRAN.R-project.org/package=doParallel>
+
+</div>
+
 <div id="ref-MicrosoftWeston2022ForeachProvidesForeach"
 class="csl-entry">
 
-Microsoft, & Weston, S. (2022). *Foreach: Provides foreach looping
+Microsoft, & Weston, S. (2022b). *Foreach: Provides foreach looping
 construct*. <https://doi.org/10.32614/CRAN.package.foreach>
 
 </div>
