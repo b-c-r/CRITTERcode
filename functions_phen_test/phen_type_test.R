@@ -29,6 +29,7 @@
 #'     response (see Juliano 2001). Proportion data is fitted using a binomial
 #'     GLM, but see Crawley (2012), chapter 16 for an introduction to this
 #'     topic.
+#'     
 #'     Required packages and their dependencies to be installed:
 #'     - `dplyr` (Wickham et al. 2023)
 #'     - `purrr` (Wickham and Henry 2025)
@@ -63,6 +64,7 @@
 #' 
 #' library("foreach")
 #' library("dplyr")
+#' source(here::here("functions_phen_test", "phen_type_test.R"))
 #' 
 #' fr_data <- data.frame(
 #'   n_start =   rep(c(1, 2, 4, 8, 16), 4),

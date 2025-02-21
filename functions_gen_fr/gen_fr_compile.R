@@ -41,11 +41,8 @@
 #'     functional response is type II or type III (Rosenbaum and Rall 2018).
 #'     
 #'     Required packages and their dependencies to be installed:
-#'       
 #'       - `odin` (FitzJohn and Jombart 2024)
-#'     
 #'     Required packages to be attached:
-#'       
 #'       - None
 #' 
 #' @references FitzJohn and Jombart (2024) odin: ODE generation and integration.
@@ -76,6 +73,8 @@
 #'     of decaying resource items.
 #'    
 #' @examples
+#' 
+#' source(here::here("functions_gen_fr", "gen_fr_compile.R"))
 #' 
 #' # compiling the model in C using odin
 #' gen_fr_compile()

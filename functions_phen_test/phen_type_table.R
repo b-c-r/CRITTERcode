@@ -22,6 +22,7 @@
 #'     options from `kableEXTRA` (Zhu et al. 2024) that will only work for
 #'     LaTeX/PDF outputs. This function is rather hard-coded and only useful in
 #'     the CRITTER project.
+#'     
 #'     Required packages and their dependencies to be installed:
 #'     - `foreach` (Microsoft and Weston 2022)
 #'     - `kableExtra` (Zhu et al. 2024)
@@ -43,6 +44,8 @@
 #' @examples
 #' 
 #' library("foreach")
+#' source(here::here("functions_phen_test", "phen_type_test.R"))
+#' source(here::here("functions_phen_test", "phen_type_table.R"))
 #' 
 #' fr_data <- data.frame(
 #'   n_start =   rep(c(1, 2, 4, 8, 16), 4),

@@ -27,12 +27,9 @@
 #'     details there.
 #'     
 #'     Required packages and their dependencies to be installed:
-#'     
 #'       - `odin` (FitzJohn and Jombart 2024)
 #'       - `foreach` (Microsoft and Weston 2022)
-#'       
 #'     Required packages to be attached:
-#'     
 #'       - `foreach` (Microsoft and Weston 2022)
 #'       
 #' 
@@ -68,6 +65,8 @@
 #' @examples
 #' 
 #' library("foreach")
+#' source(here::here("functions_gen_fr", "gen_fr_compile.R"))
+#' source(here::here("functions_gen_fr", "gen_fr_sim.R"))
 #' 
 #' # compile the functional response ODE in C
 #' gen_fr_compile()
