@@ -265,6 +265,28 @@ Required packages to be attached:
 
 - `foreach` (Microsoft & Weston, 2022)
 
+#### `gen_fr_fit`
+
+**`gen_fr_fit`** automatically fits the generalized functional response
+model (Real, 1977; Rosenbaum & Rall, 2018) to data. In the simplest
+case, you only need to provide the number of resources eaten (count
+data) and the initial resource density (count data): the function does
+the rest, including initial parameter value guessing. See the parameters
+section and the code example for more options. If your experiment ran a
+day, but you want to have the maximum feeding rate on an hourly basis,
+you can enter t_end = 24.
+
+Required packages and their dependencies to be installed:
+
+. `bbmle` (Bolker et al., 2023) - `dplyr` (Wickham et al., 2023) -
+`foreach` (Microsoft & Weston, 2022) - `lhs` (Carnell, 2024) - `odin`
+(FitzJohn, 2024)
+
+Required packages to be attached:
+
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022)
+
 ## Funding Information
 
 - Mireia Aranbarri was funded by the **Investigo Programm funded by the
@@ -287,6 +309,14 @@ entry-spacing="0" line-spacing="2">
 
 Bolker, B. M. (2008). *Ecological models and data in R*. Princeton
 University Press. <https://math.mcmaster.ca/~bolker/emdbook/index.html>
+
+</div>
+
+<div id="ref-BolkerEtAl2023BbmleToolsGeneral" class="csl-entry">
+
+Bolker, B. M., R. Development Core Team, & Giné-Vázquez, I. (2023).
+*Bbmle: Tools for General Maximum Likelihood Estimation*.
+<https://doi.org/10.32614/CRAN.package.bbmle>
 
 </div>
 
