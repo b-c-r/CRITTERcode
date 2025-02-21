@@ -59,19 +59,20 @@ This code is published under a [**GNU General Public License
 ## Related Works
 
 - [Data on Zenodo](https://doi.org/10.5281/zenodo.14891980) (Flores et
-  al. 2025)
+  al., 2025)
 
 - [Data on GitHub](https://github.com/b-c-r/CRITTERdata)
 
-- [R-Code on Zenodo](https://doi.org/10.5281/zenodo.14894598)
-  (**RallEtAl2025ComplexityReducesFeedingCode?**)
+- [R-Code on Zenodo](https://doi.org/10.5281/zenodo.14894598) (Rall et
+  al., 2025b)
 
 - [R-Code on GitHub](https://github.com/b-c-r/CRITTERdata)
 
 - [Statistical Report on
   GitHub](https://github.com/b-c-r/CRITTERstatistics)
 
-- Statistical Report on Zenodo (link tba)
+- [Statistical Report on
+  Zenodo](https://doi.org/10.5281/zenodo.14898819) (Rall et al., 2025a)
 
 - Scientific Preprint Paper (link tba)
 
@@ -79,7 +80,7 @@ This code is published under a [**GNU General Public License
 
 We predominantly used functions to organize our R code for this project.
 Each function is saved in a separate \*.R-file and documented
-approximately in roxygen2 style (Wickham et al. 2024). The functions
+approximately in roxygen2 style (Wickham et al., 2024). The functions
 depend mostly hierarchically on each other. All functions are saved in
 the project’s sub folder called functions\_\*.
 
@@ -87,56 +88,63 @@ the project’s sub folder called functions\_\*.
 
 The functions are located in `/functions_phen_test/`.
 
+#### `phen_type_test`
+
 **`phen_type_test`** is a wrapper around the function `frair_test`
-(Pritchard, Barrios-O’Neill, et al. 2017; Pritchard, Paterson, et al.
+(Pritchard, Paterson, et al., 2017; Pritchard, Barrios-O’Neill, et al.,
 2017) to test for the type of the functional response using the
 proportion of prey eaten as response to the initial prey density. If the
 proportion of prey eaten increases at low prey densities and decreases
 after reaching a maximum, there is evidence for a type III functional
-response (Juliano 2001). Proportion data is fitted using a binomial GLM,
-but see Crawley (2012), chapter 16 for an introduction to this topic.
+response (Juliano, 2001). Proportion data is fitted using a binomial
+GLM, but see Crawley (2012), chapter 16 for an introduction to this
+topic.
 
 Required packages and their dependencies to be installed:
 
-- `dplyr` (Wickham et al. 2023)
-- `purrr` (Wickham and Henry 2025)
-- `foreach` (Microsoft and Weston 2022)
-- `frair` (Pritchard, Barrios-O’Neill, et al. 2017)
+- `dplyr` (Wickham et al., 2023)
+- `purrr` (Wickham & Henry, 2025)
+- `foreach` (Microsoft & Weston, 2022)
+- `frair` (Pritchard, Barrios-O’Neill, et al., 2017)
 
 Required packages to be attached:
 
-- `dplyr` (Wickham et al. 2023)
-- `foreach` (Microsoft and Weston 2022)
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022)
+
+#### `phen_type_table`
 
 **`phen_type_table`** takes a `phen_type_test` output and creates a nice
 table for the statistical report. Note that the function uses options
-from `kableEXTRA` (Zhu 2024) that will only work for LaTeX/PDF outputs.
+from `kableEXTRA` (Zhu, 2024) that will only work for LaTeX/PDF outputs.
 This function is rather hard-coded and only useful in the CRITTER
 project.
 
 Required packages and their dependencies to be installed:
 
-- `foreach` (Microsoft and Weston 2022)
-- `kableExtra` (Zhu 2024)
+- `foreach` (Microsoft & Weston, 2022)
+- `kableExtra` (Zhu, 2024)
 
 Required packages to be attached:
 
-- `foreach` (Microsoft and Weston 2022)
+- `foreach` (Microsoft & Weston, 2022)
 
 ### Generalized Functional Response Model Functions
 
 The functions are located in `/functions_gen_fr/`.
 
-**`gen_fr_compile`** compiles the ordinary differential equation (ODE)
+#### `gen_fr_compile`
+
+`gen_fr_compile` compiles the ordinary differential equation (ODE)
 describing the decay of resource items over time during a feeding
 functional response trial. The functional response model has a free
-shape parameter (Real 1977, 1979), allowing a continuous shift of the
-shape of a classic type II functional response (Holling 1959b) to a type
-III functional response (Holling 1959a). The feeding rate, $F$, depends
-on the resource density, $N$, and the parameters of the model are the
-maximum feeding rate, $F_{max}$, the half saturation density,
-$N_{half}$, and the shape parameter $q$ (Williams and Martinez 2004;
-Vucic-Pestic et al. 2010):
+shape parameter (Real, 1977, 1979), allowing a continuous shift of the
+shape of a classic type II functional response (Holling, 1959a) to a
+type III functional response (Holling, 1959b). The feeding rate, $F$,
+depends on the resource density, $N$, and the parameters of the model
+are the maximum feeding rate, $F_{max}$, the half saturation density,
+$N_{half}$, and the shape parameter $q$ (Vucic-Pestic et al., 2010;
+Williams & Martinez, 2004):
 
 $$
 F = \frac{F_{max}  N^{(1+q)}}{N_{half}^{(1+q)} + N^{(1+q)}}.
@@ -150,38 +158,84 @@ $$
 $$
 
 A numerical simulation is required as there is no analytical solution
-for this problem (Rosenbaum and Rall 2018). We use the R package “odin”
-(FitzJohn 2024) to create a fast simulation model in C. This model can
+for this problem (Rosenbaum & Rall, 2018). We use the R package “odin”
+(FitzJohn, 2024) to create a fast simulation model in C. This model can
 be used to estimate the exact shape of the functional response or test
-if a functional response is type II or type III (Rosenbaum and Rall
+if a functional response is type II or type III (Rosenbaum & Rall,
 2018).
 
 Required packages and their dependencies to be installed:
 
-- `odin` (FitzJohn 2024)
+- `odin` (FitzJohn, 2024)
 
 Required packages to be attached:
 
 - None
 
+#### `gen_fr_sim`
+
 **`gen_fr_sim`** simulates time series across different initial prey
 densities. It returns only the number of initial prey items and the
 number of prey eaten at the end of the time series, mimicking common
 functional response laboratory experiments. The underlying functional
-response model is the generalized functional response model (Real 1977,
+response model is the generalized functional response model (Real, 1977,
 1979). Note that not integers, but floating numbers are returned by
 **`gen_fr_sim`**. **`gen_fr_sim`** depends on **`gen_fr_compile`**.
-Please find more details there.
+Please find details more above.
 
 Required packages and their dependencies to be installed:
 
-- `odin` (FitzJohn 2024)
+- `odin` (FitzJohn, 2024)
 
-- `foreach` (Microsoft and Weston 2022)
+- `foreach` (Microsoft & Weston, 2022)
 
 Required packages to be attached:
 
-- `foreach` (Microsoft and Weston 2022)
+- `foreach` (Microsoft & Weston, 2022)
+
+#### `gen_fr_nll`
+
+**`gen_fr_nll`** calculates the negative log likelihood of the
+generalized functional response model (Real, 1977, 1979), but see the
+description of **`gen_fr_compile`** for further information. We
+calculated the likelihood assuming a binomial distribution, as every
+prey item has a chance to be eaten or not to be eaten throughout the
+experimental trial. For further details on the methodology, please read
+chapter eight of “Ecological models and data in R” (Bolker, 2008). To
+restrict the fitting to reasonable values of the shape parameter $q$
+(Rosenbaum & Rall, 2018; Vucic-Pestic et al., 2010; Williams & Martinez,
+2004) we applied a quadratic penalty on the negative log-likelihood
+following:
+
+``` r
+if(q < q_low){
+  nll <- nll + penalty*(q-q_low)^2
+} else{
+  if(q >= q_up){
+    nll <- nll + penalty*(q-q_up)^2
+  } else{
+    nll <- nll
+  }
+}
+```
+
+`q_low` is set to “0” by default (a type II functional response), `q_up`
+is set to “1” by default (a “strict” type III functional response), and
+`penalty` is set to 1000 by default. Especially `q_low` is important, as
+negative values may lead to an unsolvable time series for `gen_fr_sim`
+leading to a crash of the fitting process. Even with this restriction,
+the simulation may fail for extreme values of $F_{max}$ or $N_{half}$;
+in this case, the function returns `Inf`. Alternative solutions would be
+that the function returns `NA` (Bolker, 2008).
+
+Required packages and their dependencies to be installed:
+
+- `odin` (FitzJohn, 2024)
+- `foreach` (Microsoft & Weston, 2022)
+
+Required packages to be attached:
+
+- `foreach` (Microsoft & Weston, 2022)
 
 ## Funding Information
 
@@ -199,159 +253,184 @@ Required packages to be attached:
 ## References
 
 <div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+entry-spacing="0" line-spacing="2">
+
+<div id="ref-Bolker2008EcologicalModelsData" class="csl-entry">
+
+Bolker, B. M. (2008). *Ecological models and data in R*. Princeton
+University Press. <https://math.mcmaster.ca/~bolker/emdbook/index.html>
+
+</div>
 
 <div id="ref-Crawley2012Book" class="csl-entry">
 
-Crawley, Michael J. 2012. *The R Book*. 2. ed. Chichester, West Sussex,
-UK: Wiley.
+Crawley, M. J. (2012). *The R Book* (2. ed.). Wiley.
 
 </div>
 
 <div id="ref-FitzJohn2024OdinODEGeneration" class="csl-entry">
 
-FitzJohn, Rich. 2024. “Odin: ODE Generation and Integration.”
-<https://doi.org/10.32614/CRAN.package.odin>.
+FitzJohn, R. (2024). *Odin: ODE generation and integration*.
+<https://doi.org/10.32614/CRAN.package.odin>
 
 </div>
 
 <div id="ref-FloresEtAl2025ComplexityReducesFeedingData"
 class="csl-entry">
 
-Flores, Lorea, Julia Reiss, Aitor Larrañaga, Björn Christian Rall,
-Mireia Aranbarri, and Ioar de Guzmán. 2025. “Complexity Reduces Feeding
-Strength of Freshwater Predators (CRITTER) Data.” Zenodo.
-<https://doi.org/10.5281/zenodo.14891980>.
-
-</div>
-
-<div id="ref-Holling1959ComponentsPredationRevealed" class="csl-entry">
-
-Holling, C. S. 1959a. “The Components of Predation as Revealed by a
-Study of Small-Mammal Predation of the European Pine Sawfly.” *The
-Canadian Entomologist* 91 (5): 293–320.
-<https://doi.org/10.4039/Ent91293-5>.
+Flores, L., Reiss, J., Larrañaga, A., Rall, B. C., Aranbarri, M., &
+Guzmán, I. de. (2025). *Complexity reduces feeding strength of
+freshwater predators (CRITTER) - Data*. Zenodo.
+<https://doi.org/10.5281/zenodo.14891980>
 
 </div>
 
 <div id="ref-Holling1959CharacteristicsSimpleTypes" class="csl-entry">
 
-———. 1959b. “Some Characteristics of Simple Types of Predation and
-Parasitism.” *The Canadian Entomologist* 91 (7): 385–98.
-<https://doi.org/10.4039/Ent91385-7>.
+Holling, C. S. (1959a). Some characteristics of simple types of
+predation and parasitism. *The Canadian Entomologist*, *91*(7), 385–398.
+<https://doi.org/10.4039/Ent91385-7>
+
+</div>
+
+<div id="ref-Holling1959ComponentsPredationRevealed" class="csl-entry">
+
+Holling, C. S. (1959b). The components of predation as revealed by a
+study of small-mammal predation of the european pine sawfly. *The
+Canadian Entomologist*, *91*(5), 293–320.
+<https://doi.org/10.4039/Ent91293-5>
 
 </div>
 
 <div id="ref-Juliano2001NonlinearCurveFitting" class="csl-entry">
 
-Juliano, Steven A. 2001. “Nonlinear Curve Fitting: Predation and
-Functional Response Curves.” In *Design and Analysis of Ecological
-Experiments*, edited by Samuel M. Scheiner and Jessica Gurevitch, 2nd
-Edition, 178–96. London: Chapman; Hall.
+Juliano, S. A. (2001). Nonlinear curve fitting: Predation and functional
+response curves. In S. M. Scheiner & J. Gurevitch (Eds.), *Design and
+analysis of ecological experiments* (2nd Edition, pp. 178–196). Chapman;
+Hall.
 
 </div>
 
 <div id="ref-MicrosoftWeston2022ForeachProvidesForeach"
 class="csl-entry">
 
-Microsoft, and Steve Weston. 2022. “Foreach: Provides Foreach Looping
-Construct.” <https://doi.org/10.32614/CRAN.package.foreach>.
+Microsoft, & Weston, S. (2022). *Foreach: Provides foreach looping
+construct*. <https://doi.org/10.32614/CRAN.package.foreach>
 
 </div>
 
 <div id="ref-PritchardEtAl2017FrairToolsFunctional" class="csl-entry">
 
-Pritchard, Daniel W., Daniel Barrios-O’Neill, Helene C. Bovy, and Rachel
-A. Paterson. 2017. “Frair: Tools for Functional Response Analysis.”
-<https://cran.r-project.org/web/packages/frair/>.
+Pritchard, D. W., Barrios-O’Neill, D., Bovy, H. C., & Paterson, R. A.
+(2017). *Frair: Tools for Functional Response Analysis*.
+<https://cran.r-project.org/web/packages/frair/>
 
 </div>
 
 <div id="ref-PritchardEtAl2017FrairPackageFitting" class="csl-entry">
 
-Pritchard, Daniel W., Rachel A. Paterson, Helene C. Bovy, and Daniel
-Barrios-O’Neill. 2017. “Frair: An R Package for Fitting and Comparing
-Consumer Functional Responses.” *Methods in Ecology and Evolution* 8
-(11): 1528–34. <https://doi.org/10.1111/2041-210X.12784>.
+Pritchard, D. W., Paterson, R. A., Bovy, H. C., & Barrios-O’Neill, D.
+(2017). Frair: An R package for fitting and comparing consumer
+functional responses. *Methods in Ecology and Evolution*, *8*(11),
+1528–1534. <https://doi.org/10.1111/2041-210X.12784>
+
+</div>
+
+<div id="ref-RallEtAl2025ComplexityReducesFeedingStatistics"
+class="csl-entry">
+
+Rall, B. C., Aranbarri, M., Flores, L., Guzmán, I. de, Larrañaga, A., &
+Reiss, J. (2025a). *Complexity reduces feeding strength of freshwater
+predators (CRITTER) - Supplemental Statistics Report*. Zenodo.
+<https://doi.org/10.5281/zenodo.14898820>
+
+</div>
+
+<div id="ref-RallEtAl2025ComplexityReducesFeedingCode"
+class="csl-entry">
+
+Rall, B. C., Aranbarri, M., Flores, L., Guzmán, I. de, Larrañaga, A., &
+Reiss, J. (2025b). *Complexity reduces feeding strength of freshwater
+predators (CRITTER) - Code*. Zenodo.
+<https://doi.org/10.5281/zenodo.14894598>
 
 </div>
 
 <div id="ref-Real1977KineticsFunctionalResponse" class="csl-entry">
 
-Real, Leslie A. 1977. “The Kinetics of Functional Response.” *The
-American Naturalist* 111 (978): 289–300.
-<https://doi.org/10.1086/283161>.
+Real, L. A. (1977). The kinetics of functional response. *The American
+Naturalist*, *111*(978), 289–300. <https://doi.org/10.1086/283161>
 
 </div>
 
 <div id="ref-Real1979EcologicalDeterminantsFunctional"
 class="csl-entry">
 
-———. 1979. “Ecological Determinants of Functional Response.” *Ecology*
-60 (3): 481–85. <https://doi.org/10.2307/1936067>.
+Real, L. A. (1979). Ecological determinants of functional response.
+*Ecology*, *60*(3), 481–485. <https://doi.org/10.2307/1936067>
 
 </div>
 
 <div id="ref-RosenbaumRall2018FittingFunctionalResponses"
 class="csl-entry">
 
-Rosenbaum, Benjamin, and Björn Christian Rall. 2018. “Fitting Functional
-Responses: Direct Parameter Estimation by Simulating Differential
-Equations.” *Methods in Ecology and Evolution* 9 (10): 2076–90.
-<https://doi.org/10.1111/2041-210X.13039>.
+Rosenbaum, B., & Rall, B. C. (2018). Fitting functional responses:
+Direct parameter estimation by simulating differential equations.
+*Methods in Ecology and Evolution*, *9*(10), 2076–2090.
+<https://doi.org/10.1111/2041-210X.13039>
 
 </div>
 
 <div id="ref-Vucic-PesticEtAl2010AllometricFunctionalResponse"
 class="csl-entry">
 
-Vucic-Pestic, Olivera, Björn Christian Rall, Gregor Kalinkat, and Ulrich
-Brose. 2010. “Allometric Functional Response Model: Body Masses
-Constrain Interaction Strengths.” *Journal of Animal Ecology* 79 (1):
-249–56. <https://doi.org/10.1111/j.1365-2656.2009.01622.x>.
+Vucic-Pestic, O., Rall, B. C., Kalinkat, G., & Brose, U. (2010).
+Allometric functional response model: Body masses constrain interaction
+strengths. *Journal of Animal Ecology*, *79*(1), 249–256.
+<https://doi.org/10.1111/j.1365-2656.2009.01622.x>
 
 </div>
 
 <div id="ref-WickhamEtAl2024Roxygen2InLineDocumentation"
 class="csl-entry">
 
-Wickham, Hadley, Peter Danenberg, Gábor Csárdi, Manuel Eugster, and
-Posit Software PBC. 2024. “Roxygen2: In-Line Documentation for R.”
-<https://doi.org/10.32614/CRAN.package.roxygen2>.
+Wickham, H., Danenberg, P., Csárdi, G., Eugster, M., & Posit Software
+PBC. (2024). *roxygen2: In-Line Documentation for R*.
+<https://doi.org/10.32614/CRAN.package.roxygen2>
 
 </div>
 
 <div id="ref-WickhamEtAl2023DplyrGrammarData" class="csl-entry">
 
-Wickham, Hadley, Romain François, Lionel Henry, Kirill Müller, and Davis
-Vaughan. 2023. “Dplyr: A Grammar of Data Manipulation.”
-<https://doi.org/10.32614/CRAN.package.dplyr>.
+Wickham, H., François, R., Henry, L., Müller, K., & Vaughan, D. (2023).
+*Dplyr: A grammar of data manipulation*.
+<https://doi.org/10.32614/CRAN.package.dplyr>
 
 </div>
 
 <div id="ref-WickhamHenry2025PurrrFunctionalProgramming"
 class="csl-entry">
 
-Wickham, Hadley, and Lionel Henry. 2025. “Purrr: Functional Programming
-Tools.” <https://doi.org/10.32614/CRAN.package.purrr>.
+Wickham, H., & Henry, L. (2025). *Purrr: Functional programming tools*.
+<https://doi.org/10.32614/CRAN.package.purrr>
 
 </div>
 
 <div id="ref-WilliamsMartinez2004StabilizationChaoticNonpermanent"
 class="csl-entry">
 
-Williams, R. J., and N. D. Martinez. 2004. “Stabilization of Chaotic and
-Non-Permanent Food-Web Dynamics.” *The European Physical Journal B:
-Condensed Matter and Complex Systems* 38 (2): 297–303.
-<https://doi.org/10.1140/epjb/e2004-00122-1>.
+Williams, R. J., & Martinez, N. D. (2004). Stabilization of chaotic and
+non-permanent food-web dynamics. *The European Physical Journal B:
+Condensed Matter and Complex Systems*, *38*(2), 297–303.
+<https://doi.org/10.1140/epjb/e2004-00122-1>
 
 </div>
 
 <div id="ref-Zhu2024KableExtraConstructComplex" class="csl-entry">
 
-Zhu, Hao. 2024. “<span class="nocase">kableExtra</span>: Construct
-Complex Table with ’Kable’ and Pipe Syntax.”
-<https://doi.org/10.32614/CRAN.package.kableExtra>.
+Zhu, H. (2024). *<span class="nocase">kableExtra</span>: Construct
+complex table with ’kable’ and pipe syntax*.
+<https://doi.org/10.32614/CRAN.package.kableExtra>
 
 </div>
 
