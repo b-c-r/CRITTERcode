@@ -160,6 +160,20 @@ Required packages to be attached:
 
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 
+#### `gen_fr_parms_scan`
+
+ **`gen_fr_parms_scan`** creates Latin hypercube samples for the functional response parameters in a reasonable range and calculates the according negative log-likelihood values. It returns the parameter values with the lowest negative log likelihood of these samples. Non-linear maximum likelihood fitting procedures require starting parameters, generally based on an educated guess [@Bolker2008EcologicalModelsData]. Moreover, these fits may end up in local best fits, and users should re-fit the data using different starting parameters [@Bolker2008EcologicalModelsData]. To overcome manually eyeballing as well as re-shuffling the starting parameters, @JagerAshauer2018ModellingSurvivalChemical suggested creating samples in a reasonable parameter range using and choosing the starting parameters (from the lowest nll value) from these samples. To reduce the number of required samples by keeping the variance of parameter values as wide as possible, it is recommended to use Latin hypercube sampling.  `gen_fr_parms_scan` requires the lhs package [@Carnell2024LhsLatinHypercubea].
+
+Required packages and their dependencies to be installed:
+
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+- `lhs` [@Carnell2024LhsLatinHypercubea]
+- `odin` [@FitzJohn2024OdinODEGeneration]
+
+Required packages to be attached:
+
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+
 
 ## Funding Information
 

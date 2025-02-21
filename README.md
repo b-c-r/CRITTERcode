@@ -237,6 +237,34 @@ Required packages to be attached:
 
 - `foreach` (Microsoft & Weston, 2022)
 
+#### `gen_fr_parms_scan`
+
+**`gen_fr_parms_scan`** creates Latin hypercube samples for the
+functional response parameters in a reasonable range and calculates the
+according negative log-likelihood values. It returns the parameter
+values with the lowest negative log likelihood of these samples.
+Non-linear maximum likelihood fitting procedures require starting
+parameters, generally based on an educated guess (Bolker, 2008).
+Moreover, these fits may end up in local best fits, and users should
+re-fit the data using different starting parameters (Bolker, 2008). To
+overcome manually eyeballing as well as re-shuffling the starting
+parameters, Jager & Ashauer (2018) suggested creating samples in a
+reasonable parameter range using and choosing the starting parameters
+(from the lowest nll value) from these samples. To reduce the number of
+required samples by keeping the variance of parameter values as wide as
+possible, it is recommended to use Latin hypercube sampling.
+`gen_fr_parms_scan` requires the lhs package (Carnell, 2024).
+
+Required packages and their dependencies to be installed:
+
+- `foreach` (Microsoft & Weston, 2022)
+- `lhs` (Carnell, 2024)
+- `odin` (FitzJohn, 2024)
+
+Required packages to be attached:
+
+- `foreach` (Microsoft & Weston, 2022)
+
 ## Funding Information
 
 - Mireia Aranbarri was funded by the **Investigo Programm funded by the
@@ -259,6 +287,13 @@ entry-spacing="0" line-spacing="2">
 
 Bolker, B. M. (2008). *Ecological models and data in R*. Princeton
 University Press. <https://math.mcmaster.ca/~bolker/emdbook/index.html>
+
+</div>
+
+<div id="ref-Carnell2024LhsLatinHypercubea" class="csl-entry">
+
+Carnell, R. (2024). *Lhs: Latin Hypercube Samples*.
+<https://doi.org/10.32614/CRAN.package.lhs>
 
 </div>
 
@@ -299,6 +334,14 @@ Holling, C. S. (1959b). The components of predation as revealed by a
 study of small-mammal predation of the european pine sawfly. *The
 Canadian Entomologist*, *91*(5), 293–320.
 <https://doi.org/10.4039/Ent91293-5>
+
+</div>
+
+<div id="ref-JagerAshauer2018ModellingSurvivalChemical"
+class="csl-entry">
+
+Jager, T., & Ashauer, R. (2018). *Modelling survival under chemical
+stress* (2nd ed.). Leanpub. <https://leanpub.com/guts_book>
 
 </div>
 
