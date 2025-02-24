@@ -22,37 +22,37 @@ This code is published under a [**GNU General Public License
 
 - Björn C. Rall
   ([0000-0002-3191-8389](https://orcid.org/0000-0002-3191-8389))
-  - [bjoern.rall@uni-konstanz.de](bjoern.rall@uni-konstanz.de)
+  - <bjoern.rall@uni-konstanz.de>
   - Aquatic Ecology and Evolution Group, Limnological Institute,
     University of Konstanz, Mainaustraße 252, 78464 Konstanz/Egg,
     Germany
 - Mireia Aranbarri
   ([0009-0001-3506-0914](https://orcid.org/0009-0001-3506-0914))
-  - [mireia.arambarri@ehu.eus](mireia.arambarri@ehu.eus)
+  - <mireia.arambarri@ehu.eus>
   - Laboratory of Stream Ecology, Department of Plant Biology and
     Ecology, Faculty of Science and Technology, University of the Basque
     Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 - Lorea Flores
   ([0000-0002-0082-4072](https://orcid.org/0000-0002-0082-4072))
-  - [lflorescompains@gmail.com](lflorescompains@gmail.com)
+  - <lflorescompains@gmail.com>
   - Laboratory of Stream Ecology, Department of Plant Biology and
     Ecology, Faculty of Science and Technology, University of the Basque
     Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 - Ioar de Guzmán
   ([0000-0001-8894-8477](https://orcid.org/0000-0001-8894-8477))
-  - [mirenioar.deguzman@ehu.eus](mirenioar.deguzman@ehu.eus)
+  - <mirenioar.deguzman@ehu.eus>
   - Laboratory of Stream Ecology, Department of Plant Biology and
     Ecology, Faculty of Science and Technology, University of the Basque
     Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 - Aitor Larrañaga
   ([0000-0002-0185-9154](https://orcid.org/0000-0002-0185-9154))
-  - [aitor.larranagaa@ehu.eus](aitor.larranagaa@ehu.eus)
+  - <aitor.larranagaa@ehu.eus>
   - Laboratory of Stream Ecology, Department of Plant Biology and
     Ecology, Faculty of Science and Technology, University of the Basque
     Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 - Julia Reiss
   ([0000-0002-3740-0046](https://orcid.org/0000-0002-3740-0046))
-  - [julia.reiss@brunel.ac.uk](julia.reiss@brunel.ac.uk)
+  - <julia.reiss@brunel.ac.uk>
   - Centre for Pollution Research and Policy, Brunel University of
     London, Uxbridge, UB8 3PH, UK
 
