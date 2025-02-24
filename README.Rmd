@@ -227,6 +227,39 @@ Required packages to be attached:
 - `dplyr` [@WickhamEtAl2023DplyrGrammarData]
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 
+### Habitat Complexity Statistics Functions
+
+#### `rrpe_sim`
+
+`rrpe_sim` runs the Real-style Type II functional [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional]. The feeding rate, $F$, is determined by the model parameters maximum feeding rate, $F_max$, and half saturation density, $N_half$:
+
+$$
+F = \frac{F_{max} N}{N_{half} + N},
+$$
+
+where $N$ is the resource density. However, this function requires a constant resource density, which is not given in most functional response experiments. To take the temporal decline of the resource into account, we apply Rogers' Random Equation [@Royama1971ComparativeStudyModels; @Rogers1972RandomSearchInsect]:
+
+$$
+N_{eaten} = N_{initial} (1 - e^{(\frac{F_{max}}{N_{half}} (\frac{N_{eaten}}{F_{max}} - P  T_{end}))}),
+$$
+
+where N_eaten are the eaten resource items, N_initial is the initial resource density, P is the predator density, and T_end is the experimental duration (time). This function contains N_eaten on both sides of the equation and is only solvable iteratively [@Juliano2001NonlinearCurveFitting; @VoneshBolker2005CompensatoryLarvalResponses]. @Bolker2008EcologicalModelsData solved this issue by using the Lambert $W$
+function [@CorlessEtAl1996LambertWFunction]:
+
+$$
+N_{eaten} = N_{initial} - \frac{W(\frac{N_{initial}}{N_{half}}  e^{-\frac{F_{max}}{N_{half}}(P T_{end}- \frac{N_{initial}}{F_{max}} )}}{N_{half}^{-1} }  
+$$
+
+We apply this function to compute the type II functional response in its Michaelis-Menten version (Real-style).
+
+Required packages and their dependencies to be installed:
+
+- `emdbook` [@Bolker2023EmdbookSupportFunctions]
+
+Required packages to be attached:
+
+- none
+
 ## Funding Information
 
 -   Mireia Aranbarri was funded by the **Investigo Programm funded by the NextGenerationEU initiative**.

@@ -328,6 +328,49 @@ Required packages to be attached:
 - `dplyr` (Wickham et al., 2023)
 - `foreach` (Microsoft & Weston, 2022b)
 
+### Habitat Complexity Statistics Functions
+
+#### `rrpe_sim`
+
+`rrpe_sim` runs the Real-style Type II functional (Real, 1977, 1979).
+The feeding rate, $F$, is determined by the model parameters maximum
+feeding rate, $F_max$, and half saturation density, $N_half$:
+
+$$
+F = \frac{F_{max} N}{N_{half} + N},
+$$
+
+where $N$ is the resource density. However, this function requires a
+constant resource density, which is not given in most functional
+response experiments. To take the temporal decline of the resource into
+account, we apply Rogers’ Random Equation (Rogers, 1972; Royama, 1971):
+
+$$
+N_{eaten} = N_{initial} (1 - e^{(\frac{F_{max}}{N_{half}} (\frac{N_{eaten}}{F_{max}} - P  T_{end}))}),
+$$
+
+where N_eaten are the eaten resource items, N_initial is the initial
+resource density, P is the predator density, and T_end is the
+experimental duration (time). This function contains N_eaten on both
+sides of the equation and is only solvable iteratively (Juliano, 2001;
+Vonesh & Bolker, 2005). Bolker (2008) solved this issue by using the
+Lambert $W$ function (Corless et al., 1996):
+
+$$
+N_{eaten} = N_{initial} - \frac{W(\frac{N_{initial}}{N_{half}}  e^{-\frac{F_{max}}{N_{half}}(P T_{end}- \frac{N_{initial}}{F_{max}} )}}{N_{half}^{-1} }  
+$$
+
+We apply this function to compute the type II functional response in its
+Michaelis-Menten version (Real-style).
+
+Required packages and their dependencies to be installed:
+
+- `emdbook` (Bolker, 2023)
+
+Required packages to be attached:
+
+- none
+
 ## Funding Information
 
 - Mireia Aranbarri was funded by the **Investigo Programm funded by the
@@ -353,6 +396,14 @@ University Press. <https://math.mcmaster.ca/~bolker/emdbook/index.html>
 
 </div>
 
+<div id="ref-Bolker2023EmdbookSupportFunctions" class="csl-entry">
+
+Bolker, B. M. (2023). *Emdbook: Support functions and data for
+"Ecological models and data"*.
+<https://CRAN.R-project.org/package=emdbook>
+
+</div>
+
 <div id="ref-BolkerEtAl2023BbmleToolsGeneral" class="csl-entry">
 
 Bolker, B. M., R. Development Core Team, & Giné-Vázquez, I. (2023).
@@ -365,6 +416,14 @@ Bolker, B. M., R. Development Core Team, & Giné-Vázquez, I. (2023).
 
 Carnell, R. (2024). *Lhs: Latin Hypercube Samples*.
 <https://doi.org/10.32614/CRAN.package.lhs>
+
+</div>
+
+<div id="ref-CorlessEtAl1996LambertWFunction" class="csl-entry">
+
+Corless, R. M., Gonnet, G. H., Hare, D. E. G., Jeffrey, D. J., & Knuth,
+D. E. (1996). On the LambertW function. *Advances in Computational
+Mathematics*, *5*(1), 329–359. <https://doi.org/10.1007/BF02124750>
 
 </div>
 
@@ -385,7 +444,7 @@ FitzJohn, R. (2024). *Odin: ODE generation and integration*.
 class="csl-entry">
 
 Flores, L., Reiss, J., Larrañaga, A., Rall, B. C., Aranbarri, M., &
-Guzmán, I. de. (2025). *Complexity reduces feeding strength of
+Guzmán, I. de. (2025). *Habitat complexity reduces feeding strength of
 freshwater predators (CRITTER) - Data*. Zenodo.
 <https://doi.org/10.5281/zenodo.14891980>
 
@@ -463,9 +522,9 @@ functional responses. *Methods in Ecology and Evolution*, *8*(11),
 class="csl-entry">
 
 Rall, B. C., Aranbarri, M., Flores, L., Guzmán, I. de, Larrañaga, A., &
-Reiss, J. (2025a). *Complexity reduces feeding strength of freshwater
-predators (CRITTER) - Supplemental Statistics Report*. Zenodo.
-<https://doi.org/10.5281/zenodo.14898820>
+Reiss, J. (2025a). *Habitat complexity reduces feeding strength of
+freshwater predators (CRITTER) - Supplemental Statistics Report*.
+Zenodo. <https://doi.org/10.5281/zenodo.14898820>
 
 </div>
 
@@ -473,8 +532,8 @@ predators (CRITTER) - Supplemental Statistics Report*. Zenodo.
 class="csl-entry">
 
 Rall, B. C., Aranbarri, M., Flores, L., Guzmán, I. de, Larrañaga, A., &
-Reiss, J. (2025b). *Complexity reduces feeding strength of freshwater
-predators (CRITTER) - Code*. Zenodo.
+Reiss, J. (2025b). *Habitat complexity reduces feeding strength of
+freshwater predators (CRITTER) - Code*. Zenodo.
 <https://doi.org/10.5281/zenodo.14894598>
 
 </div>
@@ -494,6 +553,14 @@ Real, L. A. (1979). Ecological determinants of functional response.
 
 </div>
 
+<div id="ref-Rogers1972RandomSearchInsect" class="csl-entry">
+
+Rogers, D. (1972). Random search and insect population models. *The
+Journal of Animal Ecology*, *41*(2), 369–383.
+<https://doi.org/10.2307/3474>
+
+</div>
+
 <div id="ref-RosenbaumRall2018FittingFunctionalResponses"
 class="csl-entry">
 
@@ -501,6 +568,23 @@ Rosenbaum, B., & Rall, B. C. (2018). Fitting functional responses:
 Direct parameter estimation by simulating differential equations.
 *Methods in Ecology and Evolution*, *9*(10), 2076–2090.
 <https://doi.org/10.1111/2041-210X.13039>
+
+</div>
+
+<div id="ref-Royama1971ComparativeStudyModels" class="csl-entry">
+
+Royama, T. (1971). A comparative study of models for predation and
+parasitism. *Researches on Population Ecology*, *13*(1), 1–91.
+<https://doi.org/10.1007/BF02511547>
+
+</div>
+
+<div id="ref-VoneshBolker2005CompensatoryLarvalResponses"
+class="csl-entry">
+
+Vonesh, J. R., & Bolker, B. M. (2005). Compensatory larval responses
+shift trade-offs associated with predator-induced hatching plasticity.
+*Ecology*, *86*(6), 1580–1591. <https://doi.org/10.1890/04-0535>
 
 </div>
 
