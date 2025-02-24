@@ -52,7 +52,7 @@ This code is published under a [**GNU General Public License
     Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 - Julia Reiss
   ([0000-0002-3740-0046](https://orcid.org/0000-0002-3740-0046))
-  - [julia.reiss@roehampton.ac.uk](julia.reiss@roehampton.ac.uk)
+  - [julia.reiss@brunel.ac.uk](julia.reiss@brunel.ac.uk)
   - Centre for Pollution Research and Policy, Brunel University of
     London, Uxbridge, UB8 3PH, UK
 
