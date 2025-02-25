@@ -201,7 +201,7 @@ rrpe_nll_mod16h <- function(
       n_initial = n_initial[i],
       p = p,
       f_max = 1 / 10^t_h_log10,
-      a = 1 / (10^a_log10 * 10^t_h_log10),
+      n_half = 1 / (10^a_log10 * 10^t_h_log10),
       t_end = t_end
     )
   }
