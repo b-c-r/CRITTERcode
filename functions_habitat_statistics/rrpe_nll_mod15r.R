@@ -63,8 +63,8 @@
 #' @param f_max_2_log10 f_max for the respective complexity level, single value.
 #' @param f_max_3_log10 f_max for the respective complexity level, single value.
 #' @param f_max_4_log10 f_max for the respective complexity level, single value.
-#' @param n_half_intercept_log10 float; intercept of log10 half saturation density, single value.
-#' @param n_half_slope_log10 float; slope of log10 half saturation density, single value.
+#' @param n_half_intercept_log10 float; intercept of log10 n_half, single value.
+#' @param n_half_slope_log10 float; slope of log10 n_half, single value.
 #' @param t_end integer or float; the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
 #'
 #'     

@@ -69,8 +69,8 @@
 #' @param f_max_range_range_2_log10 A range for f_max for the respective complexity level, two values.
 #' @param f_max_range_range_3_log10 A range for f_max for the respective complexity level, two values.
 #' @param f_max_range_range_4_log10 A range for f_max for the respective complexity level, two values.
-#' @param n_half_range_intercept_log10 float; intercept of log10 half saturation density, two values.
-#' @param n_half_range_slope_log10 float; slope of log10 half saturation density, two values.
+#' @param n_half_range_intercept_log10 float; intercept of log10 n_half, two values.
+#' @param n_half_range_slope_log10 float; slope of log10 n_half, two values.
 #' @param t_end integer or float; the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
 #' @param no_lhs_samples a single integer value; the number of random latin hypercube samplings.
 #' 
