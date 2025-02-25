@@ -76,6 +76,51 @@
 #'
 #' @examples
 #' 
+#' rm(list=ls())
+#' 
+#' library("foreach")
+#' library("dplyr")
+#' 
+#' gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/functions_habitat_statistics/"
+#' 
+#' source(paste(gh_path, "rrpe_sim.R", sep = ""))
+#' source(paste(gh_path, "rrpe_nll_mod16r.R", sep = ""))
+#' source(paste(gh_path, "rrpe_scan_mod16r.R", sep = ""))
+#' source(paste(gh_path, "rrpe_fit_mod16r.R", sep = ""))
+#'
+#' ################################################################################
+#' ## Data
+#' fr_data <- read.csv(
+#'   "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/critter_data.csv"
+#'   )
+#'   
+#' fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
+#' fr_data_ng <- subset(fr_data, predator == "Notonecta glauca")
+#' 
+#' ################################################################################
+#' ## Fit Ischnura elegans
+#' mod16r_fit_ie <- rrpe_fit_mod16r(
+#'   n_eaten = fr_data_ie$n_eaten,
+#'   n_initial = fr_data_ie$n_initial,
+#'   complexity = fr_data_ie$complexity_level
+#' )
+#'
+#' bbmle::summary(mod16r_fit_ie)
+#' BIC(mod16r_fit_ie)
+#' 
+#' ################################################################################
+#' ## Fit Notonecta glauca
+#' 
+#' mod16r_fit_ng <- rrpe_fit_mod16r(
+#'   n_eaten = fr_data_ng$n_eaten,
+#'   n_initial = fr_data_ng$n_initial,
+#'   complexity = fr_data_ng$complexity_level
+#' )
+#' 
+#' bbmle::summary(mod16r_fit_ng)
+#' BIC(mod16r_fit_ng)
+#' 
+#' 
 
 rrpe_fit_mod16r <- function(
     n_eaten,

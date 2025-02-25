@@ -24,15 +24,10 @@
 ################################################################################
 #' 
 #'
-#' @description All functions from `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and 
-#'     `rrpe_nll_mod01h` to `rrpe_nll_mod16h` calculate the negative log
-#'     likelihood of using experimental functional response data (eaten resource
-#'     items as a function of resource density) using the Michaelis-Menten Type
-#'     II functional response (Real 1977) from the `rrpe_sim` function.
-#'     Functions having `r` in their name return the parameters for the
-#'     Real-style functional response (Real 1977): $F_{max}$ and $N_{half}$.
-#'     Functions having `h` in their name return the parameters for the
-#'     Holling-style functional response (Holling 1959): T_handling and a. We
+#' @description `rrpe_nll_mod16r` calculates the negative log likelihood of
+#'     using experimental functional response data (eaten resource items as a
+#'     function of resource density) using the Michaelis-Menten Type
+#'     II functional response (Real 1977) from the `rrpe_sim` function. We
 #'     calculated the likelihood by assuming a binomial distribution of the
 #'     depended data, i.e., whether a resource item can be eaten or not at the
 #'     end of the experimental trial. See (Bolker 2008), chapter 8 for details.
@@ -83,8 +78,10 @@
 #' 
 #' library("foreach")
 #' 
-#' source(here::here("functions_habitat_statistics", "rrpe_sim.R"))
-#' source(here::here("functions_habitat_statistics", "rrpe_nll_mod16r.R"))
+#' gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/functions_habitat_statistics/"
+#' 
+#' source(paste(gh_path, "rrpe_sim.R", sep = ""))
+#' source(paste(gh_path, "rrpe_nll_mod16h.R", sep = ""))
 #' 
 #' fr_data <- read.csv("https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/critter_data.csv")
 #' fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")

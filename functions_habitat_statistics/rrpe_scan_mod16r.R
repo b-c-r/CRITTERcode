@@ -85,9 +85,11 @@
 #' 
 #' library("foreach")
 #' 
-#' source(here::here("functions_habitat_statistics", "rrpe_sim.R"))
-#' source(here::here("functions_habitat_statistics", "rrpe_nll_mod16r.R"))
-#' source(here::here("functions_habitat_statistics", "rrpe_scan_mod16r.R"))
+#' gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/functions_habitat_statistics/"
+#' 
+#' source(paste(gh_path, "rrpe_sim.R", sep = ""))
+#' source(paste(gh_path, "rrpe_nll_mod16h.R", sep = ""))
+#' source(paste(gh_path, "rrpe_scan_mod16r.R", sep = ""))
 #' 
 #' fr_data <- read.csv("https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/critter_data.csv")
 #' fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
