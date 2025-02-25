@@ -1,6 +1,5 @@
 ################################################################################
-#   rrpe_parms_scan_mod16r: scans for reasonable starting parameters before    #
-#       fitting                                                                #
+#   rrpe_parms_scan_mod16r: scans for reasonable starting parameters           #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
