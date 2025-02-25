@@ -87,12 +87,12 @@
 #' 
 #' source(here::here("functions_habitat_statistics", "rrpe_sim.R"))
 #' source(here::here("functions_habitat_statistics", "rrpe_nll_mod16r.R"))
-#' source(here::here("functions_habitat_statistics", "rrpe_parms_scan_mod16r.R"))
+#' source(here::here("functions_habitat_statistics", "rrpe_scan_mod16r.R"))
 #' 
 #' fr_data <- read.csv("https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/critter_data.csv")
 #' fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
 #' 
-#' rrpe_parms_scan_mod16r(
+#' rrpe_scan_mod16r(
 #'   n_eaten = fr_data_ie$n_eaten,
 #'   n_initial = fr_data_ie$n_initial,
 #'   complexity  = fr_data_ie$complexity_level,
@@ -115,7 +115,7 @@
 #' 
 #' fr_data_ng <- subset(fr_data, predator == "Notonecta glauca")
 #' 
-#' rrpe_parms_scan_mod16r(
+#' rrpe_scan_mod16r(
 #'   n_eaten = fr_data_ng$n_eaten,
 #'   n_initial = fr_data_ng$n_initial,
 #'   complexity  = fr_data_ng$complexity_level,
@@ -135,7 +135,7 @@
 #' )
 #' 
 
-rrpe_parms_scan_mod16r <- function(
+rrpe_scan_mod16r <- function(
     n_eaten,
     n_initial,
     complexity,
