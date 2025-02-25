@@ -31,7 +31,8 @@
 #'     lowest nll value) from these samples. To reduce the number of required
 #'     samples by keeping the variance of parameter values as wide as possible,
 #'     it is recommended to use Latin hypercube sampling. `gen_fr_parms_scan`
-#'     requires the lhs package (Carnell 2024).
+#'     requires the lhs package (Carnell 2024). See also the description of
+#'     `gen_fr_nll` for further information.
 #' 
 #'     Required packages and their dependencies to be installed:
 #'       - `foreach` (Microsoft and Weston 2022)

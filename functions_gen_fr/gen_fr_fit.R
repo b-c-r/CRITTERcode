@@ -24,7 +24,8 @@
 #'     does the rest, including initial parameter value guessing. See the
 #'     parameters section and the code example for more options. If your
 #'     experiment ran a day, but you want to have the maximum feeding rate on an
-#'     hourly basis, you can enter t_end = 24.
+#'     hourly basis, you can enter t_end = 24. See also the description of
+#'     `gen_fr_nll` and `gen_fr_parms_scan` for further information.
 #'
 #'     Required packages and their dependencies to be installed:
 #'       - `bbmle` (Bolker et al 2023)

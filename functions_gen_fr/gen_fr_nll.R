@@ -45,7 +45,10 @@
 #'     leading to a crash of the fitting process. Even with this restriction,
 #'     the simulation may fail for extreme values of F_max or N_half; in this
 #'     case, the function returns `Inf`. Alternative solutions would be that the
-#'     function returns `NA` (Bolker 2008).
+#'     function returns `NA` (Bolker 2008). Moreover, the function requires the
+#'     model parameters F_max and N_half on log-scale, as this transformation
+#'     (1) accelerates the fitting procedure and (2) prevents biologically
+#'     irrelevant negative estimations that would crash the fitting algorithm.
 #'     
 #'     Required packages and their dependencies to be installed:
 #'       - `odin` (FitzJohn and Jombart 2024)
