@@ -74,7 +74,7 @@ phen_type_table <- function(
   table <- foreach::foreach(i = loops, .combine = "rbind") %do% {
 
     ## get sign of linear term (linear GLM):
-    sign_lin_lin <- sign(summary(phen_tests[[i]][[2]]$modT2)[[12]][2])
+    sign_lin_lin <- sign(summary(phen_test_results[[i]][[2]]$modT2)[[12]][2])
     if(sign_lin_lin == 1){
       ssign_ll <- "+"
     }
@@ -86,7 +86,7 @@ phen_type_table <- function(
     }
     
     # get significance of linear term (linear GLM):
-    sig_lin_lin <- summary(phen_tests[[i]][[2]]$modT2)[[12]][8]
+    sig_lin_lin <- summary(phen_test_results[[i]][[2]]$modT2)[[12]][8]
     if(sig_lin_lin >= 0.05){
       slev_ll <- "n.s."
     }
@@ -101,7 +101,7 @@ phen_type_table <- function(
     }
     
     ## get sign of linear term (quadratic GLM):
-    sign_lin <- sign(summary(phen_tests[[i]][[2]]$modT3)[[12]][2])
+    sign_lin <- sign(summary(phen_test_results[[i]][[2]]$modT3)[[12]][2])
     if(sign_lin == 1){
       ssign_l <- "+"
     }
@@ -113,7 +113,7 @@ phen_type_table <- function(
     }
     
     # get significance of linear term (quadratic GLM):
-    sig_lin <- summary(phen_tests[[i]][[2]]$modT3)[[12]][11]
+    sig_lin <- summary(phen_test_results[[i]][[2]]$modT3)[[12]][11]
     if(sig_lin >= 0.05){
       slev_l <- "n.s."
     }
@@ -128,7 +128,7 @@ phen_type_table <- function(
     }
     
     ## get sign of quadratic term:
-    sign_quad <- sign(summary(phen_tests[[i]][[2]]$modT3)[[12]][3])
+    sign_quad <- sign(summary(phen_test_results[[i]][[2]]$modT3)[[12]][3])
     if(sign_quad == 1){
       ssign_q <- "+"
     }
@@ -140,7 +140,7 @@ phen_type_table <- function(
     }
     
     # get significance of quadratic term
-    sig_quad <- summary(phen_tests[[i]][[2]]$modT3)[[12]][12]
+    sig_quad <- summary(phen_test_results[[i]][[2]]$modT3)[[12]][12]
     if(sig_quad >= 0.05){
       slev_q <- "n.s."
     }
@@ -170,8 +170,8 @@ phen_type_table <- function(
     }
 
     data.frame(
-      predator = unique(phen_tests[[i]][[3]][,2]),
-      complexity = unique(phen_tests[[i]][[3]][,3]),
+      predator = unique(phen_test_results[[i]][[3]][,2]),
+      complexity = unique(phen_test_results[[i]][[3]][,3]),
       linear = paste(ssign_l, "(", slev_l, ")", sep =""),
       quadratic = paste(ssign_q, "(", slev_q, ")", sep =""),
       linear_linear = paste(ssign_ll, "(", slev_ll, ")", sep =""),
