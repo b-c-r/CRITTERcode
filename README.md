@@ -1,7 +1,7 @@
 Habitat *c*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater
 p*r*edators (CRITTER, Code Repository)
 ================
-2025-02-24
+2025-02-25
 
 ## Summary
 
@@ -226,7 +226,11 @@ negative values may lead to an unsolvable time series for `gen_fr_sim`
 leading to a crash of the fitting process. Even with this restriction,
 the simulation may fail for extreme values of $F_{max}$ or $N_{half}$;
 in this case, the function returns `Inf`. Alternative solutions would be
-that the function returns `NA` (Bolker, 2008).
+that the function returns `NA` (Bolker, 2008). Moreover, the functions
+require the model parameters $F_{max}$ and $N_{half}$ to be on
+log10-scale, as this transformation (1) accelerates the fitting
+procedure and (2) prevents biologically irrelevant negative estimations
+that would crash the fitting algorithm.
 
 Required packages and their dependencies to be installed:
 
@@ -253,7 +257,8 @@ reasonable parameter range using and choosing the starting parameters
 (from the lowest nll value) from these samples. To reduce the number of
 required samples by keeping the variance of parameter values as wide as
 possible, it is recommended to use Latin hypercube sampling.
-`gen_fr_parms_scan` requires the lhs package (Carnell, 2024).
+`gen_fr_parms_scan` requires the lhs package (Carnell, 2024). See also
+the description of `gen_fr_nll` for further information.
 
 Required packages and their dependencies to be installed:
 
@@ -274,7 +279,8 @@ data) and the initial resource density (count data): the function does
 the rest, including initial parameter value guessing. See the parameters
 section and the code example for more options. If your experiment ran a
 day, but you want to have the maximum feeding rate on an hourly basis,
-you can enter t_end = 24.
+you can enter t_end = 24. See also the description of `gen_fr_nll` and
+`gen_fr_parms_scan` for further information.
 
 Required packages and their dependencies to be installed:
 
@@ -370,6 +376,90 @@ Required packages and their dependencies to be installed:
 Required packages to be attached:
 
 - none
+
+#### `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and `rrpe_nll_mod01h` to `rrpe_nll_mod16h`
+
+All functions from `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and
+`rrpe_nll_mod01h` to `rrpe_nll_mod16h` calculate the negative log
+likelihood of using experimental functional response data (eaten
+resource items as a function of resource density) using the
+Michaelis-Menten Type II functional response (Real, 1977) from the
+`rrpe_sim` function. Functions having `r` in their name return the
+parameters for the Real-style functional response (Real, 1977):
+$F_{max}$ and $N_{half}$. Functions having `h` in their name return the
+parameters for the Holling-style functional response (Holling, 1959a):
+$T_{handling}$ and $a$. We calculated the likelihood by assuming a
+binomial distribution of the depended data, i.e., whether a resource
+item can be eaten or not at the end of the experimental trial. See
+Bolker (2008), chapter 8 for details. Moreover, the functions require
+the model parameters on log-scale, as this transformation (1)
+accelerates the fitting procedure and (2) prevents biologically
+irrelevant negative estimations that would crash the fitting algorithm.
+
+Required packages and their dependencies to be installed:
+
+- `emdbook` (Bolker, 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+
+Required packages to be attached:
+
+- `foreach` (Microsoft & Weston, 2022b)
+
+#### `rrpe_parms_scan_mod01r` to `rrpe_parms_scan_mod16r` and `rrpe_parms_scan_mod01h` to `rrpe_parms_scan_mod16h`
+
+All `rrpe_parms_scan_mod*` functions create Latin hypercube samples for
+the functional response parameters in a reasonable range and calculate
+the according negative log likelihood values. They return the parameter
+values with the lowest negative log likelihood of these samples.
+Non-linear maximum likelihood fitting procedures require starting
+parameters, generally based on an educated guess (Bolker, 2008).
+Moreover, these fits may end up in local best fits, and users should
+re-fit the data using different starting parameters (Bolker, 2008). To
+overcome manually eyeballing as well as re-shuffling the starting
+parameters, Jager & Ashauer (2018) suggested creating samples in a
+reasonable parameter range using and choosing the starting parameters
+(from the lowest nll value) from these samples. To reduce the number of
+required samples by keeping the variance of parameter values as wide as
+possible, it is recommended to use Latin hypercube sampling.
+`rrpe_parms_scan_mod*16r*` require the lhs package (Carnell, 2024).
+
+Required packages and their dependencies to be installed:
+
+- `emdbook` (Bolker, 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `lhs` (Carnell, 2024)
+
+Required packages to be attached:
+
+- `foreach` (Microsoft & Weston, 2022b)
+
+#### `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`
+
+All functions from `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and
+`rrpe_fit_mod01h` to `rrpe_fit_mod16h` allow for fitting the Rogers’
+Random Predator Equation function (Rogers, 1972; Royama, 1971) using the
+Michaelis-Menten version of the Type II functional response (Real,
+1977). Functions having `r` in their name return the parameters for the
+Real-style functional response (Real, 1977): $F_{max}$ and $N_{half}$.
+Functions having `h` in their name return the parameters for the
+Holling-style functional response (Holling, 1959a): $T_{handling}$ and
+$a$. You only need to provide the number of resources eaten and the
+initial resource density. The function does the rest. But see the
+parameters section and the example for more possibilities. E.g., if your
+trials ran a day, but you want to have the maximum feeding rate on an
+hourly basis, you can enter t_end = 24.
+
+Required packages and their dependencies to be installed:
+
+- `emdbook` (Bolker, 2023)
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `lhs` (Carnell, 2024)
+
+Required packages to be attached:
+
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
 
 ## Funding Information
 
