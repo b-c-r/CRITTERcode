@@ -53,7 +53,7 @@
 #'
 #' @include rrpe_sim.R
 #' @include rrpe_nll_mod16r.R
-#' @include rrpe_scan_parms_mod16r.R
+#' @include rrpe_scan_mod16r.R
 #'
 #' @param n_eaten integer (or float); the prey items that were eaten throughout
 #'     the experimental trial. A vector.
@@ -95,7 +95,7 @@ rrpe_fit_mod16r <- function(
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
   # initial lhs sampling
-  initial_guess <- rrpe_parms_scan_mod16r(
+  initial_guess <- rrpe_scan_mod16r(
     n_eaten = n_eaten,
     n_initial = n_initial,
     complexity  = complexity,
@@ -180,7 +180,7 @@ rrpe_fit_mod16r <- function(
         n_half_range_3 <- c(10^bbmle::coef(fit[[witer-1]])[10] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[10] * range_multiplier[i])
         n_half_range_4 <- c(10^bbmle::coef(fit[[witer-1]])[11] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[11] * range_multiplier[i])
         
-        rrpe_parms_scan_mod16r(
+        rrpe_scan_mod16r(
           n_eaten = n_eaten,
           n_initial = n_initial,
           complexity  = complexity,
