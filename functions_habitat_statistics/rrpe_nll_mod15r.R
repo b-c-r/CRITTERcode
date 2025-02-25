@@ -55,6 +55,7 @@
 #'
 #' @param n_eaten integer (or float); the prey items that were eaten throughout the experimental trial. A vector.
 #' @param n_initial integer or float; a vector of initial prey densities.
+#' @param n_rings number of ring structures (0, 2, or 3), a single integer value.
 #' @param complexity level of complexity (0-4), a single integer value.
 #' @param p integer or float; a single value of a fixed predator density. The default value is 1.
 #' @param f_max_0_log10 f_max for the respective complexity level, single value.
@@ -101,6 +102,7 @@
 #'   data = list(
 #'     n_eaten = fr_data_ie$n_eaten,
 #'     n_initial = fr_data_ie$n_initial,
+#'     n_rings = fr_data_ie$ring_count,
 #'     complexity = fr_data_ie$complexity_level
 #'   ),
 #'   control = list(reltol = 1e-12),
@@ -131,6 +133,7 @@
 #'   data = list(
 #'     n_eaten = fr_data_ng$n_eaten,
 #'     n_initial = fr_data_ng$n_initial,
+#'     n_rings = fr_data_ng$ring_count,
 #'     complexity = fr_data_ng$complexity_level
 #'   ),
 #'   control = list(reltol = 1e-12),
@@ -143,6 +146,7 @@
 rrpe_nll_mod15r <- function(
     n_eaten,
     n_initial,
+    n_rings,
     complexity,
     p = 1,
     f_max_0_log10,
