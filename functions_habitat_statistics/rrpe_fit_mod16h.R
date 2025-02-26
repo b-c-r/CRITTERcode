@@ -68,6 +68,14 @@
 #' @param range_multiplier The multipliers with which the current best
 #'     parameters should be multiplied for the validation random latin hypercube
 #'     sampling.
+#' @param rel_f_max_range These two values are multiplied by the largest feeding
+#'      value of n_eaten to set the initial boundaries to seek for a
+#'      reasonable starting value of f_max, default = c(0.6, 0.95). f_max is
+#'      afterwards transformed to t_h.
+#' @param rel_n_half_range These two values are multiplied by the largest
+#'      starting density value, n_initial, to set the initial boundaries to seek
+#'      for a reasonable starting value of n_half, default = c(0.2, 0.8). n_half
+#'      and f_max are afterwards transformed to a.
 #' @param witer_max How many fits should be performed without convergence?
 #' @param mle2_tol The tolerance of a single mle2 fit.
 #' @param val_tol The tolerance of the validation.
@@ -130,6 +138,8 @@ rrpe_fit_mod16h <- function(
     t_end = 1,
     no_lhs_samples = 1000,
     range_multiplier = c(1.0001, 1.001, 1.1, 1.5, 2),
+    rel_f_max_range = c(0.6, 0.95),
+    rel_n_half_range = c(0.2, 0.8),
     witer_max = 25,
     mle2_tol = 1e-12,
     val_tol = 6,
@@ -139,22 +149,33 @@ rrpe_fit_mod16h <- function(
   
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
+  f_max_range_0  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
+  f_max_range_1  <- rel_f_max_range *  max(n_eaten[complexity == 1])/t_end
+  f_max_range_2  <- rel_f_max_range *  max(n_eaten[complexity == 2])/t_end
+  f_max_range_3  <- rel_f_max_range *  max(n_eaten[complexity == 3])/t_end
+  f_max_range_4  <- rel_f_max_range *  max(n_eaten[complexity == 4])/t_end
+  n_half_range_0 <- rel_n_half_range * max(n_initial[complexity == 0])
+  n_half_range_1 <- rel_n_half_range * max(n_initial[complexity == 1])
+  n_half_range_2 <- rel_n_half_range * max(n_initial[complexity == 2])
+  n_half_range_3 <- rel_n_half_range * max(n_initial[complexity == 3])
+  n_half_range_4 <- rel_n_half_range * max(n_initial[complexity == 4])
+  
   # initial lhs sampling
   initial_guess <- rrpe_scan_mod16h(
     n_eaten = n_eaten,
     n_initial = n_initial,
     complexity  = complexity,
     p = p,
-    t_h_range_0_log10 = log10(1/(c(1, max(n_eaten[complexity == 0]))/t_end)),
-    t_h_range_1_log10 = log10(1/(c(1, max(n_eaten[complexity == 1]))/t_end)),
-    t_h_range_2_log10 = log10(1/(c(1, max(n_eaten[complexity == 2]))/t_end)),
-    t_h_range_3_log10 = log10(1/(c(1, max(n_eaten[complexity == 3]))/t_end)),
-    t_h_range_4_log10 = log10(1/(c(1, max(n_eaten[complexity == 4]))/t_end)),
-    a_range_0_log10 = log10(c(1 / mean(n_initial[complexity == 0]), max(n_eaten[complexity == 0]) / mean(n_initial[complexity == 0])) / t_end),
-    a_range_1_log10 = log10(c(1 / mean(n_initial[complexity == 1]), max(n_eaten[complexity == 1]) / mean(n_initial[complexity == 1])) / t_end),
-    a_range_2_log10 = log10(c(1 / mean(n_initial[complexity == 2]), max(n_eaten[complexity == 2]) / mean(n_initial[complexity == 2])) / t_end),
-    a_range_3_log10 = log10(c(1 / mean(n_initial[complexity == 3]), max(n_eaten[complexity == 3]) / mean(n_initial[complexity == 3])) / t_end),
-    a_range_4_log10 = log10(c(1 / mean(n_initial[complexity == 4]), max(n_eaten[complexity == 4]) / mean(n_initial[complexity == 4])) / t_end),
+    t_h_range_0_log10 = log10(1/rev(f_max_range_0)),
+    t_h_range_1_log10 = log10(1/rev(f_max_range_1)),
+    t_h_range_2_log10 = log10(1/rev(f_max_range_2)),
+    t_h_range_3_log10 = log10(1/rev(f_max_range_3)),
+    t_h_range_4_log10 = log10(1/rev(f_max_range_4)),
+    a_range_0_log10 = log10(c(f_max_range_0[1]/n_half_range_0[2], f_max_range_0[2]/n_half_range_0[1])),
+    a_range_1_log10 = log10(c(f_max_range_1[1]/n_half_range_1[2], f_max_range_1[2]/n_half_range_1[1])),
+    a_range_2_log10 = log10(c(f_max_range_2[1]/n_half_range_2[2], f_max_range_2[2]/n_half_range_2[1])),
+    a_range_3_log10 = log10(c(f_max_range_3[1]/n_half_range_3[2], f_max_range_3[2]/n_half_range_3[1])),
+    a_range_4_log10 = log10(c(f_max_range_4[1]/n_half_range_4[2], f_max_range_4[2]/n_half_range_4[1])),
     t_end = t_end,
     no_lhs_samples = no_lhs_samples
   )

@@ -69,6 +69,16 @@
 #' @param range_multiplier The multipliers with which the current best
 #'     parameters should be multiplied for the validation random latin hypercube
 #'     sampling.
+#' @param rel_f_max_range These two values are multiplied by the largest feeding
+#'      value of n_eaten to set the initial boundaries to seek for a
+#'      reasonable starting value of f_max, default = c(0.6, 0.95).
+#' @param rel_n_half_range These two values are multiplied by the largest
+#'      starting density value, n_initial, to set the initial boundaries to seek
+#'      for a reasonable starting value of n_half, default = c(0.2, 0.8).
+#' @param slope_range the range of initial slopes tested for the log-linear
+#'      relationship with number of rings. It applies for any FR variable if
+#'      fitted to number of rings. The intercept is calculated using complexity
+#'      level = 0. Default is c(-0.05, 0.05).
 #' @param witer_max How many fits should be performed without convergence?
 #' @param mle2_tol The tolerance of a single mle2 fit.
 #' @param val_tol The tolerance of the validation.
@@ -134,6 +144,9 @@ rrpe_fit_mod15r <- function(
     t_end = 1,
     no_lhs_samples = 1000,
     range_multiplier = c(1.0001, 1.001, 1.1, 1.5, 2),
+    rel_f_max_range = c(0.6, 0.95),
+    rel_n_half_range = c(0.2, 0.8),
+    slope_range = c(-0.1, 0.1),
     witer_max = 25,
     mle2_tol = 1e-12,
     val_tol = 6,
@@ -143,6 +156,13 @@ rrpe_fit_mod15r <- function(
   
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
+  f_max_range_0  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
+  f_max_range_1  <- rel_f_max_range *  max(n_eaten[complexity == 1])/t_end
+  f_max_range_2  <- rel_f_max_range *  max(n_eaten[complexity == 2])/t_end
+  f_max_range_3  <- rel_f_max_range *  max(n_eaten[complexity == 3])/t_end
+  f_max_range_4  <- rel_f_max_range *  max(n_eaten[complexity == 4])/t_end
+  n_half_range_0 <- rel_n_half_range * max(n_initial[complexity == 0])
+  
   # initial lhs sampling
   initial_guess <- rrpe_scan_mod15r(
     n_eaten = n_eaten,
@@ -150,13 +170,13 @@ rrpe_fit_mod15r <- function(
     n_rings = n_rings,
     complexity  = complexity,
     p = p,
-    f_max_range_0_log10 = log10(c(1, max(n_eaten[complexity == 0]))/t_end),
-    f_max_range_1_log10 = log10(c(1, max(n_eaten[complexity == 1]))/t_end),
-    f_max_range_2_log10 = log10(c(1, max(n_eaten[complexity == 2]))/t_end),
-    f_max_range_3_log10 = log10(c(1, max(n_eaten[complexity == 3]))/t_end),
-    f_max_range_4_log10 = log10(c(1, max(n_eaten[complexity == 4]))/t_end),
-    n_half_range_intercept_log10 = log10(c(1, max(n_initial[n_rings == 0]))),
-    n_half_range_slope_log10 = c(-0.1, 0.1),
+    f_max_range_0_log10 = log10(f_max_range_0),
+    f_max_range_1_log10 = log10(f_max_range_1),
+    f_max_range_2_log10 = log10(f_max_range_2),
+    f_max_range_3_log10 = log10(f_max_range_3),
+    f_max_range_4_log10 = log10(f_max_range_4),
+    n_half_range_intercept_log10 = log10(n_half_range_0),
+    n_half_range_slope_log10 = slope_range,
     t_end = t_end,
     no_lhs_samples = no_lhs_samples
   )

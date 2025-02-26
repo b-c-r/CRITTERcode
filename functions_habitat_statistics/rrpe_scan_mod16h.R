@@ -156,16 +156,16 @@ rrpe_scan_mod16h <- function(
   # generation of 
   lhsvals <- lhs::randomLHS(no_lhs_samples, 10)
   
-  t_h_range_0_log10   <- (lhsvals[, 1] * ( t_h_range_0_log10[2] -  t_h_range_0_log10[1])) +  t_h_range_0_log10[1]
-  t_h_range_1_log10   <- (lhsvals[, 2] * ( t_h_range_1_log10[2] -  t_h_range_1_log10[1])) +  t_h_range_1_log10[1]
-  t_h_range_2_log10   <- (lhsvals[, 3] * ( t_h_range_2_log10[2] -  t_h_range_2_log10[1])) +  t_h_range_2_log10[1]
-  t_h_range_3_log10   <- (lhsvals[, 4] * ( t_h_range_3_log10[2] -  t_h_range_3_log10[1])) +  t_h_range_3_log10[1]
-  t_h_range_4_log10   <- (lhsvals[, 5] * ( t_h_range_4_log10[2] -  t_h_range_4_log10[1])) +  t_h_range_4_log10[1]
-  a_range_0_log10  <- (lhsvals[, 6] * (a_range_0_log10[2] - a_range_0_log10[1])) + a_range_0_log10[1]
-  a_range_1_log10  <- (lhsvals[, 7] * (a_range_1_log10[2] - a_range_1_log10[1])) + a_range_1_log10[1]
-  a_range_2_log10  <- (lhsvals[, 8] * (a_range_2_log10[2] - a_range_2_log10[1])) + a_range_2_log10[1]
-  a_range_3_log10  <- (lhsvals[, 9] * (a_range_3_log10[2] - a_range_3_log10[1])) + a_range_3_log10[1]
-  a_range_4_log10  <- (lhsvals[,10] * (a_range_4_log10[2] - a_range_4_log10[1])) + a_range_4_log10[1]
+  t_h_range_0_log10 <- log10((lhsvals[, 1] * (10^t_h_range_0_log10[2] - 10^t_h_range_0_log10[1])) + 10^t_h_range_0_log10[1])
+  t_h_range_1_log10 <- log10((lhsvals[, 2] * (10^t_h_range_1_log10[2] - 10^t_h_range_1_log10[1])) + 10^t_h_range_1_log10[1])
+  t_h_range_2_log10 <- log10((lhsvals[, 3] * (10^t_h_range_2_log10[2] - 10^t_h_range_2_log10[1])) + 10^t_h_range_2_log10[1])
+  t_h_range_3_log10 <- log10((lhsvals[, 4] * (10^t_h_range_3_log10[2] - 10^t_h_range_3_log10[1])) + 10^t_h_range_3_log10[1])
+  t_h_range_4_log10 <- log10((lhsvals[, 5] * (10^t_h_range_4_log10[2] - 10^t_h_range_4_log10[1])) + 10^t_h_range_4_log10[1])
+  a_range_0_log10   <- log10((lhsvals[, 6] * (  10^a_range_0_log10[2]   - 10^a_range_0_log10[1]))   + 10^a_range_0_log10[1])
+  a_range_1_log10   <- log10((lhsvals[, 7] * (  10^a_range_1_log10[2]   - 10^a_range_1_log10[1]))   + 10^a_range_1_log10[1])
+  a_range_2_log10   <- log10((lhsvals[, 8] * (  10^a_range_2_log10[2]   - 10^a_range_2_log10[1]))   + 10^a_range_2_log10[1])
+  a_range_3_log10   <- log10((lhsvals[, 9] * (  10^a_range_3_log10[2]   - 10^a_range_3_log10[1]))   + 10^a_range_3_log10[1])
+  a_range_4_log10   <- log10((lhsvals[,10] * (  10^a_range_4_log10[2]   - 10^a_range_4_log10[1]))   + 10^a_range_4_log10[1])
   
   ## calculate nlls
   nlls <- foreach::foreach(

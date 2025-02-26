@@ -150,13 +150,13 @@ rrpe_scan_mod15r <- function(
   # generation of 
   lhsvals <- lhs::randomLHS(no_lhs_samples, 7)
   
-  f_max_range_0_log10   <- (lhsvals[, 1] * ( f_max_range_0_log10[2] -  f_max_range_0_log10[1])) +  f_max_range_0_log10[1]
-  f_max_range_1_log10   <- (lhsvals[, 2] * ( f_max_range_1_log10[2] -  f_max_range_1_log10[1])) +  f_max_range_1_log10[1]
-  f_max_range_2_log10   <- (lhsvals[, 3] * ( f_max_range_2_log10[2] -  f_max_range_2_log10[1])) +  f_max_range_2_log10[1]
-  f_max_range_3_log10   <- (lhsvals[, 4] * ( f_max_range_3_log10[2] -  f_max_range_3_log10[1])) +  f_max_range_3_log10[1]
-  f_max_range_4_log10   <- (lhsvals[, 5] * ( f_max_range_4_log10[2] -  f_max_range_4_log10[1])) +  f_max_range_4_log10[1]
-  n_half_range_intercept_log10 <- (lhsvals[, 6] * (n_half_range_intercept_log10[2] - n_half_range_intercept_log10[1])) + n_half_range_intercept_log10[1]
-  n_half_range_slope_log10     <- (lhsvals[, 7] * (    n_half_range_slope_log10[2] -     n_half_range_slope_log10[1])) +     n_half_range_slope_log10[1]
+  f_max_range_0_log10          <- log10((lhsvals[, 1] * (         10^f_max_range_0_log10[2] -          10^f_max_range_0_log10[1])) +          10^f_max_range_0_log10[1])
+  f_max_range_1_log10          <- log10((lhsvals[, 2] * (         10^f_max_range_1_log10[2] -          10^f_max_range_1_log10[1])) +          10^f_max_range_1_log10[1])
+  f_max_range_2_log10          <- log10((lhsvals[, 3] * (         10^f_max_range_2_log10[2] -          10^f_max_range_2_log10[1])) +          10^f_max_range_2_log10[1])
+  f_max_range_3_log10          <- log10((lhsvals[, 4] * (         10^f_max_range_3_log10[2] -          10^f_max_range_3_log10[1])) +          10^f_max_range_3_log10[1])
+  f_max_range_4_log10          <- log10((lhsvals[, 5] * (         10^f_max_range_4_log10[2] -          10^f_max_range_4_log10[1])) +          10^f_max_range_4_log10[1])
+  n_half_range_intercept_log10 <- log10((lhsvals[, 6] * (10^n_half_range_intercept_log10[2] - 10^n_half_range_intercept_log10[1])) + 10^n_half_range_intercept_log10[1])
+  n_half_range_slope_log10     <-       (lhsvals[, 7] * (       n_half_range_slope_log10[2] -        n_half_range_slope_log10[1])) +        n_half_range_slope_log10[1]
   
   ## calculate nlls
   nlls <- foreach::foreach(

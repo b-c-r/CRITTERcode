@@ -150,13 +150,13 @@ rrpe_scan_mod15h <- function(
   # generation of 
   lhsvals <- lhs::randomLHS(no_lhs_samples, 7)
   
-  t_h_range_0_log10   <- (lhsvals[, 1] * ( t_h_range_0_log10[2] -  t_h_range_0_log10[1])) +  t_h_range_0_log10[1]
-  t_h_range_1_log10   <- (lhsvals[, 2] * ( t_h_range_1_log10[2] -  t_h_range_1_log10[1])) +  t_h_range_1_log10[1]
-  t_h_range_2_log10   <- (lhsvals[, 3] * ( t_h_range_2_log10[2] -  t_h_range_2_log10[1])) +  t_h_range_2_log10[1]
-  t_h_range_3_log10   <- (lhsvals[, 4] * ( t_h_range_3_log10[2] -  t_h_range_3_log10[1])) +  t_h_range_3_log10[1]
-  t_h_range_4_log10   <- (lhsvals[, 5] * ( t_h_range_4_log10[2] -  t_h_range_4_log10[1])) +  t_h_range_4_log10[1]
-  a_range_intercept_log10 <- (lhsvals[, 6] * (a_range_intercept_log10[2] - a_range_intercept_log10[1])) + a_range_intercept_log10[1]
-  a_range_slope_log10     <- (lhsvals[, 7] * (    a_range_slope_log10[2] -     a_range_slope_log10[1])) +     a_range_slope_log10[1]
+  t_h_range_0_log10 <-       log10((lhsvals[, 1] * (      10^t_h_range_0_log10[2] -       10^t_h_range_0_log10[1]))       + 10^t_h_range_0_log10[1])
+  t_h_range_1_log10 <-       log10((lhsvals[, 2] * (      10^t_h_range_1_log10[2] -       10^t_h_range_1_log10[1]))       + 10^t_h_range_1_log10[1])
+  t_h_range_2_log10 <-       log10((lhsvals[, 3] * (      10^t_h_range_2_log10[2] -       10^t_h_range_2_log10[1]))       + 10^t_h_range_2_log10[1])
+  t_h_range_3_log10 <-       log10((lhsvals[, 4] * (      10^t_h_range_3_log10[2] -       10^t_h_range_3_log10[1]))       + 10^t_h_range_3_log10[1])
+  t_h_range_4_log10 <-       log10((lhsvals[, 5] * (      10^t_h_range_4_log10[2] -       10^t_h_range_4_log10[1]))       + 10^t_h_range_4_log10[1])
+  a_range_intercept_log10 <- log10((lhsvals[, 6] * (10^a_range_intercept_log10[2] - 10^a_range_intercept_log10[1])) + 10^a_range_intercept_log10[1])
+  a_range_slope_log10     <-       (lhsvals[, 7] * (       a_range_slope_log10[2]     -    a_range_slope_log10[1])) +     a_range_slope_log10[1]
   
   ## calculate nlls
   nlls <- foreach::foreach(
