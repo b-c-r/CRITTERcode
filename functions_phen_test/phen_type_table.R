@@ -38,6 +38,8 @@
 #' @include phen_type_test.R
 #'
 #' @param phen_test_results a object created by create_phen_test
+#' @param add_caption add a caption? Default is "TRUE"
+#' @param caption_text the caption text if add_caption = TRUE
 #'
 #' @return Creates a nice table for a report.
 #'
@@ -68,6 +70,7 @@
 
 phen_type_table <- function(
     phen_test_results,
+    add_caption = TRUE,
     caption_text = "Add caption text here."
     ){
   loops <- 1:length(phen_test_results)
@@ -177,28 +180,55 @@ phen_type_table <- function(
       linear_linear = paste(ssign_ll, "(", slev_ll, ")", sep =""),
       suggested_type = stype)
   }
+  
+  if(add_caption){
+    table %>%
+      kableExtra::kable(
+        booktabs = TRUE,
+        caption = caption_text,
+        col.names = c(
+          "Predator",
+          "Complexity",
+          "Linear (Q)",
+          "Quadratic (Q)",
+          "Linear (L)",
+          "Type"
+        ),
+        align = "c"
+      ) %>%
+      kableExtra::row_spec(
+        row = 0,
+        bold = TRUE
+      ) %>%
+      kableExtra::column_spec(
+        column = 1,
+        italic = TRUE
+      ) %>%
+      kableExtra::kable_styling(latex_options = "HOLD_position")
+  } else{
+    table %>%
+      kableExtra::kable(
+        booktabs = TRUE,
+        col.names = c(
+          "Predator",
+          "Complexity",
+          "Linear (Q)",
+          "Quadratic (Q)",
+          "Linear (L)",
+          "Type"
+        ),
+        align = "c"
+      ) %>%
+      kableExtra::row_spec(
+        row = 0,
+        bold = TRUE
+      ) %>%
+      kableExtra::column_spec(
+        column = 1,
+        italic = TRUE
+      ) %>%
+      kableExtra::kable_styling(latex_options = "HOLD_position")
+  }
 
-  table %>%
-    kableExtra::kable(
-      booktabs = TRUE,
-      caption = caption_text,
-      col.names = c(
-        "Predator",
-        "Complexity",
-        "Linear (Q)",
-        "Quadratic (Q)",
-        "Linear (L)",
-        "Type"
-      ),
-      align = "c"
-    ) %>%
-    kableExtra::row_spec(
-      row = 0,
-      bold = TRUE
-    ) %>%
-    kableExtra::column_spec(
-      column = 1,
-      italic = TRUE
-    ) %>%
-    kableExtra::kable_styling(latex_options = "HOLD_position")
+  
 }
