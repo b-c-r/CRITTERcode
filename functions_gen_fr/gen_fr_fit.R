@@ -132,13 +132,16 @@ gen_fr_fit <- function(
   
   gen_fr_compile()
   
+  f_max_range  <- c(0.6, 0.95) *  max(n_eaten)/t_end
+  n_half_range <- c(0.1, 0.7) * max(n_initial)
+  
   # initial lhs sampling
   initial_guess <- gen_fr_parms_scan(
     n_eaten = n_eaten,
     n_initial = n_initial,
     p = p,
-    f_max_range_log10 = log10(c(1, max(n_eaten))/t_end),
-    n_half_range_log10 = log10(c(1, max(n_initial))),
+    f_max_range_log10 = log10(f_max_range),
+    n_half_range_log10 = log10(n_half_range),
     q_range = c(q_low, q_up),
     t_start = t_start,
     t_end = t_end,

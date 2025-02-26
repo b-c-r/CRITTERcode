@@ -140,9 +140,9 @@ gen_fr_parms_scan <- function(
   
   lhsvals <- lhs::randomLHS(no_lhs_samples, 3)
   
-  f_max_range_log10 <- (lhsvals[,1] * (f_max_range_log10[2]-f_max_range_log10[1])) + f_max_range_log10[1]
-  n_half_range_log10 <- (lhsvals[,2] * (n_half_range_log10[2]-n_half_range_log10[1])) + n_half_range_log10[1]
-  q_range <- (lhsvals[,3] * (q_range[2]-q_range[1])) + q_range[1]
+  f_max_range_log10  <- log10((lhsvals[,1] * (10^f_max_range_log10[2]  - 10^f_max_range_log10[1] )) + 10^f_max_range_log10[1])
+  n_half_range_log10 <- log10((lhsvals[,2] * (10^n_half_range_log10[2] - 10^n_half_range_log10[1])) + 10^n_half_range_log10[1])
+  q_range            <- (lhsvals[,3] * (q_range[2]-q_range[1])) + q_range[1]
   
   ## calculate nlls
   nlls <- foreach::foreach(
