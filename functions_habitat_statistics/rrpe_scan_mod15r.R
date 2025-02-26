@@ -85,7 +85,7 @@
 #' gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/functions_habitat_statistics/"
 #' 
 #' source(paste(gh_path, "rrpe_sim.R", sep = ""))
-#' source(paste(gh_path, "rrpe_nll_mod16h.R", sep = ""))
+#' source(paste(gh_path, "rrpe_nll_mod15r.R", sep = ""))
 #' source(paste(gh_path, "rrpe_scan_mod15r.R", sep = ""))
 #' 
 #' fr_data <- read.csv("https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/critter_data.csv")
