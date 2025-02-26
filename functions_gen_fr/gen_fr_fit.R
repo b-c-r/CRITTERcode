@@ -82,6 +82,12 @@
 #' @param range_multiplier The multipliers with which the current best
 #'     parameters should be multiplied for the validation random latin hypercube
 #'     sampling. Default = c(1.0001, 1.001, 1.1, 1.5, 2).
+#' @param rel_f_max_range These two values are multiplied by the largest feeding
+#'      value of n_eaten to set the initial boundaries to seek for a
+#'      reasonable starting value of f_max, default = c(0.6, 0.95)
+#' @param rel_n_half_range These two values are multiplied by the largest
+#'      starting density value, n_initial, to set the initial boundaries to seek
+#'      for a reasonable starting value of n_half, default = c(0.2, 0.8)
 #' @param witer_max How many fits should be performed without convergence?
 #'     Default = 25.
 #' @param val_tol The tolerance of the validation. Default = 6 (decimal places).
@@ -124,6 +130,8 @@ gen_fr_fit <- function(
     q_up = 1,
     no_lhs_samples = 1000,
     range_multiplier = c(1.0001, 1.001, 1.1, 1.5, 2),
+    rel_f_max_range = c(0.6, 0.95),
+    rel_n_half_range = c(0.2, 0.8),
     witer_max = 25,
     val_tol = 6,
     mle2_tol = 1e-12,
@@ -132,8 +140,8 @@ gen_fr_fit <- function(
   
   gen_fr_compile()
   
-  f_max_range  <- c(0.6, 0.95) *  max(n_eaten)/t_end
-  n_half_range <- c(0.1, 0.7) * max(n_initial)
+  f_max_range  <- rel_f_max_range *  max(n_eaten)/t_end
+  n_half_range <- rel_n_half_range * max(n_initial)
   
   # initial lhs sampling
   initial_guess <- gen_fr_parms_scan(
