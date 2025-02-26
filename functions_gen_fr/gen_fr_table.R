@@ -51,6 +51,7 @@
 
 gen_fr_table <- function(
     gen_fr_results,
+    add_caption = TRUE,
     caption_text = "Add caption text here.",
     output_style = "github_document"
     ){
@@ -105,43 +106,88 @@ gen_fr_table <- function(
   }
 
   if(output_style == "github_document"){
-    table %>%
-      knitr::kable(
-        caption = caption_text,
-        col.names = c(
-          "Predator Name",
-          "Complexity",
-          "*q*",
-          "Significance",
-          "Type-o-Response"
-        )
-      )
-  } else{
-    if(output_style == "pdf"){
+    
+    if(add_caption){
+      
       table %>%
         knitr::kable(
-          escape = F,
-          format = "latex",
           caption = caption_text,
-          booktabs = TRUE,
           col.names = c(
             "Predator Name",
             "Complexity",
-            "$q$",
+            "*q*",
             "Significance",
             "Type-o-Response"
-          ),
-          align = "c"
-        ) %>%
-        kableExtra::row_spec(
-          row = 0,
-          bold = TRUE
-        ) %>%
-        kableExtra::column_spec(
-          column = 1,
-          italic = TRUE
-        ) %>%
-        kableExtra::kable_styling(latex_options = "HOLD_position")
+          )
+        )
+    } else {
+      
+      table %>%
+        knitr::kable(
+          col.names = c(
+            "Predator Name",
+            "Complexity",
+            "*q*",
+            "Significance",
+            "Type-o-Response"
+          )
+        )
+    }
+    
+  } else{
+    if(output_style == "pdf"){
+      
+      if(add_caption){
+        table %>%
+          knitr::kable(
+            escape = F,
+            format = "latex",
+            caption = caption_text,
+            booktabs = TRUE,
+            col.names = c(
+              "Predator Name",
+              "Complexity",
+              "$q$",
+              "Significance",
+              "Type-o-Response"
+            ),
+            align = "c"
+          ) %>%
+          kableExtra::row_spec(
+            row = 0,
+            bold = TRUE
+          ) %>%
+          kableExtra::column_spec(
+            column = 1,
+            italic = TRUE
+          ) %>%
+          kableExtra::kable_styling(latex_options = "HOLD_position")
+      } else{
+        table %>%
+          knitr::kable(
+            escape = F,
+            format = "latex",
+            booktabs = TRUE,
+            col.names = c(
+              "Predator Name",
+              "Complexity",
+              "$q$",
+              "Significance",
+              "Type-o-Response"
+            ),
+            align = "c"
+          ) %>%
+          kableExtra::row_spec(
+            row = 0,
+            bold = TRUE
+          ) %>%
+          kableExtra::column_spec(
+            column = 1,
+            italic = TRUE
+          ) %>%
+          kableExtra::kable_styling(latex_options = "HOLD_position")
+      }
+      
     } else{
       stop("No valid output style defined. Please select eihter github_document or pdf.")
     }
