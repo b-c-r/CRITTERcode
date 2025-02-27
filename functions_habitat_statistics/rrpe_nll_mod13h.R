@@ -66,7 +66,7 @@
 #' @param t_h_2_log10 t_h for the respective complexity level, single value.
 #' @param t_h_3_log10 t_h for the respective complexity level, single value.
 #' @param t_h_4_log10 t_h for the respective complexity level, single value.
-#' @param a_log10 a if habitat is absent, single value.
+#' @param a_log10 a, single value.
 #' @param t_end integer or float; the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
 #'
 #'     
