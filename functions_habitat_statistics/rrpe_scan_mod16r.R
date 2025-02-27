@@ -63,11 +63,11 @@
 #' @param n_initial integer or float; a vector of initial prey densities.
 #' @param complexity level of complexity (0-4), a single integer value.
 #' @param p integer or float; a single value of a fixed predator density. The def
-#' @param f_max_range_range_0_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_1_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_2_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_3_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_4_log10 A range for f_max for the respective complexity level, two values.
+#' @param f_max_range_0_log10 A range for f_max for the respective complexity level, two values.
+#' @param f_max_range_1_log10 A range for f_max for the respective complexity level, two values.
+#' @param f_max_range_2_log10 A range for f_max for the respective complexity level, two values.
+#' @param f_max_range_3_log10 A range for f_max for the respective complexity level, two values.
+#' @param f_max_range_4_log10 A range for f_max for the respective complexity level, two values.
 #' @param n_half_range_range_0_log10 A range for n_half for the respective complexity level, two values.
 #' @param n_half_range_range_1_log10 A range for n_half for the respective complexity level, two values.
 #' @param n_half_range_range_2_log10 A range for n_half for the respective complexity level, two values.
