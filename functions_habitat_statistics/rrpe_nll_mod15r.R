@@ -159,44 +159,48 @@ rrpe_nll_mod15r <- function(
     t_end = 1
 ){
   
-  eaten_simulated <- foreach::foreach(
-    i = 1:length(n_initial),
-    .combine = "rbind"
-  ) %do% {
-    
-    if(complexity[i] == 0){
-      f_max_log10 <- f_max_0_log10
-    }
-    if(complexity[i] == 1){
-      f_max_log10 <- f_max_1_log10
-    }
-    if(complexity[i] == 2){
-      f_max_log10 <- f_max_2_log10
-    }
-    if(complexity[i] == 3){
-      f_max_log10 <- f_max_3_log10
-    }
-    if(complexity[i] == 4){
-      f_max_log10 <- f_max_4_log10
-    }
-    
-    rrpe_sim(
-      n_initial = n_initial[i],
-      p = p,
-      f_max = 10^f_max_log10,
-      n_half = 10^(n_half_intercept_log10 + n_half_slope_log10 * n_rings[i]),
-      t_end = t_end
-    )
-  }
+  nll <- Inf
   
-  lls <- dbinom(
-    x = n_eaten,
-    size = n_initial,
-    prob = eaten_simulated$n_eaten/n_initial,
-    log = T
+  try({
+    eaten_simulated <- foreach::foreach(
+      i = 1:length(n_initial),
+      .combine = "rbind"
+    ) %do% {
+      
+      if(complexity[i] == 0){
+        f_max_log10 <- f_max_0_log10
+      }
+      if(complexity[i] == 1){
+        f_max_log10 <- f_max_1_log10
+      }
+      if(complexity[i] == 2){
+        f_max_log10 <- f_max_2_log10
+      }
+      if(complexity[i] == 3){
+        f_max_log10 <- f_max_3_log10
+      }
+      if(complexity[i] == 4){
+        f_max_log10 <- f_max_4_log10
+      }
+      
+      rrpe_sim(
+        n_initial = n_initial[i],
+        p = p,
+        f_max = 10^f_max_log10,
+        n_half = 10^(n_half_intercept_log10 + n_half_slope_log10 * n_rings[i]),
+        t_end = t_end
+      )
+    }
+    
+    lls <- dbinom(
+      x = n_eaten,
+      size = n_initial,
+      prob = eaten_simulated$n_eaten/n_initial,
+      log = T
     )
-  
-  nll <- -1*sum(lls)
+    
+    nll <- -1*sum(lls)
+  }, silent = TRUE)
   
   return(nll)
 }
