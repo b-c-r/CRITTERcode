@@ -68,11 +68,11 @@
 #' @param t_h_range_range_2_log10 A range for t_h for the respective complexity level, two values.
 #' @param t_h_range_range_3_log10 A range for t_h for the respective complexity level, two values.
 #' @param t_h_range_range_4_log10 A range for t_h for the respective complexity level, two values.
-#' @param a_range_range_0_log10 A range for a for the respective complexity level, two values.
-#' @param a_range_range_1_log10 A range for a for the respective complexity level, two values.
-#' @param a_range_range_2_log10 A range for a for the respective complexity level, two values.
-#' @param a_range_range_3_log10 A range for a for the respective complexity level, two values.
-#' @param a_range_range_4_log10 A range for a for the respective complexity level, two values.
+#' @param a_range_0_log10 A range for a for the respective complexity level, two values.
+#' @param a_range_1_log10 A range for a for the respective complexity level, two values.
+#' @param a_range_2_log10 A range for a for the respective complexity level, two values.
+#' @param a_range_3_log10 A range for a for the respective complexity level, two values.
+#' @param a_range_4_log10 A range for a for the respective complexity level, two values.
 #' @param t_end integer or float; the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
 #' @param no_lhs_samples a single integer value; the number of random latin hypercube samplings.
 #' 

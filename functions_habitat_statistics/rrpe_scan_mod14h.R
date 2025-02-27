@@ -68,8 +68,8 @@
 #' @param t_h_range_range_2_log10 A range for t_h for the respective complexity level, two values.
 #' @param t_h_range_range_3_log10 A range for t_h for the respective complexity level, two values.
 #' @param t_h_range_range_4_log10 A range for t_h for the respective complexity level, two values.
-#' @param a_range_range_0_log10 A range for a if habitat is absent, two values.
-#' @param a_range_range_1_log10 A range for a if habitat is present, two values.
+#' @param a_range_0_log10 A range for a if habitat is absent, two values.
+#' @param a_range_1_log10 A range for a if habitat is present, two values.
 #' @param t_end integer or float; the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
 #' @param no_lhs_samples a single integer value; the number of random latin hypercube samplings.
 #' 
@@ -99,7 +99,7 @@
 #'   t_h_range_3_log10 = log10(c(1, max(fr_data_ie$n_eaten[fr_data_ie$complexity_level == 3]))),
 #'   t_h_range_4_log10 = log10(c(1, max(fr_data_ie$n_eaten[fr_data_ie$complexity_level == 4]))),
 #'   a_range_hab0_log10 = log10(c(1, max(fr_data_ie$n_initial[fr_data_ie$complexity_level == 0]))),
-#'   a_range_hab1_log10 = log10(c(1, max(fr_data_ie$n_initial[fr_data_ie$complexity_level  > 0])))
+#'   a_range_hab1_log10 = log10(c(1, max(fr_data_ie$n_initial[fr_data_ie$complexity_level  > 0]))),
 #'   t_end = 1,
 #'   no_lhs_samples = 100
 #' )
