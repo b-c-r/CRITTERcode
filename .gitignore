@@ -51,3 +51,4 @@ rsconnect/
 # Custom
 *.Rproj
 rdev/
+data/
