@@ -17,8 +17,20 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
 ################################################################################
 #'
-#' @description find the description including parameters here:
-#'     https://github.com/b-c-r/CRITTERcode/blob/main/README.md
+#' @description
+#'     find the description including parameters here:
+#'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
+#'     
+#'     if you prefer to download a pdf, including the full statistics, follow:
+#'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
+#'     
+#'     if you are interested in the full scientific paper follow:
+#'         https://doi.org/10.1101/2025.02.22.639633
+#'     
+#'     if you use this code, please cite:
+#'         Rall et al. (2025): Habitat complexity reduces feeding strength of
+#'         freshwater predators (CRITTER) - Code. Zenodo.
+#'         https://doi.org/10.5281/zenodo.14894598
 #'
 #' @include rrpe_sim.R
 #' @include rrpe_nll_mod12h.R
