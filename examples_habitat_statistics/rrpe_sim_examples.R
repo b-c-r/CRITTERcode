@@ -58,7 +58,7 @@ source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                          
 ## example for Holling-style
 
 out_h <- rrpe_sim(
-  style = "Holling",
+  fr_style = "Holling",
   n_initial = 1:100,                                                            # x-axis values (initial prey density)
   p = 1,                                                                        # predator density - single value
   a = .5,                                                                       # attack rate - single value
@@ -70,12 +70,12 @@ plot(out_h$n_initial, out_h$n_eaten, type = "l")                                
 ################################################################################
 ## example for Real-style
 
-out <- rrpe_sim(
-  style = "Real",
-  n_initial = 1:100,                                                             # x-axis values (initial prey density)
-  p = 1,                                                                         # predator density - single value
-  f_max = 10,                                                                    # maximum feeding rate - single value
-  n_half = 20                                                                    # half saturation density - single value
+out_r <- rrpe_sim(
+  fr_style = "Real",
+  n_initial = 1:100,                                                            # x-axis values (initial prey density)
+  p = 1,                                                                        # predator density - single value
+  f_max = 10,                                                                   # maximum feeding rate - single value
+  n_half = 20                                                                   # half saturation density - single value
 )
 
-plot(out$n_initial, out$n_eaten, type = "l")                                    # plots the output
+plot(out_r$n_initial, out_r$n_eaten, type = "l")                                # plots the output
