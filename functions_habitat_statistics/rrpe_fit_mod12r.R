@@ -143,7 +143,7 @@ rrpe_fit_mod12r <- function(
     p = 1,
     t_end = 1,
     no_lhs_samples = 1000,
-    range_multiplier = c(1.0001, 1.001, 1.1, 1.2, 1.3),
+    range_multiplier = c(1.0001, 1.001, 1.1, 1.5, 2),
     rel_f_max_range = c(0.6, 0.95),
     rel_n_half_range = c(0.2, 0.8),
     slope_range = c(-0.1, 0.1),
