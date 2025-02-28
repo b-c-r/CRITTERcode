@@ -57,7 +57,7 @@ rrpe_scan_mod13h <- function(
     t_h_2_log10_range,
     t_h_3_log10_range,
     t_h_4_log10_range,
-    a_range_log10,
+    a_log10_range,
     t_end = 1,
     no_lhs_samples = 1000
 ){
@@ -70,7 +70,7 @@ rrpe_scan_mod13h <- function(
   t_h_2_log10_range  <- log10((lhsvals[, 3] * (10^t_h_2_log10_range[2] - 10^t_h_2_log10_range[1])) + 10^t_h_2_log10_range[1])
   t_h_3_log10_range  <- log10((lhsvals[, 4] * (10^t_h_3_log10_range[2] - 10^t_h_3_log10_range[1])) + 10^t_h_3_log10_range[1])
   t_h_4_log10_range  <- log10((lhsvals[, 5] * (10^t_h_4_log10_range[2] - 10^t_h_4_log10_range[1])) + 10^t_h_4_log10_range[1])
-  a_range_log10      <- log10((lhsvals[, 6] * (    10^a_range_log10[2] -     10^a_range_log10[1])) +     10^a_range_log10[1])
+  a_log10_range      <- log10((lhsvals[, 6] * (    10^a_log10_range[2] -     10^a_log10_range[1])) +     10^a_log10_range[1])
   
   ## calculate nlls
   nlls <- foreach::foreach(
@@ -87,7 +87,7 @@ rrpe_scan_mod13h <- function(
           t_h_2_log10 = t_h_2_log10_range[i],
           t_h_3_log10 = t_h_3_log10_range[i],
           t_h_4_log10 = t_h_4_log10_range[i],
-          a_log10 = a_range_log10[i],
+          a_log10 = a_log10_range[i],
           t_end = t_end
         )
       
@@ -99,7 +99,7 @@ rrpe_scan_mod13h <- function(
     t_h_2_log10  =  t_h_2_log10_range[nlls == min(nlls)],
     t_h_3_log10  =  t_h_3_log10_range[nlls == min(nlls)],
     t_h_4_log10  =  t_h_4_log10_range[nlls == min(nlls)],
-    a_log10 = a_range_log10[nlls == min(nlls)],
+    a_log10 = a_log10_range[nlls == min(nlls)],
     nll = nlls[nlls == min(nlls)]
   )
   
