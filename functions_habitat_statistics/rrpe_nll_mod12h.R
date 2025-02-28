@@ -38,6 +38,11 @@
 #'         freshwater predators (CRITTER) - Code. Zenodo.
 #'         https://doi.org/10.5281/zenodo.14894598
 #' 
+#'      please also consider citing for the underlying method:
+#'         Bolker (2008) Ecological models and data in R, Princeton University Press,
+#'         Princeton, New Jersey.
+#'         https://math.mcmaster.ca/~bolker/emdbook/index.html
+#' 
 #' @include rrpe_sim.R
 #' 
 #' @return Returns a single negative log-likelihood value.
@@ -55,7 +60,7 @@ rrpe_nll_mod12h <- function(
     complexity,
     p = 1,
     t_h_intercept_log10,
-    t_h_slope_log10,
+    t_h_slope,
     a_0_log10,
     a_1_log10,
     a_2_log10,
@@ -89,10 +94,11 @@ rrpe_nll_mod12h <- function(
       }
       
       rrpe_sim(
+        fr_style = "Holling",
         n_initial = n_initial[i],
         p = p,
-        f_max = 1 / (10^(t_h_intercept_log10 + t_h_slope_log10 * n_rings[i])),
-        n_half = 1 / (10^a_log10 * 10^(t_h_intercept_log10 + t_h_slope_log10 * n_rings[i]))  ,
+        a = 10^a_log10,
+        t_h = 10^(t_h_intercept_log10 + t_h_slope * n_rings[i]),
         t_end = t_end
       )
     }

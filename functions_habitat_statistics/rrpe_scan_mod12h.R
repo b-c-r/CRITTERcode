@@ -49,13 +49,13 @@ rrpe_scan_mod12h <- function(
     n_rings,
     complexity,
     p = 1,
-    t_h_range_intercept_log10,
-    t_h_range_slope_log10,
-    a_range_0_log10,
-    a_range_1_log10,
-    a_range_2_log10,
-    a_range_3_log10,
-    a_range_4_log10,
+    t_h_intercept_log10_range,
+    t_h_slope_range,
+    a_0_log10_range,
+    a_1_log10_range,
+    a_2_log10_range,
+    a_3_log10_range,
+    a_4_log10_range,
     t_end = 1,
     no_lhs_samples = 1000
 ){
@@ -63,13 +63,13 @@ rrpe_scan_mod12h <- function(
   # generation of 
   lhsvals <- lhs::randomLHS(no_lhs_samples, 7)
   
-  t_h_range_intercept_log10 <- log10((lhsvals[, 1] * (10^t_h_range_intercept_log10[2] - 10^t_h_range_intercept_log10[1])) + 10^t_h_range_intercept_log10[1])
-  t_h_range_slope_log10     <-       (lhsvals[, 2] * (       t_h_range_slope_log10[2] -        t_h_range_slope_log10[1])) +        t_h_range_slope_log10[1]
-  a_range_0_log10           <- log10((lhsvals[, 3] * (          10^a_range_0_log10[2] -           10^a_range_0_log10[1])) +           10^a_range_0_log10[1])
-  a_range_1_log10           <- log10((lhsvals[, 4] * (          10^a_range_1_log10[2] -           10^a_range_1_log10[1])) +           10^a_range_1_log10[1])
-  a_range_2_log10           <- log10((lhsvals[, 5] * (          10^a_range_2_log10[2] -           10^a_range_2_log10[1])) +           10^a_range_2_log10[1])
-  a_range_3_log10           <- log10((lhsvals[, 6] * (          10^a_range_3_log10[2] -           10^a_range_3_log10[1])) +           10^a_range_3_log10[1])
-  a_range_4_log10           <- log10((lhsvals[, 7] * (          10^a_range_4_log10[2] -           10^a_range_4_log10[1])) +           10^a_range_4_log10[1])
+  t_h_intercept_log10_range <- log10((lhsvals[, 1] * (10^t_h_intercept_log10_range[2] - 10^t_h_intercept_log10_range[1])) + 10^t_h_intercept_log10_range[1])
+  t_h_slope_range           <-       (lhsvals[, 2] * (             t_h_slope_range[2] -              t_h_slope_range[1])) +              t_h_slope_range[1]
+  a_0_log10_range           <- log10((lhsvals[, 3] * (          10^a_0_log10_range[2] -           10^a_0_log10_range[1])) +           10^a_0_log10_range[1])
+  a_1_log10_range           <- log10((lhsvals[, 4] * (          10^a_1_log10_range[2] -           10^a_1_log10_range[1])) +           10^a_1_log10_range[1])
+  a_2_log10_range           <- log10((lhsvals[, 5] * (          10^a_2_log10_range[2] -           10^a_2_log10_range[1])) +           10^a_2_log10_range[1])
+  a_3_log10_range           <- log10((lhsvals[, 6] * (          10^a_3_log10_range[2] -           10^a_3_log10_range[1])) +           10^a_3_log10_range[1])
+  a_4_log10_range           <- log10((lhsvals[, 7] * (          10^a_4_log10_range[2] -           10^a_4_log10_range[1])) +           10^a_4_log10_range[1])
   
   ## calculate nlls
   nlls <- foreach::foreach(
@@ -82,26 +82,26 @@ rrpe_scan_mod12h <- function(
           n_rings = n_rings,
           complexity = complexity,
           p = p,
-          t_h_intercept_log10 = t_h_range_intercept_log10[i],
-          t_h_slope_log10 = t_h_range_slope_log10[i],
-          a_0_log10 = a_range_0_log10[i],
-          a_1_log10 = a_range_1_log10[i],
-          a_2_log10 = a_range_2_log10[i],
-          a_3_log10 = a_range_3_log10[i],
-          a_4_log10 = a_range_4_log10[i],
+          t_h_intercept_log10 = t_h_intercept_log10_range[i],
+          t_h_slope = t_h_slope_range[i],
+          a_0_log10 = a_0_log10_range[i],
+          a_1_log10 = a_1_log10_range[i],
+          a_2_log10 = a_2_log10_range[i],
+          a_3_log10 = a_3_log10_range[i],
+          a_4_log10 = a_4_log10_range[i],
           t_end = t_end
         )
       
     }
   
   sel_parms <- data.frame(
-    t_h_intercept_log10  =  t_h_range_intercept_log10[nlls == min(nlls)],
-    t_h_slope_log10  =  t_h_range_slope_log10[nlls == min(nlls)],
-    a_0_log10 = a_range_0_log10[nlls == min(nlls)],
-    a_1_log10 = a_range_1_log10[nlls == min(nlls)],
-    a_2_log10 = a_range_2_log10[nlls == min(nlls)],
-    a_3_log10 = a_range_3_log10[nlls == min(nlls)],
-    a_4_log10 = a_range_4_log10[nlls == min(nlls)],
+    t_h_intercept_log10 = t_h_intercept_log10_range[nlls == min(nlls)],
+    t_h_slope = t_h_slope_range[nlls == min(nlls)],
+    a_0_log10 = a_0_log10_range[nlls == min(nlls)],
+    a_1_log10 = a_1_log10_range[nlls == min(nlls)],
+    a_2_log10 = a_2_log10_range[nlls == min(nlls)],
+    a_3_log10 = a_3_log10_range[nlls == min(nlls)],
+    a_4_log10 = a_4_log10_range[nlls == min(nlls)],
     nll = nlls[nlls == min(nlls)]
   )
   
