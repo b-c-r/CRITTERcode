@@ -19,20 +19,29 @@
 
 ################################################################################
 ## Setup
+# please install following packages, if not already done:
+# install.packages("bbmle")
+# install.packages("dplyr")
+# install.packages("emdbook")
+# install.packages("foreach")
+# install.packages("lhs")
 
+
+# empty environment:
 rm(list=ls())
 
-library("foreach")
+# attach libraries
 library("dplyr")
+library("foreach")
 
 # import the functions from GitHub:
 gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
-f_path <- "functions_habitat_statistics"
+f_path <- "functions_habitat_statistics/"
 
-source(paste(gh_path, f_path, "rrpe_sim.R"))                                    # simulates a feeding functional response based on parameters and initial prey density
-source(paste(gh_path, f_path, "rrpe_nll_mod12h.R"))                             # calculates negative log likelihood
-source(paste(gh_path, f_path, "rrpe_scan_mod12h.R"))                            # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
-source(paste(gh_path, f_path, "rrpe_fit_mod12h.R"))                             # fits functional response model to data
+source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                          # simulates a feeding functional response based on parameters and initial prey density
+source(paste(gh_path, f_path, "rrpe_nll_mod12h.R", sep = ""))                   # calculates negative log likelihood
+source(paste(gh_path, f_path, "rrpe_scan_mod12h.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
+source(paste(gh_path, f_path, "rrpe_fit_mod12h.R", sep = ""))                   # fits functional response model to data
 
 ################################################################################
 ## Data
