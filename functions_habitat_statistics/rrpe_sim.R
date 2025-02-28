@@ -37,7 +37,12 @@
 #'         Rall et al. (2025): Habitat complexity reduces feeding strength of
 #'         freshwater predators (CRITTER) - Code. Zenodo.
 #'         https://doi.org/10.5281/zenodo.14894598
-#' 
+#'          
+#'     please also consider citing for the underlying method:
+#'         Bolker (2008) Ecological models and data in R, Princeton University
+#'         Press,Princeton, New Jersey.
+#'         https://math.mcmaster.ca/~bolker/emdbook/index.html
+#'
 #' @return returns a data frame with simulated n_initial and n_eaten.
 #' 
 #' @examples
@@ -61,16 +66,15 @@ rrpe_sim <- function(
 
     remaining_prey <- n_half * emdbook::lambertW( n_initial/n_half * exp((n_initial - f_max * p * t_end)/n_half))
     
-    else{
-      if(fr_style == "Holling"){
-        
-        remaining_prey <- emdbook::lambertW(a * t_h * n_initial * exp(a * (t_h * n_initial - p * t_end))) / (a * t_h)
-
-      } else{
-        
-        stop("please provide a valid functional response style: Real or Holling")
-        
-      }
+  } else{
+    if(fr_style == "Holling"){
+      
+      remaining_prey <- emdbook::lambertW(a * t_h * n_initial * exp(a * (t_h * n_initial - p * t_end))) / (a * t_h)
+      
+    } else{
+      
+      stop("please provide a valid functional response style: Real or Holling")
+      
     }
   }
   

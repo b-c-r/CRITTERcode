@@ -30,6 +30,11 @@
 #     Rall et al. (2025): Habitat complexity reduces feeding strength of
 #         freshwater predators (CRITTER) - Code. Zenodo.
 #         https://doi.org/10.5281/zenodo.14894598
+# 
+# please also consider citing for the underlying method:
+#     Bolker (2008) Ecological models and data in R, Princeton University Press,
+#         Princeton, New Jersey.
+#         https://math.mcmaster.ca/~bolker/emdbook/index.html
 #
 ################################################################################
 ## Setup
