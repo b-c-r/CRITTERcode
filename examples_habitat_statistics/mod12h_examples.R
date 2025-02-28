@@ -109,13 +109,13 @@ rrpe_scan_mod12h(
  n_rings = fr_data_ie$ring_count,                                               # data: number of habitat rings provided as structure
  complexity  = fr_data_ie$complexity_level,                                     # data: complexity levels
  p = 1,                                                                         # number of predators in the experiment: here 1 predator per vessel
- t_h_intercept_log10_range = c(.05, .05),                                       # two values, the range, for handling time intercept (log10 scale)
+ t_h_intercept_log10_range = log10(c(.05, .05)),                                # two values, the range, for handling time intercept (log10 scale)
  t_h_slope_range = c(-0.05, 0.05),                                              # two values, the range, handling time (linear after log10 transformation)
- a_0_log10_range = c(.01,0.5),                                                  # two values, the range, attack rate at complexity level 0 (log10 scale)
- a_1_log10_range = c(.01,0.5),                                                  # two values, the range, attack rate at complexity level 1 (log10 scale)
- a_2_log10_range = c(.01,0.5),                                                  # two values, the range, attack rate at complexity level 2 (log10 scale)
- a_3_log10_range = c(.01,0.5),                                                  # two values, the range, attack rate at complexity level 3 (log10 scale)
- a_4_log10_range = c(.01,0.5),                                                  # two values, the range, attack rate at complexity level 4 (log10 scale)
+ a_0_log10_range = log10(c(.01,0.5)),                                           # two values, the range, attack rate at complexity level 0 (log10 scale)
+ a_1_log10_range = log10(c(.01,0.5)),                                           # two values, the range, attack rate at complexity level 1 (log10 scale)
+ a_2_log10_range = log10(c(.01,0.5)),                                           # two values, the range, attack rate at complexity level 2 (log10 scale)
+ a_3_log10_range = log10(c(.01,0.5)),                                           # two values, the range, attack rate at complexity level 3 (log10 scale)
+ a_4_log10_range = log10(c(.01,0.5)),                                           # two values, the range, attack rate at complexity level 4 (log10 scale)
  t_end = 1,                                                                     # end time of the experiment, here 1 day
  no_lhs_samples = 100                                                           # number of latin hypercube samples that should be taken (i.e. 100 random values in the range of the above assigned ranges)
 )
