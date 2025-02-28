@@ -1,7 +1,7 @@
 Habitat *c*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater
 p*r*edators (CRITTER, Code Repository)
 ================
-2025-02-25
+2025-02-28
 
 ## Summary
 
@@ -338,51 +338,69 @@ Required packages to be attached:
 
 #### `rrpe_sim`
 
-`rrpe_sim` runs the Real-style Type II functional (Real, 1977, 1979).
-The feeding rate, $F$, is determined by the model parameters maximum
-feeding rate, $F_max$, and half saturation density, $N_half$:
+***Description***:
+
+`rrpe_sim` simulates the type II functional response (Holling, 1959a;
+Real, 1977). The feeding rate, $F$, is determined by the model
+parameters handling time, $T_{h}$, and attack rate, $a$ (Holling, 1959a)
+or maximum feeding rate, $F_{max}$, and half saturation density,
+$N_{half}$ (Real, 1977):
 
 $$
-F = \frac{F_{max} N}{N_{half} + N},
+F = \frac{a N}{1 + a T_h N} = \frac{F_{max} N}{N_{half} + N},
 $$
 
-where $N$ is the resource density. However, this function requires a
-constant resource density, which is not given in most functional
-response experiments. To take the temporal decline of the resource into
-account, we apply Rogers’ Random Equation (Rogers, 1972; Royama, 1971):
+where $N$ is the current resource density. These equations, however,
+require a constant resource density, which is not given in most
+functional response experiments. To take the temporal decline of the
+resource into account, we apply Rogers’ Random Equation (Rogers, 1972;
+Royama, 1971):
 
 $$
-N_{eaten} = N_{initial} (1 - e^{(\frac{F_{max}}{N_{half}} (\frac{N_{eaten}}{F_{max}} - P  T_{end}))}),
+N_{eaten} = N_{initial} (1 - e^{a (N_{eaten}T_{h} - P  T_{end})}) = N_{initial} (1 - e^{\frac{N_{eaten} - F_{max} P  T_{end}}{N_{half}}}),
 $$
 
 where N_eaten are the eaten resource items, N_initial is the initial
 resource density, P is the predator density, and T_end is the
-experimental duration (time). This function contains N_eaten on both
-sides of the equation and is only solvable iteratively (Juliano, 2001;
-Vonesh & Bolker, 2005). Bolker (2008) solved this issue by using the
+experimental duration (time). These equations contain N_eaten on both
+sides and are only solvable iteratively (Juliano, 2001; Vonesh & Bolker,
+2005). Alternatively, Bolker (2008) solved this issue by using the
 Lambert $W$ function (Corless et al., 1996):
 
 $$
-N_{eaten} = N_{initial} - \frac{W(\frac{N_{initial}}{N_{half}}  e^{-\frac{F_{max}}{N_{half}}(P T_{end}- \frac{N_{initial}}{F_{max}} )}}{N_{half}^{-1} }  
+N_{eaten} = N_{initial} - \frac{W(a T_h N_{initial} e^{a(T_h N_{initial} - P T_{end})})}{a T_h}  = N_{initial} - N_{half} W(\frac{N_{initial}}{N_{half}}  e^{-\frac{F_{max} P T_{end}- N_{initial}}{N_{half}}})
 $$
 
-We apply this function to compute the type II functional response in its
-Michaelis-Menten version (Real-style).
+We apply these functions to compute the type II functional response.
 
-Required packages and their dependencies to be installed:
+***Parameters***:
+
+- `fr_style` \[string\]: either “Holling” or “Real”.
+- `n_initial` \[numeric\]: a vector of initial prey densities (can also
+  be a single value).
+- `p integer` \[numeric\]: a single value of a fixed predator density.
+  The default value is 1.
+- `a` \[numeric\]: the attack rate, a single value. Only for
+  Holling-style.
+- `t_h` \[numeric\]: the handling time, a single value. Only for
+  Holling-style.
+- `f_max float` \[numeric\]: the maximum feeding rate, a single value.
+  Only for Real-style.
+- `n_half float` \[numeric\]: the half saturation density, a single
+  value. Only for Real-style.
+- `t_end` \[numeric\]: the time were the feeding ends. A single value;
+  default = 1 (e.g. 1 day).
+
+***Required packages***:
 
 - `emdbook` (Bolker, 2023)
 
-Required packages to be attached:
-
-- none
-
 #### `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and `rrpe_nll_mod01h` to `rrpe_nll_mod16h`
 
-All functions from `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and
-`rrpe_nll_mod01h` to `rrpe_nll_mod16h` calculate the negative log
-likelihood of using experimental functional response data (eaten
-resource items as a function of resource density) using the
+***Description***: All functions from `rrpe_nll_mod01r` to
+`rrpe_nll_mod16r` and `rrpe_nll_mod01h` to `rrpe_nll_mod16h` calculate
+the negative log likelihood of using experimental functional response
+data (eaten resource items as a function of resource density) using the
 Michaelis-Menten Type II functional response (Real, 1977) from the
 `rrpe_sim` function. Functions having `r` in their name return the
 parameters for the Real-style functional response (Real, 1977):
@@ -396,7 +414,9 @@ the model parameters on log-scale, as this transformation (1)
 accelerates the fitting procedure and (2) prevents biologically
 irrelevant negative estimations that would crash the fitting algorithm.
 
-Required packages and their dependencies to be installed:
+***Parameters***: TBA
+
+***Required packages***:
 
 - `emdbook` (Bolker, 2023)
 - `foreach` (Microsoft & Weston, 2022b)
