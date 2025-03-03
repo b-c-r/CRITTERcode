@@ -17,117 +17,34 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
 ################################################################################
 #'
-#' @description `rrpe_parms_scan_mod15r` creates Latin hypercube samples for the
-#'     functional response parameters in a reasonable range and calculates the
-#'     according negative log-likelihood values. It returns the parameter values
-#'     with the lowest negative log likelihood of these samples. Non-linear
-#'     maximum likelihood fitting procedures require starting parameters,
-#'     generally based on an educated guess (e.g., Bolker 2008). Moreover,
-#'     these fits may end up in local best fits, and users should re-fit the
-#'     data using different starting parameters (Bolker 2008). To overcome
-#'     manually eyeballing as well as re-shuffling the starting parameters,
-#'     Jager and Ashauer (2018) suggested creating samples in a reasonable
-#'     parameter range using and choosing the starting parameters (from the
-#'     lowest nll value) from these samples. To reduce the number of required
-#'     samples by keeping the variance of parameter values as wide as possible,
-#'     we use Latin hypercube sampling. Moreover, the function requires the
-#'     model parameters on log-scale, as this transformation (1) accelerates the
-#'     fitting procedure and (2) prevents biologically irrelevant negative
-#'     estimations that would crash the fitting algorithm.
-#'     `rrpe_parms_scan_mod15r` requires the lhs package (Carnell 2024).
+#' @description
+#'     find the description including parameters here:
+#'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
+#'     
+#'     if you prefer to download a pdf, including the full statistics, follow:
+#'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
+#'     
+#'     if you are interested in the full scientific paper follow:
+#'         https://doi.org/10.1101/2025.02.22.639633
+#'     
+#'     if you use this code, please cite:
+#'         Rall et al. (2025): Habitat complexity reduces feeding strength of
+#'         freshwater predators (CRITTER) - Code. Zenodo.
+#'         https://doi.org/10.5281/zenodo.14894598
 #' 
-#'     Required packages and their dependencies to be installed:
-#'       - `emdbook` (Bolker 2023)
-#'       - `foreach` (Microsoft and Weston 2022)
-#'       - `lhs` (Carnell 2024)
-#'     Required packages to be attached:
-#'       - `foreach` (Microsoft and Weston 2022)
+#'      please also consider citing for the underlying method:
+#'         Bolker (2008) Ecological models and data in R, Princeton University Press,
+#'         Princeton, New Jersey.
+#'         https://math.mcmaster.ca/~bolker/emdbook/index.html
 #' 
-#' @references Bolker (2008) Ecological models and data in R, Princeton
-#'     University Press, Princeton, New Jersey.
-#'     https://math.mcmaster.ca/~bolker/emdbook/index.html
-#' @references Bolker (2023) emdbook: support functions and data for "Ecological
-#'     models and data". Version 1.3.13.
-#'     https://CRAN.R-project.org/package=emdbook
-#' @references Carnell (2024) lhs: latin hypercube samples. Version 1.2.0.
-#'     https://CRAN.R-project.org/package=lhs
-#' @references Microsoft and Weston (2022) foreach: provides foreach looping
-#'     construct. Version 1.5.2. https://doi.org/10.32614/CRAN.package.foreach
-#' @references Jager and Ashauer (2018) Modelling survival under chemical stress
-#'     Leanpub. https://leanpub.com/guts_book
-#'
 #' @include rrpe_sim.R
-#' @include rrpe_nll_mod15r.R
 #' 
-#' @param n_eaten integer (or float); the prey items that were eaten throughout the experimental trial. A vector.
-#' @param n_initial integer or float; a vector of initial prey densities.
-#' @param n_rings number of ring structures (0, 2, or 3), a single integer value.
-#' @param complexity level of complexity (0-4), a single integer value.
-#' @param p integer or float; a single value of a fixed predator density. The def
-#' @param f_max_range_range_0_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_1_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_2_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_3_log10 A range for f_max for the respective complexity level, two values.
-#' @param f_max_range_range_4_log10 A range for f_max for the respective complexity level, two values.
-#' @param n_half_range_intercept_log10 float; intercept of log10 n_half, two values.
-#' @param n_half_range_slope_log10 float; slope of log10 n_half, two values.
-#' @param t_end integer or float; the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
-#' @param no_lhs_samples a single integer value; the number of random latin hypercube samplings.
-#' 
-#' @return Returns a data frame with a single row of parameter values.
+#' @return Returns a single negative log-likelihood value.
 #' 
 #' @examples
 #' 
-#' rm(list=ls())
-#' 
-#' library("foreach")
-#' 
-#' gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/functions_habitat_statistics/"
-#' 
-#' source(paste(gh_path, "rrpe_sim.R", sep = ""))
-#' source(paste(gh_path, "rrpe_nll_mod15r.R", sep = ""))
-#' source(paste(gh_path, "rrpe_scan_mod15r.R", sep = ""))
-#' 
-#' fr_data <- read.csv("https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/critter_data.csv")
-#' fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
-#' 
-#' rrpe_scan_mod15r(
-#'   n_eaten = fr_data_ie$n_eaten,
-#'   n_initial = fr_data_ie$n_initial,
-#'   n_rings = fr_data_ie$ring_count,
-#'   complexity  = fr_data_ie$complexity_level,
-#'   p = 1,
-#'   f_max_range_0_log10 = log10(c(1, max(fr_data_ie$n_eaten[fr_data_ie$complexity_level == 0]))),
-#'   f_max_range_1_log10 = log10(c(1, max(fr_data_ie$n_eaten[fr_data_ie$complexity_level == 1]))),
-#'   f_max_range_2_log10 = log10(c(1, max(fr_data_ie$n_eaten[fr_data_ie$complexity_level == 2]))),
-#'   f_max_range_3_log10 = log10(c(1, max(fr_data_ie$n_eaten[fr_data_ie$complexity_level == 3]))),
-#'   f_max_range_4_log10 = log10(c(1, max(fr_data_ie$n_eaten[fr_data_ie$complexity_level == 4]))),
-#'   n_half_range_intercept_log10 = log10(c(1, max(fr_data_ie$n_initial[fr_data_ie$ring_count == 0]))),
-#'   n_half_range_slope_log10 = c(-0.1, 0.1),
-#'   t_end = 1,
-#'   no_lhs_samples = 100
-#' )
-#' 
-#' #############################################################################
-#' 
-#' fr_data_ng <- subset(fr_data, predator == "Notonecta glauca")
-#' 
-#' rrpe_scan_mod15r(
-#'   n_eaten = fr_data_ng$n_eaten,
-#'   n_initial = fr_data_ng$n_initial,
-#'   n_rings = fr_data_ng$ring_count,
-#'   complexity  = fr_data_ng$complexity_level,
-#'   p = 1,
-#'   f_max_range_0_log10 = log10(c(1, max(fr_data_ng$n_eaten[fr_data_ng$complexity_level == 0]))),
-#'   f_max_range_1_log10 = log10(c(1, max(fr_data_ng$n_eaten[fr_data_ng$complexity_level == 1]))),
-#'   f_max_range_2_log10 = log10(c(1, max(fr_data_ng$n_eaten[fr_data_ng$complexity_level == 2]))),
-#'   f_max_range_3_log10 = log10(c(1, max(fr_data_ng$n_eaten[fr_data_ng$complexity_level == 3]))),
-#'   f_max_range_4_log10 = log10(c(1, max(fr_data_ng$n_eaten[fr_data_ng$complexity_level == 4]))),
-#'   n_half_range_intercept_log10 = log10(c(1, max(fr_data_ng$n_initial[fr_data_ng$ring_count == 0]))),
-#'   n_half_range_slope_log10 = c(-0.1, 0.1),
-#'   t_end = 1,
-#'   no_lhs_samples = 100
-#' )
+#' # find an executable example here:
+#' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod15r_examples.R
 #' 
 
 rrpe_scan_mod15r <- function(
