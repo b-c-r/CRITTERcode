@@ -94,6 +94,7 @@ rrpe_nll_mod12r <- function(
       }
       
       rrpe_sim(
+        fr_style = "Real",
         n_initial = n_initial[i],
         p = p,
         f_max = 10^(f_max_intercept_log10 + f_max_slope_log10 * n_rings[i]),

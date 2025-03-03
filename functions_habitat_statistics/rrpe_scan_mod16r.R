@@ -52,16 +52,16 @@ rrpe_scan_mod16r <- function(
     n_initial,
     complexity,
     p = 1,
-    f_max_range_0_log10,
-    f_max_range_1_log10,
-    f_max_range_2_log10,
-    f_max_range_3_log10,
-    f_max_range_4_log10,
-    n_half_range_0_log10,
-    n_half_range_1_log10,
-    n_half_range_2_log10,
-    n_half_range_3_log10,
-    n_half_range_4_log10,
+    f_max_0_log10_range,
+    f_max_1_log10_range,
+    f_max_2_log10_range,
+    f_max_3_log10_range,
+    f_max_4_log10_range,
+    n_half_0_log10_range,
+    n_half_1_log10_range,
+    n_half_2_log10_range,
+    n_half_3_log10_range,
+    n_half_4_log10_range,
     t_end = 1,
     no_lhs_samples = 1000
 ){
@@ -69,16 +69,16 @@ rrpe_scan_mod16r <- function(
   # generation of 
   lhsvals <- lhs::randomLHS(no_lhs_samples, 10)
   
-  f_max_range_0_log10   <- log10((lhsvals[, 1] * ( 10^f_max_range_0_log10[2] -  10^f_max_range_0_log10[1])) +  10^f_max_range_0_log10[1])
-  f_max_range_1_log10   <- log10((lhsvals[, 2] * ( 10^f_max_range_1_log10[2] -  10^f_max_range_1_log10[1])) +  10^f_max_range_1_log10[1])
-  f_max_range_2_log10   <- log10((lhsvals[, 3] * ( 10^f_max_range_2_log10[2] -  10^f_max_range_2_log10[1])) +  10^f_max_range_2_log10[1])
-  f_max_range_3_log10   <- log10((lhsvals[, 4] * ( 10^f_max_range_3_log10[2] -  10^f_max_range_3_log10[1])) +  10^f_max_range_3_log10[1])
-  f_max_range_4_log10   <- log10((lhsvals[, 5] * ( 10^f_max_range_4_log10[2] -  10^f_max_range_4_log10[1])) +  10^f_max_range_4_log10[1])
-  n_half_range_0_log10  <- log10((lhsvals[, 6] * (10^n_half_range_0_log10[2] - 10^n_half_range_0_log10[1])) + 10^n_half_range_0_log10[1])
-  n_half_range_1_log10  <- log10((lhsvals[, 7] * (10^n_half_range_1_log10[2] - 10^n_half_range_1_log10[1])) + 10^n_half_range_1_log10[1])
-  n_half_range_2_log10  <- log10((lhsvals[, 8] * (10^n_half_range_2_log10[2] - 10^n_half_range_2_log10[1])) + 10^n_half_range_2_log10[1])
-  n_half_range_3_log10  <- log10((lhsvals[, 9] * (10^n_half_range_3_log10[2] - 10^n_half_range_3_log10[1])) + 10^n_half_range_3_log10[1])
-  n_half_range_4_log10  <- log10((lhsvals[,10] * (10^n_half_range_4_log10[2] - 10^n_half_range_4_log10[1])) + 10^n_half_range_4_log10[1])
+  f_max_0_log10_range   <- log10((lhsvals[, 1] * ( 10^f_max_0_log10_range[2] -  10^f_max_0_log10_range[1])) +  10^f_max_0_log10_range[1])
+  f_max_1_log10_range   <- log10((lhsvals[, 2] * ( 10^f_max_1_log10_range[2] -  10^f_max_1_log10_range[1])) +  10^f_max_1_log10_range[1])
+  f_max_2_log10_range   <- log10((lhsvals[, 3] * ( 10^f_max_2_log10_range[2] -  10^f_max_2_log10_range[1])) +  10^f_max_2_log10_range[1])
+  f_max_3_log10_range   <- log10((lhsvals[, 4] * ( 10^f_max_3_log10_range[2] -  10^f_max_3_log10_range[1])) +  10^f_max_3_log10_range[1])
+  f_max_4_log10_range   <- log10((lhsvals[, 5] * ( 10^f_max_4_log10_range[2] -  10^f_max_4_log10_range[1])) +  10^f_max_4_log10_range[1])
+  n_half_0_log10_range  <- log10((lhsvals[, 6] * (10^n_half_0_log10_range[2] - 10^n_half_0_log10_range[1])) + 10^n_half_0_log10_range[1])
+  n_half_1_log10_range  <- log10((lhsvals[, 7] * (10^n_half_1_log10_range[2] - 10^n_half_1_log10_range[1])) + 10^n_half_1_log10_range[1])
+  n_half_2_log10_range  <- log10((lhsvals[, 8] * (10^n_half_2_log10_range[2] - 10^n_half_2_log10_range[1])) + 10^n_half_2_log10_range[1])
+  n_half_3_log10_range  <- log10((lhsvals[, 9] * (10^n_half_3_log10_range[2] - 10^n_half_3_log10_range[1])) + 10^n_half_3_log10_range[1])
+  n_half_4_log10_range  <- log10((lhsvals[,10] * (10^n_half_4_log10_range[2] - 10^n_half_4_log10_range[1])) + 10^n_half_4_log10_range[1])
   
   ## calculate nlls
   nlls <- foreach::foreach(
@@ -90,32 +90,32 @@ rrpe_scan_mod16r <- function(
           n_initial = n_initial,
           complexity = complexity,
           p = p,
-          f_max_0_log10 = f_max_range_0_log10[i],
-          f_max_1_log10 = f_max_range_1_log10[i],
-          f_max_2_log10 = f_max_range_2_log10[i],
-          f_max_3_log10 = f_max_range_3_log10[i],
-          f_max_4_log10 = f_max_range_4_log10[i],
-          n_half_0_log10 = n_half_range_0_log10[i],
-          n_half_1_log10 = n_half_range_1_log10[i],
-          n_half_2_log10 = n_half_range_2_log10[i],
-          n_half_3_log10 = n_half_range_3_log10[i],
-          n_half_4_log10 = n_half_range_4_log10[i],
+          f_max_0_log10 = f_max_0_log10_range[i],
+          f_max_1_log10 = f_max_1_log10_range[i],
+          f_max_2_log10 = f_max_2_log10_range[i],
+          f_max_3_log10 = f_max_3_log10_range[i],
+          f_max_4_log10 = f_max_4_log10_range[i],
+          n_half_0_log10 = n_half_0_log10_range[i],
+          n_half_1_log10 = n_half_1_log10_range[i],
+          n_half_2_log10 = n_half_2_log10_range[i],
+          n_half_3_log10 = n_half_3_log10_range[i],
+          n_half_4_log10 = n_half_4_log10_range[i],
           t_end = t_end
         )
       
     }
   
   sel_parms <- data.frame(
-    f_max_0_log10  =  f_max_range_0_log10[nlls == min(nlls)],
-    f_max_1_log10  =  f_max_range_1_log10[nlls == min(nlls)],
-    f_max_2_log10  =  f_max_range_2_log10[nlls == min(nlls)],
-    f_max_3_log10  =  f_max_range_3_log10[nlls == min(nlls)],
-    f_max_4_log10  =  f_max_range_4_log10[nlls == min(nlls)],
-    n_half_0_log10 = n_half_range_0_log10[nlls == min(nlls)],
-    n_half_1_log10 = n_half_range_1_log10[nlls == min(nlls)],
-    n_half_2_log10 = n_half_range_2_log10[nlls == min(nlls)],
-    n_half_3_log10 = n_half_range_3_log10[nlls == min(nlls)],
-    n_half_4_log10 = n_half_range_4_log10[nlls == min(nlls)],
+    f_max_0_log10  =  f_max_0_log10_range[nlls == min(nlls)],
+    f_max_1_log10  =  f_max_1_log10_range[nlls == min(nlls)],
+    f_max_2_log10  =  f_max_2_log10_range[nlls == min(nlls)],
+    f_max_3_log10  =  f_max_3_log10_range[nlls == min(nlls)],
+    f_max_4_log10  =  f_max_4_log10_range[nlls == min(nlls)],
+    n_half_0_log10 = n_half_0_log10_range[nlls == min(nlls)],
+    n_half_1_log10 = n_half_1_log10_range[nlls == min(nlls)],
+    n_half_2_log10 = n_half_2_log10_range[nlls == min(nlls)],
+    n_half_3_log10 = n_half_3_log10_range[nlls == min(nlls)],
+    n_half_4_log10 = n_half_4_log10_range[nlls == min(nlls)],
     nll = nlls[nlls == min(nlls)]
   )
   

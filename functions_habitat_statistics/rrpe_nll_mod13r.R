@@ -92,6 +92,7 @@ rrpe_nll_mod13r <- function(
       }
       
       rrpe_sim(
+        fr_style = "Real",
         n_initial = n_initial[i],
         p = p,
         f_max = 10^f_max_log10,

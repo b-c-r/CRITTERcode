@@ -66,16 +66,16 @@ rrpe_fit_mod16h <- function(
   
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
-  f_max_range_0  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
-  f_max_range_1  <- rel_f_max_range *  max(n_eaten[complexity == 1])/t_end
-  f_max_range_2  <- rel_f_max_range *  max(n_eaten[complexity == 2])/t_end
-  f_max_range_3  <- rel_f_max_range *  max(n_eaten[complexity == 3])/t_end
-  f_max_range_4  <- rel_f_max_range *  max(n_eaten[complexity == 4])/t_end
-  n_half_range_0 <- rel_n_half_range * max(n_initial[complexity == 0])
-  n_half_range_1 <- rel_n_half_range * max(n_initial[complexity == 1])
-  n_half_range_2 <- rel_n_half_range * max(n_initial[complexity == 2])
-  n_half_range_3 <- rel_n_half_range * max(n_initial[complexity == 3])
-  n_half_range_4 <- rel_n_half_range * max(n_initial[complexity == 4])
+  f_max_0_range  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
+  f_max_1_range  <- rel_f_max_range *  max(n_eaten[complexity == 1])/t_end
+  f_max_2_range  <- rel_f_max_range *  max(n_eaten[complexity == 2])/t_end
+  f_max_3_range  <- rel_f_max_range *  max(n_eaten[complexity == 3])/t_end
+  f_max_4_range  <- rel_f_max_range *  max(n_eaten[complexity == 4])/t_end
+  n_half_0_range <- rel_n_half_range * max(n_initial[complexity == 0])
+  n_half_1_range <- rel_n_half_range * max(n_initial[complexity == 1])
+  n_half_2_range <- rel_n_half_range * max(n_initial[complexity == 2])
+  n_half_3_range <- rel_n_half_range * max(n_initial[complexity == 3])
+  n_half_4_range <- rel_n_half_range * max(n_initial[complexity == 4])
   
   # initial lhs sampling
   initial_guess <- rrpe_scan_mod16h(
@@ -83,16 +83,16 @@ rrpe_fit_mod16h <- function(
     n_initial = n_initial,
     complexity  = complexity,
     p = p,
-    t_h_range_0_log10 = log10(1/rev(f_max_range_0)),
-    t_h_range_1_log10 = log10(1/rev(f_max_range_1)),
-    t_h_range_2_log10 = log10(1/rev(f_max_range_2)),
-    t_h_range_3_log10 = log10(1/rev(f_max_range_3)),
-    t_h_range_4_log10 = log10(1/rev(f_max_range_4)),
-    a_range_0_log10 = log10(c(f_max_range_0[1]/n_half_range_0[2], f_max_range_0[2]/n_half_range_0[1])),
-    a_range_1_log10 = log10(c(f_max_range_1[1]/n_half_range_1[2], f_max_range_1[2]/n_half_range_1[1])),
-    a_range_2_log10 = log10(c(f_max_range_2[1]/n_half_range_2[2], f_max_range_2[2]/n_half_range_2[1])),
-    a_range_3_log10 = log10(c(f_max_range_3[1]/n_half_range_3[2], f_max_range_3[2]/n_half_range_3[1])),
-    a_range_4_log10 = log10(c(f_max_range_4[1]/n_half_range_4[2], f_max_range_4[2]/n_half_range_4[1])),
+    t_h_0_log10_range = log10(1/rev(f_max_0_range)),
+    t_h_1_log10_range = log10(1/rev(f_max_1_range)),
+    t_h_2_log10_range = log10(1/rev(f_max_2_range)),
+    t_h_3_log10_range = log10(1/rev(f_max_3_range)),
+    t_h_4_log10_range = log10(1/rev(f_max_4_range)),
+    a_0_log10_range = log10(c(f_max_0_range[1]/n_half_0_range[2], f_max_0_range[2]/n_half_0_range[1])),
+    a_1_log10_range = log10(c(f_max_1_range[1]/n_half_1_range[2], f_max_1_range[2]/n_half_1_range[1])),
+    a_2_log10_range = log10(c(f_max_2_range[1]/n_half_2_range[2], f_max_2_range[2]/n_half_2_range[1])),
+    a_3_log10_range = log10(c(f_max_3_range[1]/n_half_3_range[2], f_max_3_range[2]/n_half_3_range[1])),
+    a_4_log10_range = log10(c(f_max_4_range[1]/n_half_4_range[2], f_max_4_range[2]/n_half_4_range[1])),
     t_end = t_end,
     no_lhs_samples = no_lhs_samples
   )
@@ -152,32 +152,32 @@ rrpe_fit_mod16h <- function(
     start_parms <- foreach::foreach(
       i = 1:length(range_multiplier),
       .combine = "rbind") %do% {
-        t_h_range_0  <- c(10^bbmle::coef(fit[[witer-1]])[2]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2]  * range_multiplier[i])
-        t_h_range_1  <- c(10^bbmle::coef(fit[[witer-1]])[3]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[3]  * range_multiplier[i])
-        t_h_range_2  <- c(10^bbmle::coef(fit[[witer-1]])[4]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4]  * range_multiplier[i])
-        t_h_range_3  <- c(10^bbmle::coef(fit[[witer-1]])[5]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5]  * range_multiplier[i])
-        t_h_range_4  <- c(10^bbmle::coef(fit[[witer-1]])[6]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6]  * range_multiplier[i])
-        a_range_0 <- c(10^bbmle::coef(fit[[witer-1]])[7]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7]  * range_multiplier[i])
-        a_range_1 <- c(10^bbmle::coef(fit[[witer-1]])[8]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[8]  * range_multiplier[i])
-        a_range_2 <- c(10^bbmle::coef(fit[[witer-1]])[9]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[9]  * range_multiplier[i])
-        a_range_3 <- c(10^bbmle::coef(fit[[witer-1]])[10] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[10] * range_multiplier[i])
-        a_range_4 <- c(10^bbmle::coef(fit[[witer-1]])[11] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[11] * range_multiplier[i])
+        t_h_0_range  <- c(10^bbmle::coef(fit[[witer-1]])[2]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2]  * range_multiplier[i])
+        t_h_1_range  <- c(10^bbmle::coef(fit[[witer-1]])[3]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[3]  * range_multiplier[i])
+        t_h_2_range  <- c(10^bbmle::coef(fit[[witer-1]])[4]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4]  * range_multiplier[i])
+        t_h_3_range  <- c(10^bbmle::coef(fit[[witer-1]])[5]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5]  * range_multiplier[i])
+        t_h_4_range  <- c(10^bbmle::coef(fit[[witer-1]])[6]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6]  * range_multiplier[i])
+        a_0_range <- c(10^bbmle::coef(fit[[witer-1]])[7]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7]  * range_multiplier[i])
+        a_1_range <- c(10^bbmle::coef(fit[[witer-1]])[8]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[8]  * range_multiplier[i])
+        a_2_range <- c(10^bbmle::coef(fit[[witer-1]])[9]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[9]  * range_multiplier[i])
+        a_3_range <- c(10^bbmle::coef(fit[[witer-1]])[10] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[10] * range_multiplier[i])
+        a_4_range <- c(10^bbmle::coef(fit[[witer-1]])[11] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[11] * range_multiplier[i])
         
         rrpe_scan_mod16h(
           n_eaten = n_eaten,
           n_initial = n_initial,
           complexity  = complexity,
           p = p,
-          t_h_range_0_log10  =  log10(t_h_range_0),
-          t_h_range_1_log10  =  log10(t_h_range_1),
-          t_h_range_2_log10  =  log10(t_h_range_2),
-          t_h_range_3_log10  =  log10(t_h_range_3),
-          t_h_range_4_log10  =  log10(t_h_range_4),
-          a_range_0_log10 = log10(a_range_0),
-          a_range_1_log10 = log10(a_range_1),
-          a_range_2_log10 = log10(a_range_2),
-          a_range_3_log10 = log10(a_range_3),
-          a_range_4_log10 = log10(a_range_4),
+          t_h_0_log10_range  =  log10(t_h_0_range),
+          t_h_1_log10_range  =  log10(t_h_1_range),
+          t_h_2_log10_range  =  log10(t_h_2_range),
+          t_h_3_log10_range  =  log10(t_h_3_range),
+          t_h_4_log10_range  =  log10(t_h_4_range),
+          a_0_log10_range = log10(a_0_range),
+          a_1_log10_range = log10(a_1_range),
+          a_2_log10_range = log10(a_2_range),
+          a_3_log10_range = log10(a_3_range),
+          a_4_log10_range = log10(a_4_range),
           t_end = t_end,
           no_lhs_samples = round(no_lhs_samples/length(range_multiplier))
         )

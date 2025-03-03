@@ -65,7 +65,7 @@ rrpe_nll_mod15r <- function(
     f_max_3_log10,
     f_max_4_log10,
     n_half_intercept_log10,
-    n_half_slope_log10,
+    n_half_slope,
     t_end = 1
 ){
   
@@ -97,7 +97,7 @@ rrpe_nll_mod15r <- function(
         n_initial = n_initial[i],
         p = p,
         f_max = 10^f_max_log10,
-        n_half = 10^(n_half_intercept_log10 + n_half_slope_log10 * n_rings[i]),
+        n_half = 10^(n_half_intercept_log10 + n_half_slope * n_rings[i]),
         t_end = t_end
       )
     }

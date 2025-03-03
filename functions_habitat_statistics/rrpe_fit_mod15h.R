@@ -68,12 +68,12 @@ rrpe_fit_mod15h <- function(
   
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
-  f_max_range_0  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
-  f_max_range_1  <- rel_f_max_range *  max(n_eaten[complexity == 1])/t_end
-  f_max_range_2  <- rel_f_max_range *  max(n_eaten[complexity == 2])/t_end
-  f_max_range_3  <- rel_f_max_range *  max(n_eaten[complexity == 3])/t_end
-  f_max_range_4  <- rel_f_max_range *  max(n_eaten[complexity == 4])/t_end
-  n_half_range_0 <- rel_n_half_range * max(n_initial[complexity == 0])
+  f_max_0_range  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
+  f_max_1_range  <- rel_f_max_range *  max(n_eaten[complexity == 1])/t_end
+  f_max_2_range  <- rel_f_max_range *  max(n_eaten[complexity == 2])/t_end
+  f_max_3_range  <- rel_f_max_range *  max(n_eaten[complexity == 3])/t_end
+  f_max_4_range  <- rel_f_max_range *  max(n_eaten[complexity == 4])/t_end
+  n_half_0_range <- rel_n_half_range * max(n_initial[complexity == 0])
   
   # initial lhs sampling
   initial_guess <- rrpe_scan_mod15h(
@@ -82,13 +82,13 @@ rrpe_fit_mod15h <- function(
     n_rings = n_rings,
     complexity  = complexity,
     p = p,
-    t_h_range_0_log10 = log10(1/rev(f_max_range_0)),
-    t_h_range_1_log10 = log10(1/rev(f_max_range_1)),
-    t_h_range_2_log10 = log10(1/rev(f_max_range_2)),
-    t_h_range_3_log10 = log10(1/rev(f_max_range_3)),
-    t_h_range_4_log10 = log10(1/rev(f_max_range_4)),
-    a_range_intercept_log10 = log10(c(f_max_range_0[1]/n_half_range_0[2], f_max_range_0[2]/n_half_range_0[1])),
-    a_range_slope_log10 = slope_range,
+    t_h_0_log10_range = log10(1/rev(f_max_0_range)),
+    t_h_1_log10_range = log10(1/rev(f_max_1_range)),
+    t_h_2_log10_range = log10(1/rev(f_max_2_range)),
+    t_h_3_log10_range = log10(1/rev(f_max_3_range)),
+    t_h_4_log10_range = log10(1/rev(f_max_4_range)),
+    a_intercept_log10_range = log10(c(f_max_0_range[1]/n_half_0_range[2], f_max_0_range[2]/n_half_0_range[1])),
+    a_slope_range = slope_range,
     t_end = t_end,
     no_lhs_samples = no_lhs_samples
   )
@@ -105,7 +105,7 @@ rrpe_fit_mod15h <- function(
       t_h_3_log10  =  initial_guess$t_h_3_log10,
       t_h_4_log10  =  initial_guess$t_h_4_log10,
       a_intercept_log10 = initial_guess$a_intercept_log10,
-      a_slope_log10 = initial_guess$a_slope_log10
+      a_slope = initial_guess$a_slope
     ),
     fixed = list(
       t_end = t_end,
@@ -129,7 +129,7 @@ rrpe_fit_mod15h <- function(
   message(paste("t_h_3_log10: ", round(bbmle::coef(fit[[1]])[5],2)))
   message(paste("t_h_4_log10: ", round(bbmle::coef(fit[[1]])[6],2)))
   message(paste("a_intercept_log10: ", round(bbmle::coef(fit[[1]])[7],2)))
-  message(paste("a_slope_log10: "    , round(bbmle::coef(fit[[1]])[8],2)))
+  message(paste("a_slope: "    , round(bbmle::coef(fit[[1]])[8],2)))
   message(paste("nll: ", nll_fits[1]))
   message("")
   message("start validating the result")
@@ -143,13 +143,13 @@ rrpe_fit_mod15h <- function(
     start_parms <- foreach::foreach(
       i = 1:length(range_multiplier),
       .combine = "rbind") %do% {
-        t_h_range_0  <- c(10^bbmle::coef(fit[[witer-1]])[2]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2]  * range_multiplier[i])
-        t_h_range_1  <- c(10^bbmle::coef(fit[[witer-1]])[3]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[3]  * range_multiplier[i])
-        t_h_range_2  <- c(10^bbmle::coef(fit[[witer-1]])[4]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4]  * range_multiplier[i])
-        t_h_range_3  <- c(10^bbmle::coef(fit[[witer-1]])[5]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5]  * range_multiplier[i])
-        t_h_range_4  <- c(10^bbmle::coef(fit[[witer-1]])[6]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6]  * range_multiplier[i])
-        a_range_intercept <- c(10^bbmle::coef(fit[[witer-1]])[7] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7] * range_multiplier[i])
-        a_range_slope     <- c(
+        t_h_0_range  <- c(10^bbmle::coef(fit[[witer-1]])[2]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2]  * range_multiplier[i])
+        t_h_1_range  <- c(10^bbmle::coef(fit[[witer-1]])[3]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[3]  * range_multiplier[i])
+        t_h_2_range  <- c(10^bbmle::coef(fit[[witer-1]])[4]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4]  * range_multiplier[i])
+        t_h_3_range  <- c(10^bbmle::coef(fit[[witer-1]])[5]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5]  * range_multiplier[i])
+        t_h_4_range  <- c(10^bbmle::coef(fit[[witer-1]])[6]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6]  * range_multiplier[i])
+        a_intercept_range <- c(10^bbmle::coef(fit[[witer-1]])[7] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7] * range_multiplier[i])
+        a_slope_range     <- c(
           bbmle::coef(fit[[witer-1]])[8] - range_multiplier[i] * abs(bbmle::coef(fit[[witer-1]])[8]),
           bbmle::coef(fit[[witer-1]])[8] + range_multiplier[i] * abs(bbmle::coef(fit[[witer-1]])[8])
         )
@@ -160,13 +160,13 @@ rrpe_fit_mod15h <- function(
           n_rings = n_rings,
           complexity  = complexity,
           p = p,
-          t_h_range_0_log10  =  log10(t_h_range_0),
-          t_h_range_1_log10  =  log10(t_h_range_1),
-          t_h_range_2_log10  =  log10(t_h_range_2),
-          t_h_range_3_log10  =  log10(t_h_range_3),
-          t_h_range_4_log10  =  log10(t_h_range_4),
-          a_range_intercept_log10 = log10(a_range_intercept),
-          a_range_slope_log10 = a_range_slope,
+          t_h_0_log10_range  =  log10(t_h_0_range),
+          t_h_1_log10_range  =  log10(t_h_1_range),
+          t_h_2_log10_range  =  log10(t_h_2_range),
+          t_h_3_log10_range  =  log10(t_h_3_range),
+          t_h_4_log10_range  =  log10(t_h_4_range),
+          a_intercept_log10_range = log10(a_intercept_range),
+          a_slope_range = a_slope_range,
           t_end = t_end,
           no_lhs_samples = round(no_lhs_samples/length(range_multiplier))
         )
@@ -184,7 +184,7 @@ rrpe_fit_mod15h <- function(
         t_h_3_log10  =  start_parms$t_h_3_log10,
         t_h_4_log10  =  start_parms$t_h_4_log10,
         a_intercept_log10 = start_parms$a_intercept_log10,
-        a_slope_log10 = start_parms$a_slope_log10
+        a_slope = start_parms$a_slope
       ),
       fixed = list(
         t_end = t_end,
@@ -209,7 +209,7 @@ rrpe_fit_mod15h <- function(
     message(paste("t_h_3_log10: ",  round(bbmle::coef(fit[[witer]])[5],2)))
     message(paste("t_h_4_log10: ",  round(bbmle::coef(fit[[witer]])[6],2)))
     message(paste("a_intercept_log10: ", round(bbmle::coef(fit[[witer]])[7],2)))
-    message(paste("a_slope_log10: "    , round(bbmle::coef(fit[[witer]])[8],2)))
+    message(paste("a_slope: "    , round(bbmle::coef(fit[[witer]])[8],2)))
     message(paste("nll: ", nll_fits[witer]))
     message("#########################################")
     message("")

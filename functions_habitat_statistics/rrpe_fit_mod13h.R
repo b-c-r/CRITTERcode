@@ -137,11 +137,11 @@ rrpe_fit_mod13h <- function(
     start_parms <- foreach::foreach(
       i = 1:length(range_multiplier),
       .combine = "rbind") %do% {
-        t_h_range_0  <- c(10^bbmle::coef(fit[[witer-1]])[2]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2]  * range_multiplier[i])
-        t_h_range_1  <- c(10^bbmle::coef(fit[[witer-1]])[3]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[3]  * range_multiplier[i])
-        t_h_range_2  <- c(10^bbmle::coef(fit[[witer-1]])[4]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4]  * range_multiplier[i])
-        t_h_range_3  <- c(10^bbmle::coef(fit[[witer-1]])[5]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5]  * range_multiplier[i])
-        t_h_range_4  <- c(10^bbmle::coef(fit[[witer-1]])[6]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6]  * range_multiplier[i])
+        t_h_0_range  <- c(10^bbmle::coef(fit[[witer-1]])[2]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2]  * range_multiplier[i])
+        t_h_1_range  <- c(10^bbmle::coef(fit[[witer-1]])[3]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[3]  * range_multiplier[i])
+        t_h_2_range  <- c(10^bbmle::coef(fit[[witer-1]])[4]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4]  * range_multiplier[i])
+        t_h_3_range  <- c(10^bbmle::coef(fit[[witer-1]])[5]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5]  * range_multiplier[i])
+        t_h_4_range  <- c(10^bbmle::coef(fit[[witer-1]])[6]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6]  * range_multiplier[i])
         a_range <- c(10^bbmle::coef(fit[[witer-1]])[7]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7]  * range_multiplier[i])
         
         rrpe_scan_mod13h(
@@ -149,11 +149,11 @@ rrpe_fit_mod13h <- function(
           n_initial = n_initial,
           complexity  = complexity,
           p = p,
-          t_h_0_log10_range  =  log10(t_h_range_0),
-          t_h_1_log10_range  =  log10(t_h_range_1),
-          t_h_2_log10_range  =  log10(t_h_range_2),
-          t_h_3_log10_range  =  log10(t_h_range_3),
-          t_h_4_log10_range  =  log10(t_h_range_4),
+          t_h_0_log10_range  =  log10(t_h_0_range),
+          t_h_1_log10_range  =  log10(t_h_1_range),
+          t_h_2_log10_range  =  log10(t_h_2_range),
+          t_h_3_log10_range  =  log10(t_h_3_range),
+          t_h_4_log10_range  =  log10(t_h_4_range),
           a_log10_range = log10(a_range),
           t_end = t_end,
           no_lhs_samples = round(no_lhs_samples/length(range_multiplier))

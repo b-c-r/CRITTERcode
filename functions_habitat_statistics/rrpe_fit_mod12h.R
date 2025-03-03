@@ -145,8 +145,8 @@ rrpe_fit_mod12h <- function(
       i = 1:length(range_multiplier),
       .combine = "rbind") %do% {
 
-        t_h_range_intercept <- c(10^bbmle::coef(fit[[witer-1]])[2] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2] * range_multiplier[i])
-        t_h_range_slope      <- c(
+        t_h_intercept_range <- c(10^bbmle::coef(fit[[witer-1]])[2] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2] * range_multiplier[i])
+        t_h_slope_range      <- c(
           bbmle::coef(fit[[witer-1]])[3] - range_multiplier[i] * abs(bbmle::coef(fit[[witer-1]])[3]),
           bbmle::coef(fit[[witer-1]])[3] + range_multiplier[i] * abs(bbmle::coef(fit[[witer-1]])[3])
         )
@@ -162,8 +162,8 @@ rrpe_fit_mod12h <- function(
           n_rings = n_rings,
           complexity  = complexity,
           p = p,
-          t_h_intercept_log10_range  = log10(t_h_range_intercept),
-          t_h_slope_range = t_h_range_slope,
+          t_h_intercept_log10_range  = log10(t_h_intercept_range),
+          t_h_slope_range = t_h_slope_range,
           a_0_log10_range = log10(a_0_range),
           a_1_log10_range = log10(a_1_range),
           a_2_log10_range = log10(a_2_range),

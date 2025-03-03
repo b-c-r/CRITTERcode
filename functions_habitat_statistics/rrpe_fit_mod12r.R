@@ -68,12 +68,12 @@ rrpe_fit_mod12r <- function(
   
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
-  f_max_range_intercept  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
-  n_half_range_0 <- rel_n_half_range * max(n_initial[complexity == 0])
-  n_half_range_1 <- rel_n_half_range * max(n_initial[complexity == 1])
-  n_half_range_2 <- rel_n_half_range * max(n_initial[complexity == 2])
-  n_half_range_3 <- rel_n_half_range * max(n_initial[complexity == 3])
-  n_half_range_4 <- rel_n_half_range * max(n_initial[complexity == 4])
+  f_max_intercept_range  <- rel_f_max_range *  max(n_eaten[complexity == 0])/t_end
+  n_half_0_range <- rel_n_half_range * max(n_initial[complexity == 0])
+  n_half_1_range <- rel_n_half_range * max(n_initial[complexity == 1])
+  n_half_2_range <- rel_n_half_range * max(n_initial[complexity == 2])
+  n_half_3_range <- rel_n_half_range * max(n_initial[complexity == 3])
+  n_half_4_range <- rel_n_half_range * max(n_initial[complexity == 4])
   
   # initial lhs sampling
   initial_guess <- rrpe_scan_mod12r(
@@ -82,13 +82,13 @@ rrpe_fit_mod12r <- function(
     n_rings = n_rings,
     complexity  = complexity,
     p = p,
-    f_max_range_intercept_log10 = log10(f_max_range_intercept),
-    f_max_range_slope_log10     = slope_range,
-    n_half_range_0_log10        = log10(n_half_range_0),
-    n_half_range_1_log10        = log10(n_half_range_1),
-    n_half_range_2_log10        = log10(n_half_range_2),
-    n_half_range_3_log10        = log10(n_half_range_3),
-    n_half_range_4_log10        = log10(n_half_range_4),
+    f_max_intercept_log10_range = log10(f_max_intercept_range),
+    f_max_slope_range     = slope_range,
+    n_half_0_log10_range        = log10(n_half_0_range),
+    n_half_1_log10_range        = log10(n_half_1_range),
+    n_half_2_log10_range        = log10(n_half_2_range),
+    n_half_3_log10_range        = log10(n_half_3_range),
+    n_half_4_log10_range        = log10(n_half_4_range),
     t_end = t_end,
     no_lhs_samples = no_lhs_samples
   )
@@ -100,7 +100,7 @@ rrpe_fit_mod12r <- function(
     minuslogl = rrpe_nll_mod12r,
     start = list(
       f_max_intercept_log10  =  initial_guess$f_max_intercept_log10,
-      f_max_slope_log10  =  initial_guess$f_max_slope_log10,
+      f_max_slope  =  initial_guess$f_max_slope,
       n_half_0_log10 = initial_guess$n_half_0_log10,
       n_half_1_log10 = initial_guess$n_half_1_log10,
       n_half_2_log10 = initial_guess$n_half_2_log10,
@@ -124,7 +124,7 @@ rrpe_fit_mod12r <- function(
   message("#########################################")
   message(paste("parameter values after fit 1:", sep = ""))
   message(paste("f_max_intercept_log10: ", round(bbmle::coef(fit[[1]])[2],2)))
-  message(paste("f_max_slope_log10: ",     round(bbmle::coef(fit[[1]])[3],2)))
+  message(paste("f_max_slope: ",     round(bbmle::coef(fit[[1]])[3],2)))
   message(paste("n_half_0_log10: ",        round(bbmle::coef(fit[[1]])[4],2)))
   message(paste("n_half_1_log10: ",        round(bbmle::coef(fit[[1]])[5],2)))
   message(paste("n_half_2_log10: ",        round(bbmle::coef(fit[[1]])[6],2)))
@@ -144,16 +144,16 @@ rrpe_fit_mod12r <- function(
       i = 1:length(range_multiplier),
       .combine = "rbind") %do% {
 
-        f_max_range_intercept <- c(10^bbmle::coef(fit[[witer-1]])[2] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2] * range_multiplier[i])
-        f_max_range_slope      <- c(
+        f_max_intercept_range <- c(10^bbmle::coef(fit[[witer-1]])[2] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2] * range_multiplier[i])
+        f_max_slope_range      <- c(
           bbmle::coef(fit[[witer-1]])[3] - range_multiplier[i] * abs(bbmle::coef(fit[[witer-1]])[3]),
           bbmle::coef(fit[[witer-1]])[3] + range_multiplier[i] * abs(bbmle::coef(fit[[witer-1]])[3])
         )
-        n_half_range_0 <- c(10^bbmle::coef(fit[[witer-1]])[4] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4] * range_multiplier[i])
-        n_half_range_1 <- c(10^bbmle::coef(fit[[witer-1]])[5] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5] * range_multiplier[i])
-        n_half_range_2 <- c(10^bbmle::coef(fit[[witer-1]])[6] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6] * range_multiplier[i])
-        n_half_range_3 <- c(10^bbmle::coef(fit[[witer-1]])[7] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7] * range_multiplier[i])
-        n_half_range_4 <- c(10^bbmle::coef(fit[[witer-1]])[8] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[8] * range_multiplier[i])
+        n_half_0_range <- c(10^bbmle::coef(fit[[witer-1]])[4] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4] * range_multiplier[i])
+        n_half_1_range <- c(10^bbmle::coef(fit[[witer-1]])[5] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[5] * range_multiplier[i])
+        n_half_2_range <- c(10^bbmle::coef(fit[[witer-1]])[6] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[6] * range_multiplier[i])
+        n_half_3_range <- c(10^bbmle::coef(fit[[witer-1]])[7] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7] * range_multiplier[i])
+        n_half_4_range <- c(10^bbmle::coef(fit[[witer-1]])[8] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[8] * range_multiplier[i])
         
         rrpe_scan_mod12r(
           n_eaten = n_eaten,
@@ -161,13 +161,13 @@ rrpe_fit_mod12r <- function(
           n_rings = n_rings,
           complexity  = complexity,
           p = p,
-          f_max_range_intercept_log10  = log10(f_max_range_intercept),
-          f_max_range_slope_log10      = f_max_range_slope,
-          n_half_range_0_log10         = log10(n_half_range_0),
-          n_half_range_1_log10         = log10(n_half_range_1),
-          n_half_range_2_log10         = log10(n_half_range_2),
-          n_half_range_3_log10         = log10(n_half_range_3),
-          n_half_range_4_log10         = log10(n_half_range_4),
+          f_max_intercept_log10_range  = log10(f_max_intercept_range),
+          f_max_slope_range      = f_max_slope_range,
+          n_half_0_log10_range         = log10(n_half_0_range),
+          n_half_1_log10_range         = log10(n_half_1_range),
+          n_half_2_log10_range         = log10(n_half_2_range),
+          n_half_3_log10_range         = log10(n_half_3_range),
+          n_half_4_log10_range         = log10(n_half_4_range),
           t_end = t_end,
           no_lhs_samples = round(no_lhs_samples/length(range_multiplier))
         )
@@ -180,7 +180,7 @@ rrpe_fit_mod12r <- function(
       minuslogl = rrpe_nll_mod12r,
       start = list(
         f_max_intercept_log10  =  start_parms$f_max_intercept_log10,
-        f_max_slope_log10  =  start_parms$f_max_slope_log10,
+        f_max_slope  =  start_parms$f_max_slope,
         n_half_0_log10 = start_parms$n_half_0_log10,
         n_half_1_log10 = start_parms$n_half_1_log10,
         n_half_2_log10 = start_parms$n_half_2_log10,
@@ -205,7 +205,7 @@ rrpe_fit_mod12r <- function(
     message("#########################################")
     message(paste("parameter values after fit ", witer, ":", sep = ""))
     message(paste("f_max_intercept_log10: ",  round(bbmle::coef(fit[[witer]])[2],2)))
-    message(paste("f_max_slope_log10: ",      round(bbmle::coef(fit[[witer]])[3],2)))
+    message(paste("f_max_slope: ",      round(bbmle::coef(fit[[witer]])[3],2)))
     message(paste("n_half_0_log10: ",         round(bbmle::coef(fit[[witer]])[4],2)))
     message(paste("n_half_1_log10: ",         round(bbmle::coef(fit[[witer]])[5],2)))
     message(paste("n_half_2_log10: ",         round(bbmle::coef(fit[[witer]])[6],2)))
