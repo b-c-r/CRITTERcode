@@ -50,5 +50,5 @@ rsconnect/
 
 # Custom
 *.Rproj
-rdev/
-data/
+/rdev
+/data
