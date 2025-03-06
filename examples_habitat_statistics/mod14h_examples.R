@@ -1,5 +1,5 @@
 ################################################################################
-#   Example code to fit mod13h to data                                         #
+#   Example code to fit mod14h to data                                         #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -55,9 +55,9 @@ gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/
 f_path <- "functions_habitat_statistics/"
 
 source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                          # simulates a feeding functional response based on parameters and initial prey density
-source(paste(gh_path, f_path, "rrpe_nll_mod13h.R", sep = ""))                   # calculates negative log likelihood
-source(paste(gh_path, f_path, "rrpe_scan_mod13h.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
-source(paste(gh_path, f_path, "rrpe_fit_mod13h.R", sep = ""))                   # fits functional response model to data
+source(paste(gh_path, f_path, "rrpe_nll_mod14h.R", sep = ""))                   # calculates negative log likelihood
+source(paste(gh_path, f_path, "rrpe_scan_mod14h.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
+source(paste(gh_path, f_path, "rrpe_fit_mod14h.R", sep = ""))                   # fits functional response model to data
 
 ################################################################################
 ## Data
@@ -71,17 +71,18 @@ fr_data <- read.csv(
 fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
 
 ################################################################################
-## example for: rrpe_nll_mod13h.R
+## example for: rrpe_nll_mod14h.R
 
-fit_ie_mod13h <- bbmle::mle2(                                                   # mle2 - the maximum likelihood estimator from the bbmle package
- minuslogl = rrpe_nll_mod13h,                                                   # mle2 requires the nll function for optimization
+fit_ie_mod14h <- bbmle::mle2(                                                   # mle2 - the maximum likelihood estimator from the bbmle package
+ minuslogl = rrpe_nll_mod14h,                                                   # mle2 requires the nll function for optimization
  start = list(
    t_h_0_log10 = -1,                                                            # start value for handling time at complexity level 0 (log10 scale)
    t_h_1_log10 = -1,                                                            # start value for handling time at complexity level 1 (log10 scale)
    t_h_2_log10 = -1,                                                            # start value for handling time at complexity level 2 (log10 scale)
    t_h_3_log10 = -1,                                                            # start value for handling time at complexity level 3 (log10 scale)
-   t_h_4_log10 = -1,                                                            # start value for handling time at complexity level 4 (log10 scale)
-   a_log10     = -1                                                             # start value for attack rate (log10 scale)
+   t_h_4_log10 =  -1,                                                           # start value for handling time at complexity level 4 (log10 scale)
+   a_hab0_log10 = -1,                                                           # start value for attack rate (log10 scale) when habitat is absent 
+   a_hab1_log10 = -1                                                            # start value for attack rate (log10 scale) when habitat is present
  ),
  fixed = list(
    t_end = 1,                                                                   # end time of the experiment, here 1 day
@@ -95,36 +96,37 @@ fit_ie_mod13h <- bbmle::mle2(                                                   
  control = list(reltol = 1e-12),                                                # fitting tolerance: the lower the better. typically around 1e-8 (see description of the optim function)
 )
 
-bbmle::summary(fit_ie_mod13h)                                                   # shows the summary table
+bbmle::summary(fit_ie_mod14h)                                                   # shows the summary table
 
 
 ################################################################################
-## example for: rrpe_scan_mod13h.R
+## example for: rrpe_scan_mod14h.R
 
-rrpe_scan_mod13h(
- n_eaten = fr_data_ie$n_eaten,                                                  # data: number of prey eaten, as integer
- n_initial = fr_data_ie$n_initial,                                              # data: number of prey provided initially, as integer
- complexity  = fr_data_ie$complexity_level,                                     # data: complexity levels
- p = 1,                                                                         # number of predators in the experiment: here 1 predator per vessel
- t_h_0_log10_range = log10(c(.1, 0.5)),                                         # two values, the range, handling time at complexity level 0 (log10 scale)
- t_h_1_log10_range = log10(c(.1, 0.5)),                                         # two values, the range, handling time at complexity level 1 (log10 scale)
- t_h_2_log10_range = log10(c(.1, 0.5)),                                         # two values, the range, handling time at complexity level 2 (log10 scale)
- t_h_3_log10_range = log10(c(.1, 0.5)),                                         # two values, the range, handling time at complexity level 3 (log10 scale)
- t_h_4_log10_range = log10(c(.1, 0.5)),                                         # two values, the range, handling time at complexity level 4 (log10 scale)
- a_log10_range     = log10(c(.01, 0.5)),                                        # two values, the range, attack rate (log10 scale)
- t_end = 1,                                                                     # end time of the experiment, here 1 day
- no_lhs_samples = 100                                                           # number of latin hypercube samples that should be taken (i.e. 100 random values in the range of the above assigned ranges)
+rrpe_scan_mod14h(
+  n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
+  n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
+  complexity  = fr_data_ie$complexity_level,                                    # data: complexity levels
+  p = 1,                                                                        # number of predators in the experiment: here 1 predator per vessel
+  t_h_0_log10_range = log10(c(.1, 0.5)),                                        # two values, the range, handling time at complexity level 0 (log10 scale)
+  t_h_1_log10_range = log10(c(.1,0.5)),                                         # two values, the range, handling time at complexity level 1 (log10 scale)
+  t_h_2_log10_range = log10(c(.1,0.5)),                                         # two values, the range, handling time at complexity level 2 (log10 scale)
+  t_h_3_log10_range  = log10(c(.1,0.5)),                                        # two values, the range, handling time at complexity level 3 (log10 scale)
+  t_h_4_log10_range = log10(c(.1,0.5)),                                         # two values, the range, handling time at complexity level 4 (log10 scale)
+  a_hab0_log10_range = log10(c(.01,0.5)),                                       # two values, the range, attack rate (log10 scale) when habitat is absent
+  a_hab1_log10_range = log10(c(.01,0.5)),                                       # two values, the range, attack rate (log10 scale) when habitat is present
+  t_end = 1,                                                                    # end time of the experiment, here 1 day
+  no_lhs_samples = 100                                                          # number of latin hypercube samples that should be taken (i.e. 100 random values in the range of the above assigned ranges)
 )
 
 ################################################################################
-## example for: rrpe_fit_mod13h.R
+## example for: rrpe_fit_mod14h.R
 
-mod13h_fit_ie <- rrpe_fit_mod13h(
+mod14h_fit_ie <- rrpe_fit_mod14h(
  n_eaten = fr_data_ie$n_eaten,                                                  # data: number of prey eaten, as integer
  n_initial = fr_data_ie$n_initial,                                              # data: number of prey provided initially, as integer
  complexity = fr_data_ie$complexity_level                                       # data: complexity levels
 )
 
-bbmle::summary(mod13h_fit_ie)                                                   # shows the summary table of the best fit
-bbmle::AIC(mod13h_fit_ie)                                                       # shows the AIC of the best fit
-BIC(mod13h_fit_ie)                                                              # shows the BIC of the best fit
+bbmle::summary(mod14h_fit_ie)                                                   # shows the summary table of the best fit
+bbmle::AIC(mod14h_fit_ie)                                                       # shows the AIC of the best fit
+BIC(mod14h_fit_ie)                                                              # shows the BIC of the best fit
