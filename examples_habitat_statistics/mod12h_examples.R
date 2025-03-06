@@ -55,9 +55,9 @@ gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/
 f_path <- "functions_habitat_statistics/"
 
 source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                          # simulates a feeding functional response based on parameters and initial prey density
-source(paste(gh_path, f_path, "rrpe_nll_mod12h.R", sep = ""))                   # calculates negative log likelihood
-source(paste(gh_path, f_path, "rrpe_scan_mod12h.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
-source(paste(gh_path, f_path, "rrpe_fit_mod12h.R", sep = ""))                   # fits functional response model to data
+source(paste(gh_path, f_path, "mod12h_rrpe_nll.R", sep = ""))                   # calculates negative log likelihood
+source(paste(gh_path, f_path, "mod12h_rrpe_scan.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
+source(paste(gh_path, f_path, "mod12h_rrpe_fit.R", sep = ""))                   # fits functional response model to data
 
 ################################################################################
 ## Data
@@ -71,10 +71,10 @@ fr_data <- read.csv(
 fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
 
 ################################################################################
-## example for: rrpe_nll_mod12h.R
+## example for: mod12h_rrpe_nll.R
 
 fit_ie_mod12h <- bbmle::mle2(                                                   # mle2 - the maximum likelihood estimator from the bbmle package
- minuslogl = rrpe_nll_mod12h,                                                   # mle2 requires the nll function for optimization
+ minuslogl = mod12h_rrpe_nll,                                                   # mle2 requires the nll function for optimization
  start = list(
    t_h_intercept_log10  = -1.5,                                                 # start value for handling time intercept (log10 scale)
    t_h_slope            =    0,                                                 # start value for handling time (linear after log10 transformation)
@@ -101,9 +101,9 @@ bbmle::summary(fit_ie_mod12h)                                                   
 
 
 ################################################################################
-## example for: rrpe_scan_mod12h.R
+## example for: mod12h_rrpe_scan.R
 
-rrpe_scan_mod12h(
+mod12h_rrpe_scan(
  n_eaten = fr_data_ie$n_eaten,                                                  # data: number of prey eaten, as integer
  n_initial = fr_data_ie$n_initial,                                              # data: number of prey provided initially, as integer
  n_rings = fr_data_ie$ring_count,                                               # data: number of habitat rings provided as structure
@@ -121,9 +121,9 @@ rrpe_scan_mod12h(
 )
 
 ################################################################################
-## example for: rrpe_fit_mod12h.R
+## example for: mod12h_rrpe_fit.R
 
-mod12h_fit_ie <- rrpe_fit_mod12h(
+mod12h_fit_ie <- mod12h_rrpe_fit(
  n_eaten = fr_data_ie$n_eaten,                                                  # data: number of prey eaten, as integer
  n_initial = fr_data_ie$n_initial,                                              # data: number of prey provided initially, as integer
  n_rings = fr_data_ie$ring_count,                                               # data: number of habitat rings provided as structure

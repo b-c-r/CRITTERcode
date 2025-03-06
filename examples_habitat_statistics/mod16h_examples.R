@@ -55,9 +55,9 @@ gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/
 f_path <- "functions_habitat_statistics/"
 
 source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                          # simulates a feeding functional response based on parameters and initial prey density
-source(paste(gh_path, f_path, "rrpe_nll_mod16h.R", sep = ""))                   # calculates negative log likelihood
-source(paste(gh_path, f_path, "rrpe_scan_mod16h.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
-source(paste(gh_path, f_path, "rrpe_fit_mod16h.R", sep = ""))                   # fits functional response model to data
+source(paste(gh_path, f_path, "mod16h_rrpe_nll.R", sep = ""))                   # calculates negative log likelihood
+source(paste(gh_path, f_path, "mod16h_rrpe_scan.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
+source(paste(gh_path, f_path, "mod16h_rrpe_fit.R", sep = ""))                   # fits functional response model to data
 
 ################################################################################
 ## Data
@@ -71,10 +71,10 @@ fr_data <- read.csv(
 fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
 
 ################################################################################
-## example for: rrpe_nll_mod16h.R
+## example for: mod16h_rrpe_nll.R
 
 fit_ie_mod16h <- bbmle::mle2(                                                   # mle2 - the maximum likelihood estimator from the bbmle package
-  minuslogl = rrpe_nll_mod16h,                                                  # mle2 requires the nll function for optimization
+  minuslogl = mod16h_rrpe_nll,                                                  # mle2 requires the nll function for optimization
   start = list(
     t_h_0_log10 = -1,                                                           # start value for handling time at complexity level 0 (log10 scale)
     t_h_1_log10 = -1,                                                           # start value for handling time at complexity level 1 (log10 scale)
@@ -103,9 +103,9 @@ bbmle::summary(fit_ie_mod16h)                                                   
 
 
 ################################################################################
-## example for: rrpe_scan_mod16h.R
+## example for: mod16h_rrpe_scan.R
 
-rrpe_scan_mod16h(
+mod16h_rrpe_scan(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
   n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
   complexity  = fr_data_ie$complexity_level,                                    # data: complexity levels
@@ -125,9 +125,9 @@ rrpe_scan_mod16h(
 )
 
 ################################################################################
-## example for: rrpe_fit_mod16h.R
+## example for: mod16h_rrpe_fit.R
 
-mod16h_fit_ie <- rrpe_fit_mod16h(
+mod16h_fit_ie <- mod16h_rrpe_fit(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
   n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
   complexity = fr_data_ie$complexity_level                                      # data: complexity levels
