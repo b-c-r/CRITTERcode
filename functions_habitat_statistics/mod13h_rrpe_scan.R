@@ -78,7 +78,7 @@ mod13h_rrpe_scan <- function(
     i = 1:no_lhs_samples,
     .combine = "c") %do% {
       
-      nll <- mod13h_nll_scan(
+      nll <- mod13h_rrpe_nll(
           n_eaten = n_eaten,
           n_initial = n_initial,
           complexity = complexity,
