@@ -1,5 +1,5 @@
 ################################################################################
-#   rrpe_fit_mod15h: fitting the RRPE to data                                  #
+#   mod15h_rrpe_fit: fitting the RRPE to data                                  #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -38,6 +38,8 @@
 #'         https://math.mcmaster.ca/~bolker/emdbook/index.html
 #' 
 #' @include rrpe_sim.R
+#' @include mod15h_rrpe_nll.R
+#' @include mod15h_rrpe_scan.R
 #' 
 #' @return Returns a single negative log-likelihood value.
 #' 
@@ -47,7 +49,7 @@
 #' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod15h_examples.R
 #' 
 
-rrpe_fit_mod15h <- function(
+mod15h_rrpe_fit <- function(
     n_eaten,
     n_initial,
     n_rings,
@@ -76,7 +78,7 @@ rrpe_fit_mod15h <- function(
   n_half_0_range <- rel_n_half_range * max(n_initial[complexity == 0])
   
   # initial lhs sampling
-  initial_guess <- rrpe_scan_mod15h(
+  initial_guess <- mod15h_rrpe_scan(
     n_eaten = n_eaten,
     n_initial = n_initial,
     n_rings = n_rings,
@@ -97,7 +99,7 @@ rrpe_fit_mod15h <- function(
   nll_fits <- c()
 
   fit[[1]] <- bbmle::mle2(
-    minuslogl = rrpe_nll_mod15h,
+    minuslogl = mod15h_rrpe_nll,
     start = list(
       t_h_0_log10  =  initial_guess$t_h_0_log10,
       t_h_1_log10  =  initial_guess$t_h_1_log10,
@@ -154,7 +156,7 @@ rrpe_fit_mod15h <- function(
           bbmle::coef(fit[[witer-1]])[8] + range_multiplier[i] * abs(bbmle::coef(fit[[witer-1]])[8])
         )
         
-        rrpe_scan_mod15h(
+        mod15h_rrpe_scan(
           n_eaten = n_eaten,
           n_initial = n_initial,
           n_rings = n_rings,
@@ -176,7 +178,7 @@ rrpe_fit_mod15h <- function(
       dplyr::filter(nll == min(nll))
 
     fit[[witer]] <- bbmle::mle2(
-      minuslogl = rrpe_nll_mod15h,
+      minuslogl = mod15h_rrpe_nll,
       start = list(
         t_h_0_log10  =  start_parms$t_h_0_log10,
         t_h_1_log10  =  start_parms$t_h_1_log10,

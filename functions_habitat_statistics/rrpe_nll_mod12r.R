@@ -1,5 +1,5 @@
 ################################################################################
-#   rrpe_nll_mod12r: estimates the negative log-likelihood                     #
+#   mod12r_rrpe_nll: estimates the negative log-likelihood                     #
 #                                                                              #
 #    Copyright (C) 2025                                                        #
 #       Björn C. Rall (https://orcid.org/0000-0002-3191-8389)                  #
@@ -53,7 +53,7 @@
 #' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod12r_examples.R
 #' 
 
-rrpe_nll_mod12r <- function(
+mod12r_rrpe_nll <- function(
     n_eaten,
     n_initial,
     n_rings,

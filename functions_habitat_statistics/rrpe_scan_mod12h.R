@@ -1,5 +1,5 @@
 ################################################################################
-#   rrpe_parms_scan_mod12h: scans for reasonable starting parameters           #
+#   mod12h_rrpe_scan: scans for reasonable starting parameters                 #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -33,7 +33,7 @@
 #'         https://doi.org/10.5281/zenodo.14894598
 #'
 #' @include rrpe_sim.R
-#' @include rrpe_nll_mod12h.R
+#' @include mod12h_rrpe_nll.R
 #' 
 #' @return returns a data frame with a single row of parameter values (lowest nll).
 #' 
@@ -43,7 +43,7 @@
 #' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod12h_examples.R
 #' 
 
-rrpe_scan_mod12h <- function(
+mod12h_rrpe_scan <- function(
     n_eaten,
     n_initial,
     n_rings,
@@ -76,7 +76,7 @@ rrpe_scan_mod12h <- function(
     i = 1:no_lhs_samples,
     .combine = "c") %do% {
       
-      nll <- rrpe_nll_mod12h(
+      nll <- mod12h_rrpe_nll(
           n_eaten = n_eaten,
           n_initial = n_initial,
           n_rings = n_rings,

@@ -1,5 +1,5 @@
 ################################################################################
-#   rrpe_parms_scan_mod14r: scans for reasonable starting parameters           #
+#   mod14r_rrpe_scan: scans for reasonable starting parameters                 #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -38,6 +38,7 @@
 #'         https://math.mcmaster.ca/~bolker/emdbook/index.html
 #' 
 #' @include rrpe_sim.R
+#' @include mod14r_rrpe_nll.R
 #' 
 #' @return Returns a single negative log-likelihood value.
 #' 
@@ -47,7 +48,7 @@
 #' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod14r_examples.R
 #' 
 
-rrpe_scan_mod14r <- function(
+mod14r_rrpe_scan <- function(
     n_eaten,
     n_initial,
     complexity,
@@ -79,7 +80,7 @@ rrpe_scan_mod14r <- function(
     i = 1:no_lhs_samples,
     .combine = "c") %do% {
       
-      nll <- rrpe_nll_mod14r(
+      nll <- mod14r_rrpe_nll(
           n_eaten = n_eaten,
           n_initial = n_initial,
           complexity = complexity,

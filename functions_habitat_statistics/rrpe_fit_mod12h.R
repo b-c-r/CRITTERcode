@@ -1,5 +1,5 @@
 ################################################################################
-#   rrpe_fit_mod12h: fitting the RRPE to data                                  #
+#   mod12h_rrpe_fit: fitting the RRPE to data                                  #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -33,8 +33,8 @@
 #'         https://doi.org/10.5281/zenodo.14894598
 #'
 #' @include rrpe_sim.R
-#' @include rrpe_nll_mod12h.R
-#' @include rrpe_scan_mod12h.R
+#' @include mod12h_rrpe_nll.R
+#' @include mod12h_rrpe_scan.R
 #'
 #' @return returns the mle2-object of the best fit
 #'
@@ -44,7 +44,7 @@
 #' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod12h_examples.R
 #' 
 
-rrpe_fit_mod12h <- function(
+mod12h_rrpe_fit <- function(
     n_eaten,
     n_initial,
     n_rings,
@@ -77,7 +77,7 @@ rrpe_fit_mod12h <- function(
   n_half_4_range <- rel_n_half_range * max(n_initial[complexity == 4])
   
   # initial lhs sampling
-  initial_guess <- rrpe_scan_mod12h(
+  initial_guess <- mod12h_rrpe_scan(
     n_eaten = n_eaten,
     n_initial = n_initial,
     n_rings = n_rings,
@@ -98,7 +98,7 @@ rrpe_fit_mod12h <- function(
   nll_fits <- c()
 
   fit[[1]] <- bbmle::mle2(
-    minuslogl = rrpe_nll_mod12h,
+    minuslogl = mod12h_rrpe_nll,
     start = list(
       t_h_intercept_log10 = initial_guess$t_h_intercept_log10,
       t_h_slope = initial_guess$t_h_slope,
@@ -156,7 +156,7 @@ rrpe_fit_mod12h <- function(
         a_3_range <- c(10^bbmle::coef(fit[[witer-1]])[7] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7] * range_multiplier[i])
         a_4_range <- c(10^bbmle::coef(fit[[witer-1]])[8] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[8] * range_multiplier[i])
         
-        rrpe_scan_mod12h(
+        mod12h_rrpe_scan(
           n_eaten = n_eaten,
           n_initial = n_initial,
           n_rings = n_rings,
@@ -178,7 +178,7 @@ rrpe_fit_mod12h <- function(
       dplyr::filter(nll == min(nll))
     
     fit[[witer]] <- bbmle::mle2(
-      minuslogl = rrpe_nll_mod12h,
+      minuslogl = mod12h_rrpe_nll,
       start = list(
         t_h_intercept_log10 = start_parms$t_h_intercept_log10,
         t_h_slope =  start_parms$t_h_slope,

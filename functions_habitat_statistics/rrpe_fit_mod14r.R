@@ -1,5 +1,5 @@
 ################################################################################
-#   rrpe_fit_mod14r: fitting the RRPE to data                                  #
+#   mod14r_rrpe_fit: fitting the RRPE to data                                  #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -38,6 +38,8 @@
 #'         https://math.mcmaster.ca/~bolker/emdbook/index.html
 #' 
 #' @include rrpe_sim.R
+#' @include mod14r_rrpe_nll.R
+#' @include mod14r_rrpe_scan.R
 #' 
 #' @return Returns a single negative log-likelihood value.
 #' 
@@ -47,7 +49,7 @@
 #' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod14r_examples.R
 #' 
 
-rrpe_fit_mod14r <- function(
+mod14r_rrpe_fit <- function(
     n_eaten,
     n_initial,
     complexity,
@@ -75,7 +77,7 @@ rrpe_fit_mod14r <- function(
   n_half_hab1_range <- rel_n_half_range * max(n_initial[complexity  > 0])
   
   # initial lhs sampling
-  initial_guess <- rrpe_scan_mod14r(
+  initial_guess <- mod14r_rrpe_scan(
     n_eaten = n_eaten,
     n_initial = n_initial,
     complexity  = complexity,
@@ -95,7 +97,7 @@ rrpe_fit_mod14r <- function(
   nll_fits <- c()
 
   fit[[1]] <- bbmle::mle2(
-    minuslogl = rrpe_nll_mod14r,
+    minuslogl = mod14r_rrpe_nll,
     start = list(
       f_max_0_log10  =  initial_guess$f_max_0_log10,
       f_max_1_log10  =  initial_guess$f_max_1_log10,
@@ -148,7 +150,7 @@ rrpe_fit_mod14r <- function(
         n_half_hab0_range <- c(10^bbmle::coef(fit[[witer-1]])[7]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[7]  * range_multiplier[i])
         n_half_hab1_range <- c(10^bbmle::coef(fit[[witer-1]])[8]  / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[8]  * range_multiplier[i])
         
-        rrpe_scan_mod14r(
+        mod14r_rrpe_scan(
           n_eaten = n_eaten,
           n_initial = n_initial,
           complexity  = complexity,
@@ -169,7 +171,7 @@ rrpe_fit_mod14r <- function(
       dplyr::filter(nll == min(nll))
 
     fit[[witer]] <- bbmle::mle2(
-      minuslogl = rrpe_nll_mod14r,
+      minuslogl = mod14r_rrpe_nll,
       start = list(
         f_max_0_log10  =  start_parms$f_max_0_log10,
         f_max_1_log10  =  start_parms$f_max_1_log10,
