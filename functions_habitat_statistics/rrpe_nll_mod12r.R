@@ -60,7 +60,7 @@ rrpe_nll_mod12r <- function(
     complexity,
     p = 1,
     f_max_intercept_log10,
-    f_max_slope_log10,
+    f_max_slope,
     n_half_0_log10,
     n_half_1_log10,
     n_half_2_log10,
@@ -97,7 +97,7 @@ rrpe_nll_mod12r <- function(
         fr_style = "Real",
         n_initial = n_initial[i],
         p = p,
-        f_max = 10^(f_max_intercept_log10 + f_max_slope_log10 * n_rings[i]),
+        f_max = 10^(f_max_intercept_log10 + f_max_slope * n_rings[i]),
         n_half = 10^n_half_log10,
         t_end = t_end
       )
