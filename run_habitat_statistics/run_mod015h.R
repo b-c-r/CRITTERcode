@@ -1,5 +1,5 @@
 ################################################################################
-#   runs mod03r_rrpe_fit                                                       #
+#   runs mod15h_rrpe_fit                                                       #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -17,7 +17,7 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
 ################################################################################
 
-mod03r_fit_ie <- mod03r_rrpe_fit(
+mod15h_fit_ie <- mod15h_rrpe_fit(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
   n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
   n_rings = fr_data_ie$ring_count,                                              # data: number of habitat structural elements (rings)
