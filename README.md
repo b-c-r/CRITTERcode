@@ -1,7 +1,7 @@
 Habitat *c*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater
 p*r*edators (CRITTER, Code Repository)
 ================
-2025-02-28
+2025-03-10
 
 ## Summary
 
@@ -819,6 +819,56 @@ hourly basis, you can enter t_end = 24.
 - `foreach` (Microsoft & Weston, 2022b)
 - `lhs` (Carnell, 2024)
 
+#### `create_h_table`
+
+**`create_h_table`** creates a nice-looking table using the output from
+all fits using functions `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and
+`rrpe_fit_mod01h` to `rrpe_fit_mod16h`. Hard-coded and only useful in
+this project.
+
+***Parameters***: - `h_test_results`: a list of mle2 objects created by
+running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`. -
+`cut_after`: the number of results that should be displayed. -
+`caption_text`: the tables caption text.
+
+***Required packages***:
+
+- `bbmle` (Bolker, 2008; Bolker et al., 2023)
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `kableExtra` (Zhu, 2024)
+- `knitr` (Xie, 2024)
+
+#### `create_summary_table`
+
+**`create_summary_table`** creates a nice-looking table using a mle2
+object from a fit of one of the models: `rrpe_fit_mod01r` to
+`rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`. In
+addition, it also calculates the confidence intervals using the
+*population prediction intervals* (see Bolker (2008), chapter 7.5.3)
+based on the Hard-coded and only useful in this project.
+
+***Parameters***: - `h_test_results`: a list of mle2 objects created by
+running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`. -
+`ci_reps` \[integer\]: the number of CI samples that should be taken,
+default = 10000. - `ci_levels` \[numeric\]: a vector of two numbers, the
+lower and upper CI levels. Default is `c(0.025, 0.975)`. - `dec_places`:
+the number of decimal places that should be displayed. Default is 3. -
+`par_names`: a vector of parameter names that should be displayed.
+Default is `c($T_{h}$, $a$)`. - `unlog`: the fit was done using
+parameters on log-scale (not the slope). Should these be displayed on
+regular scale? Default is `c(TRUE, TRUE)`. **Note, that you must add
+`FALSE` if the parameter was a slope**. - `caption_text`: the tables
+caption text.
+
+***Required packages***:
+
+- `bbmle` (Bolker, 2008; Bolker et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `kableExtra` (Zhu, 2024)
+- `knitr` (Xie, 2024)
+- `MASS` (Ripley et al., 2025)
+
 ## Funding Information
 
 - Mireia Aranbarri was funded by the **Investigo Programm funded by the
@@ -998,6 +1048,14 @@ class="csl-entry">
 
 Real, L. A. (1979). Ecological determinants of functional response.
 *Ecology*, *60*(3), 481–485. <https://doi.org/10.2307/1936067>
+
+</div>
+
+<div id="ref-RipleyEtAl2025MASSSupportFunctions" class="csl-entry">
+
+Ripley, B., Venables, B., Bates, D. M., Hornik, K., Gebhardt, A., &
+Firth, D. (2025). *MASS: Support Functions and Datasets for Venables and
+Ripley’s MASS*. <https://doi.org/10.32614/CRAN.package.MASS>
 
 </div>
 

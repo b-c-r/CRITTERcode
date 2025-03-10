@@ -431,23 +431,43 @@ All functions from `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` 
 
 #### `create_h_table`
 
-**`h_table`** creates a nice-looking table using the output from all fits using functions `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`. Hard-coded and only useful in this project.
+**`create_h_table`** creates a nice-looking table using the output from all fits using functions `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`. Hard-coded and only useful in this project.
 
 ***Parameters***:
 -   `h_test_results`: a list of mle2 objects created by running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`.
 -   `cut_after`: the number of results that should be displayed.
--   `caption_text`: the tables caption_text.
+-   `caption_text`: the tables caption text.
 
 ***Required packages***:
 
 - `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
-- `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
 - `dplyr` [@WickhamEtAl2023DplyrGrammarData]
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 - `kableExtra` [@Zhu2024KableExtraConstructComplex]
 - `knitr` [@Xie2024KnitrGeneralpurposePackage]
-- `lhs` [@Carnell2024LhsLatinHypercubea]
 
+
+#### `create_summary_table`
+
+**`create_summary_table`** creates a nice-looking table using a mle2 object from a fit of one of the models: `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`. In addition, it also calculates the confidence intervals using the *population prediction intervals* (see @Bolker2008EcologicalModelsData, chapter 7.5.3) based on the Hard-coded and only useful in this project.
+
+***Parameters***:
+-   `h_test_results`: a list of mle2 objects created by running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`.
+-   `ci_reps` [integer]: the number of CI samples that should be taken, default = 10000.
+-   `ci_levels` [numeric]: a vector of two numbers, the lower and upper CI levels. Default is `c(0.025, 0.975)`.
+-   `dec_places`: the number of decimal places that should be displayed. Default is 3.
+-   `par_names`: a vector of parameter names that should be displayed. Default is `c($T_{h}$, $a$)`.
+-   `unlog`: the fit was done using parameters on log-scale (not the slope). Should these be displayed on regular scale? Default is `c(TRUE, TRUE)`. **Note, that you must add `FALSE` if the parameter was a slope**.
+-   `caption_text`: the tables caption text.
+
+
+***Required packages***:
+
+- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+- `kableExtra` [@Zhu2024KableExtraConstructComplex]
+- `knitr` [@Xie2024KnitrGeneralpurposePackage]
+- `MASS` [@RipleyEtAl2025MASSSupportFunctions]
 
 
 
