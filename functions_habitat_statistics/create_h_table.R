@@ -45,8 +45,8 @@ create_h_table <- function(
   caption_text = "Please add caption here as text string."
 ){
   
-  model_names <- foreach::foreach(i = 1:length(h_test_results), .combine = "c") %do% {
-    paste("Model ", i, sep = "")
+  model_names <- foreach::foreach(i = 1:(length(h_test_results)/2), .combine = "c") %do% {
+    c(paste("Model ", i, "h", sep = ""), paste("Model ", i, "r", sep = ""))
   }
   
   aic_list <- foreach::foreach(
