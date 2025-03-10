@@ -19,6 +19,5 @@
 
 mod01r_fit_ie <- mod01r_rrpe_fit(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
-  n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
-  complexity = fr_data_ie$complexity_level                                      # data: complexity levels
+  n_initial = fr_data_ie$n_initial                                              # data: number of prey provided initially, as integer
 )

@@ -51,7 +51,6 @@
 mod01r_rrpe_scan <- function(
     n_eaten,
     n_initial,
-    complexity,
     p = 1,
     f_max_log10_range,
     n_half_log10_range,
@@ -73,7 +72,6 @@ mod01r_rrpe_scan <- function(
       nll <- mod01r_rrpe_nll(
           n_eaten = n_eaten,
           n_initial = n_initial,
-          complexity = complexity,
           p = p,
           f_max_log10 = f_max_log10_range[i],
           n_half_log10 = n_half_log10_range[i],

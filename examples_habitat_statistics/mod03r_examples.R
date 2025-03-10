@@ -87,8 +87,7 @@ fit_ie_mod03r <- bbmle::mle2(                                                   
   data = list(
     n_eaten = fr_data_ie$n_eaten,                                               # data: number of prey eaten, as integer
     n_initial = fr_data_ie$n_initial,                                           # data: number of prey provided initially, as integer
-    n_rings = fr_data_ie$ring_count,                                            # data: number of habitat structural elements (rings)
-    complexity = fr_data_ie$complexity_level                                    # data: complexity levels
+    n_rings = fr_data_ie$ring_count                                             # data: number of habitat structural elements (rings)
   ),
   control = list(reltol = 1e-12),                                               # fitting tolerance: the lower the better. typically around 1e-8 (see description of the optim function)
 )
@@ -103,7 +102,6 @@ mod03r_rrpe_scan(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
   n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
   n_rings = fr_data_ie$ring_count,                                              # data: number of habitat structural elements (rings)
-  complexity  = fr_data_ie$complexity_level,                                    # data: complexity levels
   p = 1,                                                                        # number of predators in the experiment: here 1 predator per vessel
   f_max_log10_range = log10(c(1, 1.5)),                                         # two values, the range, for maximum feeding rate (log10 scale)
   n_half_intercept_log10_range = log10(c(1, 1.5)),                              # two values, the range, half saturation density intercept (log10 scale, when habitat is absent)
@@ -118,8 +116,7 @@ mod03r_rrpe_scan(
 mod03r_fit_ie <- mod03r_rrpe_fit(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
   n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
-  n_rings = fr_data_ie$ring_count,                                              # data: number of habitat structural elements (rings)
-  complexity = fr_data_ie$complexity_level                                      # data: complexity levels
+  n_rings = fr_data_ie$ring_count                                               # data: number of habitat structural elements (rings)
 )
 
 bbmle::summary(mod03r_fit_ie)                                                   # shows the summary table of the best fit

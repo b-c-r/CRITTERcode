@@ -52,7 +52,6 @@
 mod01r_rrpe_fit <- function(
     n_eaten,
     n_initial,
-    complexity,
     p = 1,
     t_end = 1,
     no_lhs_samples = 1000,
@@ -68,14 +67,13 @@ mod01r_rrpe_fit <- function(
   
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
-  f_max_range    <- rel_f_max_range  * max(n_eaten[complexity == 0])/t_end
+  f_max_range    <- rel_f_max_range  * max(n_eaten)/t_end
   n_half_range   <- rel_n_half_range * max(n_initial)
   
   # initial lhs sampling
   initial_guess <- mod01r_rrpe_scan(
     n_eaten = n_eaten,
     n_initial = n_initial,
-    complexity  = complexity,
     p = p,
     f_max_log10_range    = log10(f_max_range),
     n_half_log10_range  = log10(n_half_range),
@@ -98,8 +96,7 @@ mod01r_rrpe_fit <- function(
     ),
     data = list(
       n_eaten = n_eaten,
-      n_initial = n_initial,
-      complexity  = complexity
+      n_initial = n_initial
     ),
     control = list(reltol = mle2_tol)
   )
@@ -123,13 +120,12 @@ mod01r_rrpe_fit <- function(
       i = 1:length(range_multiplier),
       .combine = "rbind") %do% {
 
-        f_max_range    <- c(10^bbmle::coef(fit[[witer-1]])[2] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2] * range_multiplier[i])
-        n_half_range     <- c(10^bbmle::coef(fit[[witer-1]])[4] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[4] * range_multiplier[i])
+        f_max_range  <- c(10^bbmle::coef(fit[[witer-1]])[2] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[2] * range_multiplier[i])
+        n_half_range <- c(10^bbmle::coef(fit[[witer-1]])[3] / range_multiplier[i], 10^bbmle::coef(fit[[witer-1]])[3] * range_multiplier[i])
         
         mod01r_rrpe_scan(
           n_eaten = n_eaten,
           n_initial = n_initial,
-          complexity  = complexity,
           p = p,
           f_max_log10_range = log10(f_max_range),
           n_half_log10_range = log10(n_half_range),
@@ -153,8 +149,7 @@ mod01r_rrpe_fit <- function(
       ),
       data = list(
         n_eaten = n_eaten,
-        n_initial = n_initial,
-        complexity  = complexity
+        n_initial = n_initial
       ),
       control = list(reltol = mle2_tol)
     )

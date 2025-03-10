@@ -20,6 +20,5 @@
 mod03r_fit_ie <- mod03r_rrpe_fit(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
   n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
-  n_rings = fr_data_ie$ring_count,                                              # data: number of habitat structural elements (rings)
-  complexity = fr_data_ie$complexity_level                                      # data: complexity levels
+  n_rings = fr_data_ie$ring_count                                               # data: number of habitat structural elements (rings)
 )

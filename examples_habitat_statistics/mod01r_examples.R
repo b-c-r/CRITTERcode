@@ -85,8 +85,7 @@ fit_ie_mod01r <- bbmle::mle2(                                                   
   ),
   data = list(
     n_eaten = fr_data_ie$n_eaten,                                               # data: number of prey eaten, as integer
-    n_initial = fr_data_ie$n_initial,                                           # data: number of prey provided initially, as integer
-    complexity = fr_data_ie$complexity_level                                    # data: complexity levels
+    n_initial = fr_data_ie$n_initial                                            # data: number of prey provided initially, as integer
   ),
   control = list(reltol = 1e-12),                                               # fitting tolerance: the lower the better. typically around 1e-8 (see description of the optim function)
 )
@@ -100,7 +99,6 @@ bbmle::summary(fit_ie_mod01r)                                                   
 mod01r_rrpe_scan(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
   n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
-  complexity  = fr_data_ie$complexity_level,                                    # data: complexity levels
   p = 1,                                                                        # number of predators in the experiment: here 1 predator per vessel
   f_max_log10_range = log10(c(1, 1.5)),                                         # two values, the range, for maximum feeding rate (log10 scale)
   n_half_log10_range = log10(c(1, 1.5)),                                        # two values, the range, half saturation density (log10 scale)
@@ -113,8 +111,7 @@ mod01r_rrpe_scan(
 
 mod01r_fit_ie <- mod01r_rrpe_fit(
   n_eaten = fr_data_ie$n_eaten,                                                 # data: number of prey eaten, as integer
-  n_initial = fr_data_ie$n_initial,                                             # data: number of prey provided initially, as integer
-  complexity = fr_data_ie$complexity_level                                      # data: complexity levels
+  n_initial = fr_data_ie$n_initial                                              # data: number of prey provided initially, as integer
 )
 
 bbmle::summary(mod01r_fit_ie)                                                   # shows the summary table of the best fit

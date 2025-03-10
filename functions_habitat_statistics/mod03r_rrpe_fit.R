@@ -53,7 +53,6 @@ mod03r_rrpe_fit <- function(
     n_eaten,
     n_initial,
     n_rings,
-    complexity,
     p = 1,
     t_end = 1,
     no_lhs_samples = 1000,
@@ -70,20 +69,18 @@ mod03r_rrpe_fit <- function(
   
   if(set_seed) set.seed(seed_value) # set the seed to assure reproducible
   
-  f_max_range      <- rel_f_max_range  * max(n_eaten[complexity == 0])/t_end
-  f_max_hab1_range <- rel_f_max_range  * max(n_eaten[complexity  > 0])/t_end
-  n_half_0_range   <- rel_n_half_range * max(n_initial[complexity == 0])
+  f_max_range   <- rel_f_max_range * max(n_eaten)/t_end
+  n_half_0_range   <- rel_n_half_range * max(n_initial[n_rings == 0])
   
   # initial lhs sampling
   initial_guess <- mod03r_rrpe_scan(
     n_eaten = n_eaten,
     n_initial = n_initial,
-    complexity  = complexity,
     n_rings = n_rings,
     p = p,
-    f_max_log10_range    = log10(f_max_range),
+    f_max_log10_range            = log10(f_max_range),
     n_half_intercept_log10_range = log10(n_half_0_range),
-    n_half_slope_range = slope_range,
+    n_half_slope_range           = slope_range,
     t_end = t_end,
     no_lhs_samples = no_lhs_samples
   )
@@ -105,8 +102,7 @@ mod03r_rrpe_fit <- function(
     data = list(
       n_eaten = n_eaten,
       n_initial = n_initial,
-      n_rings = n_rings,
-      complexity  = complexity
+      n_rings = n_rings
     ),
     control = list(reltol = mle2_tol)
   )
@@ -142,7 +138,6 @@ mod03r_rrpe_fit <- function(
           n_eaten = n_eaten,
           n_initial = n_initial,
           n_rings = n_rings,
-          complexity  = complexity,
           p = p,
           f_max_log10_range = log10(f_max_range),
           n_half_intercept_log10_range = log10(n_half_range_intercept),
@@ -169,8 +164,7 @@ mod03r_rrpe_fit <- function(
       data = list(
         n_eaten = n_eaten,
         n_initial = n_initial,
-        n_rings = n_rings,
-        complexity  = complexity
+        n_rings = n_rings
       ),
       control = list(reltol = mle2_tol)
     )

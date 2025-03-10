@@ -56,7 +56,6 @@
 mod01r_rrpe_nll <- function(
     n_eaten,
     n_initial,
-    complexity,
     p = 1,
     f_max_log10,
     n_half_log10,
