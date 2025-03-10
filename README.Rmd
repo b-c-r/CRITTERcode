@@ -429,6 +429,29 @@ All functions from `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` 
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 - `lhs` [@Carnell2024LhsLatinHypercubea]
 
+#### `create_h_table`
+
+**`h_table`** creates a nice-looking table using the output from all fits using functions `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`. Hard-coded and only useful in this project.
+
+***Parameters***:
+-   `h_test_results`: a list of mle2 objects created by running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`.
+-   `cut_after`: the number of results that should be displayed.
+-   `caption_text`: the tables caption_text.
+
+***Required packages***:
+
+- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
+- `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
+- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+- `kableExtra` [@Zhu2024KableExtraConstructComplex]
+- `knitr` [@Xie2024KnitrGeneralpurposePackage]
+- `lhs` [@Carnell2024LhsLatinHypercubea]
+
+
+
+
+
 ## Funding Information
 
 -   Mireia Aranbarri was funded by the **Investigo Programm funded by the NextGenerationEU initiative**.
