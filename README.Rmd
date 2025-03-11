@@ -12,13 +12,19 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Summary
 
-This code is a supplement to the upcoming publication of Aranbarri et al. (unpublished) investigating the effect of habitat complexity on the feeding functional response of two freshwater invertebrate predators. You will find details on the methodology in the cited publication. We will link to it after we make it publicly available.
+This code is supplementing our preprint article by @AranbarriEtAl2025ComplexityReducesFeeding investigating the effect of habitat complexity on the feeding functional response of two freshwater invertebrate predators. Find below information on related works.
 
 **Note that this code is still under construction!**
 
 ## License
 
 This code is published under a [**GNU General Public License 3**](https://www.gnu.org/licenses/gpl-3.0.html).
+
+## How to cite:
+
+If you use our code, please cite us:
+
+Rall et al. (2025): Habitat complexity reduces feeding strength of freshwater predators (CRITTER) - Code. Zenodo. https://doi.org/10.5281/zenodo.14894598
 
 ## Authors
 
