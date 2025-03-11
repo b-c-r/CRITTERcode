@@ -51,19 +51,19 @@ This code is published under a [**GNU General Public License 3**](https://www.gn
 
 -   [R-Code on GitHub](https://github.com/b-c-r/CRITTERdata)
 
--   [Statistical Report on GitHub](https://github.com/b-c-r/CRITTERstatistics)
-
 -   [Statistical Report on Zenodo](https://doi.org/10.5281/zenodo.14898819) [@RallEtAl2025ComplexityReducesFeedingStatistics]
 
--   Scientific Preprint Paper (link tba)
+-   [Statistical Report on GitHub](https://github.com/b-c-r/CRITTERstatistics)
+
+-   [Scientific Preprint Article](https://doi.org/10.1101/2025.02.22.639633) [@AranbarriEtAl2025ComplexityReducesFeeding]
 
 ## Code Description
 
-We predominantly used functions to organize our R code for this project. Each function is saved in a separate \*.R-file and documented approximately in roxygen2 style [@WickhamEtAl2024Roxygen2InLineDocumentation]. The functions depend mostly hierarchically on each other. All functions are saved in the project's sub folder called functions_*.
+We predominantly used functions to organize our R code for this project. Each function is saved in a separate \*.R-file and documented approximately in roxygen2 style [@WickhamEtAl2024Roxygen2InLineDocumentation]. The functions depend mostly hierarchically on each other. All functions are saved in the project's sub folders called functions_*.
 
-### Phenomenological Functional Response Type Test
+### Functions to identify the functional response type
 
-The functions are located in `/functions_phen_test/`.
+The functions are located in `/functions_type_statistics/`.
 
 #### `phen_type_test`
 **`phen_type_test`** is a wrapper around the function `frair_test` [@PritchardEtAl2017FrairToolsFunctional; @PritchardEtAl2017FrairPackageFitting] to test for the type of the functional response using the proportion of prey eaten as response to the initial prey density. If the proportion of prey eaten increases at low prey densities and decreases after reaching a maximum, there is evidence for a type III functional response [@Juliano2001NonlinearCurveFitting]. Proportion data is fitted using a binomial GLM, but see @Crawley2012Book, chapter 16 for an introduction to this topic.
@@ -80,21 +80,6 @@ Required packages to be attached:
 - `dplyr` [@WickhamEtAl2023DplyrGrammarData]
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 
-#### `phen_type_table`
-**`phen_type_table`** takes a `phen_type_test` output and creates a nice table for the statistical report. Note that the function uses options from `kableEXTRA` [@Zhu2024KableExtraConstructComplex] that will only work for LaTeX/PDF outputs. This function is rather hard-coded and only useful in the CRITTER project.
-
-Required packages and their dependencies to be installed:
-
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `kableExtra` [@Zhu2024KableExtraConstructComplex]
-
-Required packages to be attached:
-
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-
-### Generalized Functional Response Model Functions
-
-The functions are located in `/functions_gen_fr/`.
 
 #### `gen_fr_compile`
 `gen_fr_compile` compiles the ordinary differential equation (ODE) describing the decay of resource items over time during a feeding functional response trial. The functional response model has a free shape parameter [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional], allowing a continuous shift of the shape of a classic type II functional response [@Holling1959CharacteristicsSimpleTypes] to a type III functional response [@Holling1959ComponentsPredationRevealed]. The feeding rate, $F$, depends on the resource density, $N$, and the parameters of the model are the maximum feeding rate, $F_{max}$, the half saturation density, $N_{half}$, and the shape parameter $q$ [@WilliamsMartinez2004StabilizationChaoticNonpermanent; @Vucic-PesticEtAl2010AllometricFunctionalResponse]:
@@ -204,23 +189,6 @@ Required packages and their dependencies to be installed:
 - `lhs` [@Carnell2024LhsLatinHypercubea]
 - `odin` [@FitzJohn2024OdinODEGeneration]
 - `purrr` [@WickhamHenry2025PurrrFunctionalProgramming]
-
-Required packages to be attached:
-
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-
-#### `gen_fr_table`
-
-**`gen_fr_table`** creates a nice-looking table using the output from `gen_fr_fit_all`. Hard-coded and only useful in this project.
-
-Required packages and their dependencies to be installed:
-
-- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `kableExtra` [@Zhu2024KableExtraConstructComplex]
-- `knitr` [@Xie2024KnitrGeneralpurposePackage]
 
 Required packages to be attached:
 
@@ -428,6 +396,39 @@ All functions from `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` 
 - `dplyr` [@WickhamEtAl2023DplyrGrammarData]
 - `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 - `lhs` [@Carnell2024LhsLatinHypercubea]
+
+### Functions for creating a pdf report using Rmarkdown
+
+The functions described below are especially programmed for the purpose of our statistical report [@RallEtAl2025ComplexityReducesFeedingStatistics] and our scienitif publication [@AranbarriEtAl2025ComplexityReducesFeeding]. They are likely only usable in this context.
+
+#### `phen_type_table`
+**`phen_type_table`** takes a `phen_type_test` output and creates a nice table for the statistical report. Note that the function uses options from `kableEXTRA` [@Zhu2024KableExtraConstructComplex] that will only work for LaTeX/PDF outputs. This function is rather hard-coded and only useful in the CRITTER project.
+
+Required packages and their dependencies to be installed:
+
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+- `kableExtra` [@Zhu2024KableExtraConstructComplex]
+
+Required packages to be attached:
+
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+
+#### `gen_fr_table`
+
+**`gen_fr_table`** creates a nice-looking table using the output from `gen_fr_fit_all`. Hard-coded and only useful in this project.
+
+Required packages and their dependencies to be installed:
+
+- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+- `kableExtra` [@Zhu2024KableExtraConstructComplex]
+- `knitr` [@Xie2024KnitrGeneralpurposePackage]
+
+Required packages to be attached:
+
+- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
+- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
 
 #### `create_h_table`
 

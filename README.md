@@ -1,7 +1,7 @@
 Habitat *c*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater
 p*r*edators (CRITTER, Code Repository)
 ================
-2025-03-10
+2025-03-11
 
 ## Summary
 
@@ -69,12 +69,14 @@ This code is published under a [**GNU General Public License
 - [R-Code on GitHub](https://github.com/b-c-r/CRITTERdata)
 
 - [Statistical Report on
-  GitHub](https://github.com/b-c-r/CRITTERstatistics)
-
-- [Statistical Report on
   Zenodo](https://doi.org/10.5281/zenodo.14898819) (Rall et al., 2025a)
 
-- Scientific Preprint Paper (link tba)
+- [Statistical Report on
+  GitHub](https://github.com/b-c-r/CRITTERstatistics)
+
+- [Scientific Preprint
+  Article](https://doi.org/10.1101/2025.02.22.639633) (Aranbarri et al.,
+  2025)
 
 ## Code Description
 
@@ -82,11 +84,11 @@ We predominantly used functions to organize our R code for this project.
 Each function is saved in a separate \*.R-file and documented
 approximately in roxygen2 style (Wickham et al., 2024). The functions
 depend mostly hierarchically on each other. All functions are saved in
-the project’s sub folder called functions\_\*.
+the project’s sub folders called functions\_\*.
 
-### Phenomenological Functional Response Type Test
+### Functions to identify the functional response type
 
-The functions are located in `/functions_phen_test/`.
+The functions are located in `/functions_type_statistics/`.
 
 #### `phen_type_test`
 
@@ -111,27 +113,6 @@ Required packages to be attached:
 
 - `dplyr` (Wickham et al., 2023)
 - `foreach` (Microsoft & Weston, 2022b)
-
-#### `phen_type_table`
-
-**`phen_type_table`** takes a `phen_type_test` output and creates a nice
-table for the statistical report. Note that the function uses options
-from `kableEXTRA` (Zhu, 2024) that will only work for LaTeX/PDF outputs.
-This function is rather hard-coded and only useful in the CRITTER
-project.
-
-Required packages and their dependencies to be installed:
-
-- `foreach` (Microsoft & Weston, 2022b)
-- `kableExtra` (Zhu, 2024)
-
-Required packages to be attached:
-
-- `foreach` (Microsoft & Weston, 2022b)
-
-### Generalized Functional Response Model Functions
-
-The functions are located in `/functions_gen_fr/`.
 
 #### `gen_fr_compile`
 
@@ -310,24 +291,6 @@ Required packages and their dependencies to be installed:
 - `lhs` (Carnell, 2024)
 - `odin` (FitzJohn, 2024)
 - `purrr` (Wickham & Henry, 2025)
-
-Required packages to be attached:
-
-- `dplyr` (Wickham et al., 2023)
-- `foreach` (Microsoft & Weston, 2022b)
-
-#### `gen_fr_table`
-
-**`gen_fr_table`** creates a nice-looking table using the output from
-`gen_fr_fit_all`. Hard-coded and only useful in this project.
-
-Required packages and their dependencies to be installed:
-
-- `bbmle` (Bolker et al., 2023)
-- `dplyr` (Wickham et al., 2023)
-- `foreach` (Microsoft & Weston, 2022b)
-- `kableExtra` (Zhu, 2024)
-- `knitr` (Xie, 2024)
 
 Required packages to be attached:
 
@@ -819,6 +782,48 @@ hourly basis, you can enter t_end = 24.
 - `foreach` (Microsoft & Weston, 2022b)
 - `lhs` (Carnell, 2024)
 
+### Functions for creating a pdf report using Rmarkdown
+
+The functions described below are especially programmed for the purpose
+of our statistical report (Rall et al., 2025a) and our scienitif
+publication (Aranbarri et al., 2025). They are likely only usable in
+this context.
+
+#### `phen_type_table`
+
+**`phen_type_table`** takes a `phen_type_test` output and creates a nice
+table for the statistical report. Note that the function uses options
+from `kableEXTRA` (Zhu, 2024) that will only work for LaTeX/PDF outputs.
+This function is rather hard-coded and only useful in the CRITTER
+project.
+
+Required packages and their dependencies to be installed:
+
+- `foreach` (Microsoft & Weston, 2022b)
+- `kableExtra` (Zhu, 2024)
+
+Required packages to be attached:
+
+- `foreach` (Microsoft & Weston, 2022b)
+
+#### `gen_fr_table`
+
+**`gen_fr_table`** creates a nice-looking table using the output from
+`gen_fr_fit_all`. Hard-coded and only useful in this project.
+
+Required packages and their dependencies to be installed:
+
+- `bbmle` (Bolker et al., 2023)
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+- `kableExtra` (Zhu, 2024)
+- `knitr` (Xie, 2024)
+
+Required packages to be attached:
+
+- `dplyr` (Wickham et al., 2023)
+- `foreach` (Microsoft & Weston, 2022b)
+
 #### `create_h_table`
 
 **`create_h_table`** creates a nice-looking table using the output from
@@ -886,6 +891,16 @@ caption text.
 
 <div id="refs" class="references csl-bib-body hanging-indent"
 entry-spacing="0" line-spacing="2">
+
+<div id="ref-AranbarriEtAl2025ComplexityReducesFeeding"
+class="csl-entry">
+
+Aranbarri, M., Flores, L., Guzmán, I. de, Larrañaga, A., Elosegi, A.,
+Rall, B. C., & Reiss, J. (2025). *Habitat complexity reduces feeding
+strength of freshwater predators*. bioRxiv.
+<https://doi.org/10.1101/2025.02.22.639633>
+
+</div>
 
 <div id="ref-Bolker2008EcologicalModelsData" class="csl-entry">
 
