@@ -231,7 +231,7 @@ plot_mod05r <- function(
     cex = cex
   )
   mtext(
-    "(a) habitat present",
+    "(b) habitat present",
     adj = .05,
     line = -1.5
   ) # adds plot letter and information
@@ -242,6 +242,5 @@ plot_mod05r <- function(
     outer = TRUE
   )
   
-  return(NULL)
 }
 
