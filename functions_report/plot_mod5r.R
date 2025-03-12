@@ -236,6 +236,10 @@ plot_mod05r <- function(
     line = -1.5
   ) # adds plot letter and information
   
+  ##############################################################################
+  # axis text
+  ##############################################################################
+  
   title(
     xlab = "initial prey items in arena",
     ylab = "prey eaten per day",
