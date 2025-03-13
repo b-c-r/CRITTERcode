@@ -41,7 +41,7 @@
 
 plot_mod05r <- function(
     model_fit,                                                                  # the mle2 fit object
-    ci_reps = 1000,                                                             # number of samples for the confidence interval lines
+    ci_reps = 10000,                                                            # number of samples for the confidence interval lines
     ci_levels = c(0.025, 0.975),                                                # lower and upper confidence limits
     x_res = 1000,                                                               # number of x values for regression line
     ylim = c(0, 25),
