@@ -89,7 +89,8 @@ create_summary_table <- function(
     kableExtra::row_spec(
       row = 0,
       bold = TRUE
-    )
+    ) %>%
+    kableExtra::kable_styling(latex_options = "HOLD_position")
 }
 
 
