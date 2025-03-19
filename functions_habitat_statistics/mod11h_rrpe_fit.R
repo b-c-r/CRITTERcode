@@ -48,6 +48,7 @@ mod11h_rrpe_fit <- function(
     n_eaten,
     n_initial,
     n_rings,
+    complexity = NA,
     p = 1,
     t_end = 1,
     no_lhs_samples = 1000,

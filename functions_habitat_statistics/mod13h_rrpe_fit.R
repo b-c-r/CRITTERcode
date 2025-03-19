@@ -52,6 +52,7 @@
 mod13h_rrpe_fit <- function(
     n_eaten,
     n_initial,
+    n_rings = NA,
     complexity,
     p = 1,
     t_end = 1,
