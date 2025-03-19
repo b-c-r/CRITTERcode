@@ -36,15 +36,21 @@
 #'
 #' @examples
 #' 
-#' # see code in the statistical report (https://github.com/b-c-r/CRITTERstatistics)
+#' # find an executable example here:
+#' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod15h_examples.R
 #' 
 
 plot_mod15h <- function(
     model_fit,                                                                  # the mle2 fit object
+    include_habitat_pics = T,                                                   # include the habitat pictograms, default = True
+    pic_x1 = rep(140.0, 4),                                                     # lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_x2 = rep(180.0, 4),                                                     # upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_y1 = rep( 30.0, 4),                                                     # lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_y2 = rep( 40.0, 4),                                                     # upper (right) y values for the 4 habitat pictures, the vector has values for 4 pictograms  
     ci_reps = 10000,                                                            # number of samples for the confidence interval lines
     ci_levels = c(0.025, 0.975),                                                # lower and upper confidence limits
     x_res = 1000,                                                               # number of x values for regression line
-    ylim = c(0, 35),
+    ylim = c(0, 40),
     pch = 16,
     cex = 0.5,
     ci_col = "lightgrey",
@@ -295,7 +301,7 @@ plot_mod15h <- function(
     adj = .05,
     line = -1.5
   ) # adds plot letter and information
-  
+
   ##############################################################################
   # Plot (b)
   ##############################################################################
@@ -338,6 +344,22 @@ plot_mod15h <- function(
     line = -1.5
   ) # adds plot letter and information
   
+  # add pictogram
+  
+  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
+  f_path <- "pictures/"
+  
+  if(include_habitat_pics){
+    png_url <- paste(gh_path, f_path, "habitat_complexity_level_01.png", sep ="")
+    graphics::rasterImage(
+      png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+      pic_x1[1],
+      pic_y1[1],
+      pic_x2[1],
+      pic_y2[1]
+    )
+  }
+  
   ##############################################################################
   # Plot (c)
   ##############################################################################
@@ -379,6 +401,22 @@ plot_mod15h <- function(
     adj = .05,
     line = -1.5
   ) # adds plot letter and information
+  
+  # add pictogram
+  
+  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
+  f_path <- "pictures/"
+  
+  if(include_habitat_pics){
+    png_url <- paste(gh_path, f_path, "habitat_complexity_level_03.png", sep ="")
+    graphics::rasterImage(
+      png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+      pic_x1[3],
+      pic_y1[3],
+      pic_x2[3],
+      pic_y2[3]
+    )
+  }
   
   ##############################################################################
   # Empty Plot
@@ -439,6 +477,22 @@ plot_mod15h <- function(
     line = -1.5
   ) # adds plot letter and information
   
+  # add pictogram
+  
+  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
+  f_path <- "pictures/"
+  
+  if(include_habitat_pics){
+    png_url <- paste(gh_path, f_path, "habitat_complexity_level_02.png", sep ="")
+    graphics::rasterImage(
+      png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+      pic_x1[2],
+      pic_y1[2],
+      pic_x2[2],
+      pic_y2[2]
+    )
+  }
+  
   ##############################################################################
   # Plot (e)
   ##############################################################################
@@ -479,6 +533,22 @@ plot_mod15h <- function(
     adj = .05,
     line = -1.5
   ) # adds plot letter and information
+  
+  # add pictogram
+  
+  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
+  f_path <- "pictures/"
+  
+  if(include_habitat_pics){
+    png_url <- paste(gh_path, f_path, "habitat_complexity_level_04.png", sep ="")
+    graphics::rasterImage(
+      png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+      pic_x1[4],
+      pic_y1[4],
+      pic_x2[4],
+      pic_y2[4]
+    )
+  }
   
   ##############################################################################
   # axis text
