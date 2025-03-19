@@ -58,6 +58,7 @@ source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                          
 source(paste(gh_path, f_path, "mod05r_rrpe_nll.R", sep = ""))                   # calculates negative log likelihood
 source(paste(gh_path, f_path, "mod05r_rrpe_scan.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
 source(paste(gh_path, f_path, "mod05r_rrpe_fit.R", sep = ""))                   # fits functional response model to data
+source(paste(gh_path, "functions_report/", "plot_mod5r.R", sep = ""))            # creates a nice plot
 
 ################################################################################
 ## Data
@@ -105,7 +106,7 @@ mod05r_rrpe_scan(
   p = 1,                                                                        # number of predators in the experiment: here 1 predator per vessel
   f_max_hab0_log10_range = log10(c(1, 1.5)),                                    # two values, the range, for maximum feeding rate (log10 scale) when habitat is absent
   f_max_hab1_log10_range = c(-0.05, 0.05),                                      # two values, the range, maximum feeding rate at complexity level 4 (log10 scale)
-  n_half_log10_range = log10(c(1, 1.5)),                                         # two values, the range, half saturation density (log10 scale)
+  n_half_log10_range = log10(c(1, 1.5)),                                        # two values, the range, half saturation density (log10 scale)
   t_end = 1,                                                                    # end time of the experiment, here 1 day
   no_lhs_samples = 100                                                          # number of latin hypercube samples that should be taken (i.e. 100 random values in the range of the above assigned ranges)
 )
@@ -122,3 +123,18 @@ mod05r_fit_ie <- mod05r_rrpe_fit(
 bbmle::summary(mod05r_fit_ie)                                                   # shows the summary table of the best fit
 bbmle::AIC(mod05r_fit_ie)                                                       # shows the AIC of the best fit
 BIC(mod05r_fit_ie)                                                              # shows the BIC of the best fit
+
+################################################################################
+## example for: mod05r_rrpe_fit.R
+
+plot_mod05r(
+  model_fit = mod05r_fit_ie,                                                    # the mle2 fit object
+  include_habitat_pics = T,                                                     # include the habitat pictograms, default = True
+  pic_x1 = c( 70.0,  95.0,  70.0,  95.0),                                       # lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+  pic_x2 = c( 95.0, 120.0,  95.0, 120.0),                                       # upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+  pic_y1 = c( 22.6,  22.6,  19.4,  19.4),                                       # lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms
+  pic_y2 = c( 25.6,  25.6,  22.4,  22.4),                                       # upper (right) y values for the 4 habitat pictures, the vector has values for 4 pictograms  
+  ci_reps = 100,                                                                # number of samples for the confidence interval lines, default for publication is 10000
+  ci_levels = c(0.025, 0.975),                                                  # lower and upper confidence limits
+  x_res = 100,                                                                  # number of x values for regression line (200+ for a smooth shape, default = 1000)
+)

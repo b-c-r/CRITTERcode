@@ -247,14 +247,17 @@ plot_mod05r <- function(
   ##############################################################################
   # add pictogramms
   ##############################################################################
-  
+
   gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
   f_path <- "pictures/"
   
   if(include_habitat_pics){
     for(i in 1:4){
+      
+      png_url <- paste(gh_path, f_path, "habitat_complexity_level_0", i, ".png", sep ="")
+      
       graphics::rasterImage(
-        png::readPNG(paste(gh_path, f_path, "habitat_complexity_level_0", i, ".png", sep ="")),
+        png::readPNG(RCurl::getURLContent(png_url)),                            # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
         pic_x1[i],
         pic_y1[i],
         pic_x2[i],
