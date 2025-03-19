@@ -125,7 +125,7 @@ bbmle::AIC(mod05r_fit_ie)                                                       
 BIC(mod05r_fit_ie)                                                              # shows the BIC of the best fit
 
 ################################################################################
-## example for: mod05r_rrpe_fit.R
+## example for: plot_mod05r.R
 
 plot_mod05r(
   model_fit = mod05r_fit_ie,                                                    # the mle2 fit object
