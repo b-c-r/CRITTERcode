@@ -245,7 +245,7 @@ plot_mod05r <- function(
   ) # adds plot letter and information
   
   ##############################################################################
-  # add pictogramms
+  # add pictograms
   ##############################################################################
 
   gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
