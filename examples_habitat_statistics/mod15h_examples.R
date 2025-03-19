@@ -58,6 +58,7 @@ source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                          
 source(paste(gh_path, f_path, "mod15h_rrpe_nll.R", sep = ""))                   # calculates negative log likelihood
 source(paste(gh_path, f_path, "mod15h_rrpe_scan.R", sep = ""))                  # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
 source(paste(gh_path, f_path, "mod15h_rrpe_fit.R", sep = ""))                   # fits functional response model to data
+source(paste(gh_path, "functions_report/", "plot_mod15h.R", sep = ""))            # creates a nice plot
 
 ################################################################################
 ## Data
@@ -133,3 +134,19 @@ mod15h_fit_ie <- mod15h_rrpe_fit(
 bbmle::summary(mod15h_fit_ie)                                                   # shows the summary table of the best fit
 bbmle::AIC(mod15h_fit_ie)                                                       # shows the AIC of the best fit
 BIC(mod15h_fit_ie)                                                              # shows the BIC of the best fit
+
+################################################################################
+## example for: plot_mod15h.R
+
+plot_mod15h(
+  model_fit = mod15h_fit_ie,                                                    # the mle2 fit object
+  include_habitat_pics = T,                                                     # include the habitat pictograms, default = True
+  pic_x1 = rep(100.0, 4),                                                       # lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+  pic_x2 = rep(120.0, 4),                                                       # upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+  pic_y1 = rep( 22.0, 4),                                                       # lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms
+  pic_y2 = rep( 25.0, 4),                                                       # upper (right) y values for the 4 habitat pictures, the vector has values for 4 pictograms  
+  ylim = c(0, 25),
+  ci_reps = 100,                                                                # number of samples for the confidence interval lines, default for publication is 10000
+  ci_levels = c(0.025, 0.975),                                                  # lower and upper confidence limits
+  x_res = 100,                                                                  # number of x values for regression line (200+ for a smooth shape, default = 1000)
+)
