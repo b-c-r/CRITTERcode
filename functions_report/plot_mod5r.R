@@ -36,11 +36,17 @@
 #'
 #' @examples
 #' 
-#' # see code in the statistical report (https://github.com/b-c-r/CRITTERstatistics)
+#' # find an executable example here:
+#' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod05r_examples.R
 #' 
 
 plot_mod05r <- function(
     model_fit,                                                                  # the mle2 fit object
+    include_habitat_pics = T,                                                   # include the habitat pictograms, default = True
+    pic_x1 = c( 70.0,  95.0,  70.0,  95.0),                                     # lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_x2 = c( 95.0, 120.0,  95.0, 120.0),                                     # upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_y1 = c( 22.6,  22.6,  19.4,  19.4),                                     # lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_y2 = c( 25.6,  25.6,  22.4,  22.4),                                     # upper (right) y values for the 4 habitat pictures, the vector has values for 4 pictograms  
     ci_reps = 10000,                                                            # number of samples for the confidence interval lines
     ci_levels = c(0.025, 0.975),                                                # lower and upper confidence limits
     x_res = 1000,                                                               # number of x values for regression line
@@ -87,7 +93,7 @@ plot_mod05r <- function(
     Sigma = bbmle::vcov(model_fit)
   ) # samples from the variance - co-variance matrix parameters
   
-
+  
   ## setup the cluster for parallel computing on the local machine
   cl <- parallel::makeCluster(no_threads)
   doParallel::registerDoParallel(cl)
@@ -156,7 +162,7 @@ plot_mod05r <- function(
     mar = c(.25,.25,.25,.25),
     las = 1
   )
-
+  
   ##############################################################################
   # Plot (a)
   ##############################################################################
@@ -230,11 +236,32 @@ plot_mod05r <- function(
     pch = pch,
     cex = cex
   )
+  
+  # add further details
   mtext(
     "(b) habitat present",
     adj = .05,
     line = -1.5
   ) # adds plot letter and information
+  
+  ##############################################################################
+  # add pictogramms
+  ##############################################################################
+  
+  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
+  f_path <- "pictures/"
+  
+  if(include_habitat_pics){
+    for(i in 1:4){
+      graphics::rasterImage(
+        png::readPNG(paste(gh_path, f_path, "habitat_complexity_level_0", i, ".png", sep ="")),
+        pic_x1[i],
+        pic_y1[i],
+        pic_x2[i],
+        pic_y2[i]
+      )
+    }
+  }
   
   ##############################################################################
   # axis text
