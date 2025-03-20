@@ -47,8 +47,8 @@
 
 run_all_hab_fits <- function(
     x,
-    model_numbers = rep(1:16, 4),
-    style_letters = c(rep("h",16), rep("r",16), rep("h",16), rep("r",16)),
+    model_numbers = rep(sort(rep(1:16, 2)),2),
+    style_letters = rep(c("h","r"), 64),
     predator_spec = c(rep("Ischnura elegans", 32), rep("Notonecta glauca", 32)),
     no_threads = max(2^(0:6)[2^(0:6) <= parallel::detectCores()]),
     p = 1,
