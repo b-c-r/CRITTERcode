@@ -60,6 +60,7 @@ mod13r_rrpe_fit <- function(
     range_multiplier = c(1.0001, 1.001, 1.1, 1.5, 2),
     rel_f_max_range = c(0.6, 0.95),
     rel_n_half_range = c(0.2, 0.8),
+    slope_range = NA,
     witer_max = 25,
     mle2_tol = 1e-12,
     val_tol = 6,
