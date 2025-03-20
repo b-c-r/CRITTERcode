@@ -44,7 +44,7 @@ create_package_info <- function(
     dependencies = TRUE,
     caption_text = "All loaded R packages that we used in this report, including base packages and dependencies."
 ){
-  dplyr::data_frame(
+  dplyr::tibble(
     pname = sessioninfo::package_info(pkgs = "loaded", include_base = include_base, dependencies = dependencies)[,1],
     pver = sessioninfo::package_info(pkgs = "loaded", include_base = include_base, dependencies = dependencies)[,3],
     pattached = sessioninfo::package_info(pkgs = "loaded", include_base = include_base, dependencies = dependencies)[,6],
