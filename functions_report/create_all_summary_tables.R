@@ -41,13 +41,13 @@
 
 create_all_summary_tables <- function(
     fit_results,
-    ci_samples = 10000,
+    ci_reps = 10000,
     caption_text = "All 32 summary tables from \\textit{Ischnura elegans} model fits."
 ){
   
   out <- foreach::foreach(i = 1:32, .combine = "rbind") %do% {
     
-    ci_samples <- MASS::mvrnorm(ci_samples, mu = fit_results[[i]]@coef, Sigma = bbmle::vcov(fit_results[[i]]))
+    ci_samples <- MASS::mvrnorm(ci_reps, mu = fit_results[[i]]@coef, Sigma = bbmle::vcov(fit_results[[i]]))
     
     par_exp = 10^bbmle::summary(fit_results[[i]])@coef[,1]
     par_value_low <- foreach::foreach(j = 1:ncol(ci_samples), .combine = "c") %do% {10^as.numeric(quantile(ci_samples[,j], 0.025))}
