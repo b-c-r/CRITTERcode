@@ -140,7 +140,7 @@ gen_fr_fit_all <- function(
     
       # import the functions from GitHub:
       gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
-      f_path <- "functions_gen_fr/"
+      f_path <- "functions_type_statistics/"
       
       source(paste(gh_path, f_path, "gen_fr_compile.R", sep = ""))
       source(paste(gh_path, f_path, "gen_fr_sim.R", sep = ""))
