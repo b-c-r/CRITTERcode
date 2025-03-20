@@ -118,7 +118,7 @@ gen_fr_fit_all <- function(
     val_tol = 6,
     mle2_tol = 1e-12,
     maxit = 5000,
-    no_threads = 10
+    no_threads = max(c(1, 2, 5, 10)[c(1, 2, 5, 10) <= max_cores])
     ){
   
   # select the required data:
@@ -164,8 +164,8 @@ gen_fr_fit_all <- function(
     # create the output:
     out_table <- list(
       treatment = treats[i],
-      q_test_results = fr_res,
-      data_orig = data_orig_i
+      q_test_results = fr_res#,
+      # data_orig = data_orig_i
     )
     
     return(out_table)
