@@ -57,7 +57,6 @@ plot_mod05r <- function(
     no_threads = max(
       c(1,2,5,10,20,50,100)[c(1,2,5,10,20,50,100) <= parallel::detectCores()]
     ),                                                                        # number of threads that should be used for simulation
-    no_threads = max(2^(0:6)[2^(0:6) <= parallel::detectCores()]),
     export_functions_to_workers = "rrpe_sim"
 ){
   
