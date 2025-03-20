@@ -118,7 +118,7 @@ gen_fr_fit_all <- function(
     val_tol = 6,
     mle2_tol = 1e-12,
     maxit = 5000,
-    no_threads = max(c(1, 2, 5, 10)[c(1, 2, 5, 10) <= max_cores])
+    no_threads = max(c(1, 2, 5, 10)[c(1, 2, 5, 10) <= parallel::detectCores()])
     ){
   
   # select the required data:
@@ -134,9 +134,19 @@ gen_fr_fit_all <- function(
   
   result <- foreach::foreach(
     i = 1:length(treats),
-    .packages = c("foreach", "dplyr"),
-    .export = ls(globalenv())
+    .packages = c("foreach", "dplyr")#,
+    # .export = ls(globalenv())
     ) %dopar% {
+    
+      # import the functions from GitHub:
+      gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
+      f_path <- "functions_gen_fr/"
+      
+      source(paste(gh_path, f_path, "gen_fr_compile.R", sep = ""))
+      source(paste(gh_path, f_path, "gen_fr_sim.R", sep = ""))
+      source(paste(gh_path, f_path, "gen_fr_nll.R", sep = ""))
+      source(paste(gh_path, f_path, "gen_fr_parms_scan.R", sep = ""))
+      source(paste(gh_path, f_path, "gen_fr_fit.R", sep = ""))
 
     # subset the data:
     data_i <- subset(data_internal, treatment == treats[i])
