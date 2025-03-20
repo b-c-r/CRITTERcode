@@ -164,8 +164,8 @@ gen_fr_fit_all <- function(
     # create the output:
     out_table <- list(
       treatment = treats[i],
-      q_test_results = fr_res#,
-      # data_orig = data_orig_i
+      q_test_results = fr_res,
+      data_orig = data_orig_i
     )
     
     return(out_table)
