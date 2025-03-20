@@ -54,7 +54,7 @@ plot_mod05r <- function(
     pch = 16,
     cex = 0.5,
     ci_col = "lightgrey",
-    no_threads = 10                                                             # number of threads that should be used for simulation
+    no_threads = max(c(1, 2, 5, 10, 20, 50, 100)[c(1, 2, 5, 10, 20, 50, 100) <= parallel::detectCores()]) # number of threads that should be used for simulation
 ){
   
   ##############################################################################

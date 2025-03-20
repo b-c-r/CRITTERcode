@@ -73,15 +73,29 @@ run_all_hab_fits <- function(
   
   result <- foreach::foreach(
     i = 1:length(model_numbers),
-    .packages = c("foreach", "dplyr"),
-    .export = ls(globalenv())
+    .packages = c("foreach", "dplyr")
   ) %dopar% {
     
+    # attach libraries
+    library("dplyr")
+    library("foreach")
+    
     if(model_numbers[i] < 10){
-      func_name <- paste("mod0", model_numbers[i], style_letters[i], "_rrpe_fit", sep ="")
+      mod_name <- paste("mod0", model_numbers[i], style_letters[i], "_rrpe", sep ="")
+      func_name <- paste(mod_name, "_fit", sep ="")
     } else {
-      func_name <- paste("mod", model_numbers[i], style_letters[i], "_rrpe_fit", sep ="")
+      mod_name <- paste("mod", model_numbers[i], style_letters[i], "_rrpe", sep ="")
+      func_name <- paste(mod_name, "_fit", sep ="")
     }
+    
+    # import the functions from GitHub:
+    gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
+    f_path <- "functions_habitat_statistics/"
+    
+    source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                      # simulates a feeding functional response based on parameters and initial prey density
+    source(paste(gh_path, f_path, mod_name, "_nll.R", sep = ""))                # calculates negative log likelihood
+    source(paste(gh_path, f_path, mod_name, "_scan.R", sep = ""))               # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
+    source(paste(gh_path, f_path, mod_name, "_fit.R", sep = ""))                # fits functional response model to data
     
     fr_data_i <- subset(x, predator == predator_spec[i])
     
@@ -106,15 +120,6 @@ run_all_hab_fits <- function(
         seed_value = seed_value
       )
     )
-    
-    # create the output:
-    out_table <- list(
-      model_name = func_name,
-      predator_spec = predator_spec[i],
-      mle2_object = out
-    )
-    
-    return(out_table)
   }
   
   parallel::stopCluster(cl)

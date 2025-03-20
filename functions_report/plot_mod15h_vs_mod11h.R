@@ -42,6 +42,13 @@
 plot_mod15h_vs_mod11h <- function(
     model_fit_15h,                                                              # the mle2 fit object
     model_fit_11h,                                                              # the mle2 fit object
+    include_habitat_pics = T,                                                   # include the habitat pictograms, default = True
+    pic_x1 =  c( 1.500,  1.600,  2.500,  2.600),                                # lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_x2 =  c( 1.900,  2.000,  2.900,  3.000),                                # upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_y1a = c(15.000, 30.000, 27.500, 14.000),                                # lower (left) y values (plot a) for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_y2a = c(17.500, 32.500, 30.000, 16.500),                                # upper (right) y values (plot a) for the 4 habitat pictures, the vector has values for 4 pictograms  
+    pic_y1b = c( 0.050,  0.025,  0.030,  0.060),                                # lower (left) y values (plot b) for the 4 habitat pictures, the vector has values for 4 pictograms
+    pic_y2b = c( 0.055,  0.030,  0.035,  0.065),                                # upper (right) y values (plot b) for the 4 habitat pictures, the vector has values for 4 pictograms  
     ci_reps = 10000,                                                            # number of samples for the confidence interval lines
     ci_levels = c(0.025, 0.975),                                                # lower and upper confidence limits
     x_res = 1000,                                                               # number of x values for regression line
@@ -175,6 +182,23 @@ plot_mod15h_vs_mod11h <- function(
     line = -1.5
   ) # adds plot letter and information
   
+  # add pictogram
+  
+  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
+  f_path <- "pictures/"
+  
+  for(i in 1:4){
+    if(include_habitat_pics){
+      png_url <- paste(gh_path, f_path, "habitat_complexity_level_0", i, ".png", sep ="")
+      graphics::rasterImage(
+        png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+        pic_x1[i],
+        pic_y1a[i],
+        pic_x2[i],
+        pic_y2a[i]
+      )
+    }
+  }
   
   ##############################################################################
   # Plot (b)
@@ -228,6 +252,24 @@ plot_mod15h_vs_mod11h <- function(
     line = -1.5
   ) # adds plot letter and information
   
+  # add pictogram
+  
+  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
+  f_path <- "pictures/"
+  
+  for(i in 1:4){
+    if(include_habitat_pics){
+      png_url <- paste(gh_path, f_path, "habitat_complexity_level_0", i, ".png", sep ="")
+      graphics::rasterImage(
+        png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+        pic_x1[i],
+        pic_y1b[i],
+        pic_x2[i],
+        pic_y2b[i]
+      )
+    }
+  }
+
   ##############################################################################
   # axis text
   ##############################################################################
