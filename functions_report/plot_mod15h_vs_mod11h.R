@@ -191,7 +191,7 @@ plot_mod15h_vs_mod11h <- function(
     if(include_habitat_pics){
       png_url <- paste(gh_path, f_path, "habitat_complexity_level_0", i, ".png", sep ="")
       graphics::rasterImage(
-        png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+        png::readPNG(RCurl::getURLContent(png_url)),                            # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
         pic_x1[i],
         pic_y1a[i],
         pic_x2[i],
@@ -254,14 +254,11 @@ plot_mod15h_vs_mod11h <- function(
   
   # add pictogram
   
-  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
-  f_path <- "pictures/"
-  
   for(i in 1:4){
     if(include_habitat_pics){
       png_url <- paste(gh_path, f_path, "habitat_complexity_level_0", i, ".png", sep ="")
       graphics::rasterImage(
-        png::readPNG(RCurl::getURLContent(png_url)),                              # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
+        png::readPNG(RCurl::getURLContent(png_url)),                            # see https://stackoverflow.com/questions/12888120/loading-png-files-directly-from-url
         pic_x1[i],
         pic_y1b[i],
         pic_x2[i],

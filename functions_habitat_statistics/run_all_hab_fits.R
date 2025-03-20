@@ -65,18 +65,13 @@ run_all_hab_fits <- function(
     seed_value = 123
 ){
   
-  library("foreach")
-  library("dplyr")
-  
   cl <- parallel::makeCluster(no_threads)
   doParallel::registerDoParallel(cl)
   
   result <- foreach::foreach(
-    i = 1:length(model_numbers),
-    .packages = c("foreach", "dplyr")
+    i = 1:length(model_numbers)
   ) %dopar% {
     
-    # attach libraries
     library("dplyr")
     library("foreach")
     
@@ -92,14 +87,14 @@ run_all_hab_fits <- function(
     gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
     f_path <- "functions_habitat_statistics/"
     
-    source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))                      # simulates a feeding functional response based on parameters and initial prey density
+    source(paste(gh_path, f_path, "rrpe_sim.R", sep = ""))              
     source(paste(gh_path, f_path, mod_name, "_nll.R", sep = ""))                # calculates negative log likelihood
     source(paste(gh_path, f_path, mod_name, "_scan.R", sep = ""))               # calculates a set negative log likelihoods (nll) of random parameters and returns parameters from lowest nll
     source(paste(gh_path, f_path, mod_name, "_fit.R", sep = ""))                # fits functional response model to data
     
     fr_data_i <- subset(x, predator == predator_spec[i])
     
-    out <- do.call(
+    do.call(
       what = func_name,
       args = list(
         n_eaten = fr_data_i$n_eaten,

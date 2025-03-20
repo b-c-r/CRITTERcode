@@ -54,7 +54,11 @@ plot_mod05r <- function(
     pch = 16,
     cex = 0.5,
     ci_col = "lightgrey",
-    no_threads = max(c(1, 2, 5, 10, 20, 50, 100)[c(1, 2, 5, 10, 20, 50, 100) <= parallel::detectCores()]) # number of threads that should be used for simulation
+    no_threads = max(
+      c(1,2,5,10,20,50,100)[c(1,2,5,10,20,50,100) <= parallel::detectCores()]
+    ),                                                                        # number of threads that should be used for simulation
+    no_threads = max(2^(0:6)[2^(0:6) <= parallel::detectCores()]),
+    export_functions_to_workers = "rrpe_sim"
 ){
   
   ##############################################################################
@@ -100,12 +104,9 @@ plot_mod05r <- function(
   
   regline_hab0 <- foreach::foreach(
     i = 1:nrow(ci_samples),
+    .export = export_functions_to_workers,
     .combine = "cbind"
   ) %dopar% {
-    
-    gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
-    f_path <- "functions_habitat_statistics/"
-    source(paste(gh_path, f_path, "rrpe_sim.R", sep = "")) 
     
     rrpe_sim(
       fr_style = "Real",
@@ -118,12 +119,9 @@ plot_mod05r <- function(
   
   regline_hab1 <- foreach::foreach(
     i = 1:nrow(ci_samples),
+    .export = export_functions_to_workers,
     .combine = "cbind"
   ) %dopar% {
-    
-    gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
-    f_path <- "functions_habitat_statistics/"
-    source(paste(gh_path, f_path, "rrpe_sim.R", sep = "")) 
     
     rrpe_sim(
       fr_style = "Real",

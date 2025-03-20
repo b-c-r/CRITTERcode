@@ -118,7 +118,9 @@ gen_fr_fit_all <- function(
     val_tol = 6,
     mle2_tol = 1e-12,
     maxit = 5000,
-    no_threads = max(c(1, 2, 5, 10)[c(1, 2, 5, 10) <= parallel::detectCores()])
+    no_threads = max(c(1, 2, 5, 10)[c(1, 2, 5, 10) <= parallel::detectCores()])#,
+    #export_packages_to_workers = c("foreach", "dplyr"),
+    #export_functions_to_workers = c("gen_fr_compile", "gen_fr_sim", "gen_fr_nll", "gen_fr_parms_scan", "gen_fr_fit")
     ){
   
   # select the required data:
@@ -133,52 +135,54 @@ gen_fr_fit_all <- function(
   doParallel::registerDoParallel(cl)
   
   result <- foreach::foreach(
-    i = 1:length(treats),
-    .packages = c("foreach", "dplyr")#,
-    # .export = ls(globalenv())
+    i = 1:length(treats)#,
+    #.packages = export_packages_to_workers,
+    #.export = export_functions_to_workers
     ) %dopar% {
-    
-      # import the functions from GitHub:
-      gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
-      f_path <- "functions_type_statistics/"
       
+      library("dplyr")
+      library("foreach")
+      
+      # import the functions from GitHub:
+      gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/" 
+      f_path <- "functions_type_statistics/"
       source(paste(gh_path, f_path, "gen_fr_compile.R", sep = ""))
       source(paste(gh_path, f_path, "gen_fr_sim.R", sep = ""))
       source(paste(gh_path, f_path, "gen_fr_nll.R", sep = ""))
       source(paste(gh_path, f_path, "gen_fr_parms_scan.R", sep = ""))
       source(paste(gh_path, f_path, "gen_fr_fit.R", sep = ""))
 
-    # subset the data:
-    data_i <- subset(data_internal, treatment == treats[i])
-    data_orig_i <- subset(data, treatment == treats[i])
+      # subset the data:
+      data_i <- subset(data_internal, treatment == treats[i])
+      data_orig_i <- subset(data, treatment == treats[i])
     
-    # run the fitting function:
-    fr_res <- gen_fr_fit(
-      n_eaten = data_i$n_eaten,
-      n_initial = data_i$n_initial,
-      p = p,
-      t_start = t_start,
-      t_end = t_end,
-      t_length = t_length,
-      penalty = penalty,
-      q_low = q_low,
-      q_up = q_up,
-      no_lhs_samples = no_lhs_samples,
-      range_multiplier = range_multiplier,
-      witer_max = witer_max,
-      val_tol = val_tol,
-      mle2_tol = mle2_tol,
-      maxit = maxit
-    )
-    
-    # create the output:
-    out_table <- list(
-      treatment = treats[i],
-      q_test_results = fr_res,
-      data_orig = data_orig_i
-    )
-    
-    return(out_table)
+      # run the fitting function:
+      fr_res <- gen_fr_fit(
+        n_eaten = data_i$n_eaten,
+        n_initial = data_i$n_initial,
+        p = p,
+        t_start = t_start,
+        t_end = t_end,
+        t_length = t_length,
+        penalty = penalty,
+        q_low = q_low,
+        q_up = q_up,
+        no_lhs_samples = no_lhs_samples,
+        range_multiplier = range_multiplier,
+        witer_max = witer_max,
+        val_tol = val_tol,
+        mle2_tol = mle2_tol,
+        maxit = maxit
+      )
+      
+      # create the output:
+      out_table <- list(
+        treatment = treats[i],
+        q_test_results = fr_res,
+        data_orig = data_orig_i
+      )
+      
+      return(out_table)
   }
   parallel::stopCluster(cl)
   return(result)
