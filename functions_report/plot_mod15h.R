@@ -55,7 +55,7 @@ plot_mod15h <- function(
     cex = 0.5,
     ci_col = "lightgrey",
     no_threads = max(
-      c(1,2,5,10,20,50,100)[c(1,2,5,10,20,50,100) <= parallel::detectCores()]
+      c(1,2,5,10,20,40,50)[c(1,2,5,10,20,40,50) <= parallel::detectCores()]
       ),                                                                        # number of threads that should be used for simulation
     export_functions_to_workers = "rrpe_sim"
 ){
