@@ -1,5 +1,5 @@
 ---
-title: "Habitat *c*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater p*r*edators (CRITTER, Code Repository)"
+title: "*C*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater p*r*edators (CRITTER) — Code"
 bibliography: references/CRITTERcode.bib
 csl: references/methods-in-ecology-and-evolution.csl
 date: "`r Sys.Date()`"
