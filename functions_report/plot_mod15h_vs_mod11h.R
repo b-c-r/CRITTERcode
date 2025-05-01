@@ -55,7 +55,8 @@ plot_mod15h_vs_mod11h <- function(
     ylim = c(13, 40),
     pch = 16,
     cex = 0.5,
-    ci_col = "lightgrey"
+    ci_col = "lightgrey",
+    journal_style = FALSE                                                       # should the style according to journal guidelines used? Default: FALSE
 ){
   
   ##############################################################################
@@ -142,7 +143,9 @@ plot_mod15h_vs_mod11h <- function(
     cex = cex,
     xlab = "",
     ylab = expression(F[max]),
-    type = "n"
+    type = "n",
+    bty = ifelse(journal_style, "l", "o"),
+    tck = ifelse(journal_style, -0.01, NA)
   ) # setup the plot
   
   polygon(
@@ -212,7 +215,9 @@ plot_mod15h_vs_mod11h <- function(
     cex = cex,
     xlab = "",
     ylab = expression(T[h]),
-    type = "n"
+    type = "n",
+    bty = ifelse(journal_style, "l", "o"),
+    tck = ifelse(journal_style, -0.01, NA)
   ) # setup the plot
   
   polygon(

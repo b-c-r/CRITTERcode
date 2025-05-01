@@ -57,7 +57,8 @@ plot_mod15h <- function(
     no_threads = max(
       c(1,2,5,10,20,40,50)[c(1,2,5,10,20,40,50) <= parallel::detectCores()]
       ),                                                                        # number of threads that should be used for simulation
-    export_functions_to_workers = "rrpe_sim"
+    export_functions_to_workers = "rrpe_sim",
+    journal_style = FALSE                                                       # should the style according to journal guidelines used? Default: FALSE
 ){
   
   ##############################################################################
@@ -262,7 +263,9 @@ plot_mod15h <- function(
     cex = cex,
     xlab = "",
     ylab = "",
-    type = "n"
+    type = "n",
+    bty = ifelse(journal_style, "l", "o"),
+    tck = ifelse(journal_style, -0.01, NA)
   ) # setup the plot
   
   polygon(
@@ -304,7 +307,9 @@ plot_mod15h <- function(
     yaxt = "n",
     ylab = "",
     xlab = "",
-    type = "n"
+    type = "n",
+    bty = ifelse(journal_style, "l", "o"),
+    tck = ifelse(journal_style, -0.01, NA)
   )  # setup the plot
   
   polygon(
@@ -362,7 +367,9 @@ plot_mod15h <- function(
     yaxt = "n",
     ylab = "",
     xlab = "",
-    type = "n"
+    type = "n",
+    bty = ifelse(journal_style, "l", "o"),
+    tck = ifelse(journal_style, -0.01, NA)
   )  # setup the plot
   
   polygon(
@@ -437,7 +444,9 @@ plot_mod15h <- function(
     cex = cex,
     xlab = "",
     ylab = "",
-    type = "n"
+    type = "n",
+    bty = ifelse(journal_style, "l", "o"),
+    tck = ifelse(journal_style, -0.01, NA)
   ) # setup the plot
   
   polygon(
@@ -494,7 +503,9 @@ plot_mod15h <- function(
     cex = cex,
     xlab = "",
     ylab = "",
-    type = "n"
+    type = "n",
+    bty = ifelse(journal_style, "l", "o"),
+    tck = ifelse(journal_style, -0.01, NA)
   ) # setup the plot
   
   polygon(
