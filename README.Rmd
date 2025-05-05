@@ -71,7 +71,7 @@ Zenodo.
 
 ## Code Description
 
-We predominantly used functions to organize our R code for this project. Each function is saved in a separate \*.R-file and documented approximately in roxygen2 style [@WickhamEtAl2024Roxygen2InLineDocumentation] and in this README. The functions depend mostly hierarchically on each other. All functions are saved in the project's sub folders called functions\_\*.
+We predominantly used functions to organize our R code for this project. Each function is saved in a separate \*.R-file and documented approximately in roxygen2 style [@WickhamEtAl2024Roxygen2InLineDocumentation] and in this README. The functions depend mostly hierarchically on each other. All functions are saved in the project's sub folders called `/functions_*/`.
 
 ### Functions to identify the functional response type
 

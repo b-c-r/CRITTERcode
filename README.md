@@ -94,7 +94,7 @@ We predominantly used functions to organize our R code for this project.
 Each function is saved in a separate \*.R-file and documented
 approximately in roxygen2 style (Wickham et al., 2024) and in this
 README. The functions depend mostly hierarchically on each other. All
-functions are saved in the project’s sub folders called functions\_\*.
+functions are saved in the project’s sub folders called `/functions_*/`.
 
 ### Functions to identify the functional response type
 
@@ -1194,7 +1194,7 @@ scientific publication. Hard-coded and only useful in this project.
 - `foreach` (Microsoft & Weston, 2022), must be attached
 - `MASS` (Ripley & Venables, 2025)
 - `png` (Urbanek, 2022)
-- `RCurl` (**TempleLang2025RCurlGeneralNetwork?**)
+- `RCurl` (Temple Lang, 2025)
 
 #### `plot_mod15h`
 
@@ -1291,7 +1291,31 @@ and scientific publication. Hard-coded and only useful in this project.
 - `foreach` (Microsoft & Weston, 2022), must be attached
 - `MASS` (Ripley & Venables, 2025)
 - `png` (Urbanek, 2022)
-- `RCurl` (**TempleLang2025RCurlGeneralNetwork?**)
+- `RCurl` (Temple Lang, 2025)
+
+#### `plot_introduction`
+
+***Description***:
+
+**`plot_introduction`** creates a nice-looking overview plot for our
+scientific publication. Hard-coded and only useful in this project.
+
+***Parameters***:
+
+- `fmax`: maximum feeding rate for example plots. Default = 20.
+- `nhalf`: half saturation density for example plots. Default = 50.
+- `q`: q values for gen FR examples plot. Default = c(0, 0.2, 0.5, 1).
+- `maxN`: maximum prey density. Default = 200.
+- `xres`: number of x-axis values. Default = 1000.
+- `ylim`: y-axis limits. Default = c(0, 30).
+- `xlim`: x-axis limits. Default = c(0, 200).
+- `journal_style`: Should be the specific journal style be applied?
+  Default = `FALSE`.
+
+***Required packages***:
+
+- `png` (Urbanek, 2022)
+- `RCurl` (Temple Lang, 2025)
 
 ## Funding Information
 
@@ -1517,6 +1541,14 @@ Direct parameter estimation by simulating differential equations.
 Royama, T. (1971). A comparative study of models for predation and
 parasitism. *Researches on Population Ecology*, *13*(1), 1–91.
 <https://doi.org/10.1007/BF02511547>
+
+</div>
+
+<div id="ref-TempleLang2025RCurlGeneralNetwork" class="csl-entry">
+
+Temple Lang, D. (2025). *RCurl: General network (HTTP/FTP/...) client
+interface for R*. CRAN. [https://doi.org/
+10.32614/CRAN.package.RCurl](https://doi.org/	10.32614/CRAN.package.RCurl)
 
 </div>
 
