@@ -37,7 +37,7 @@
 #'         Princeton, New Jersey.
 #'         https://math.mcmaster.ca/~bolker/emdbook/index.html
 #' 
-#' @return Returns a single negative log-likelihood value.
+#' @return Returns mle2 objects of each fit in a list.
 #' 
 #' @examples
 #' 

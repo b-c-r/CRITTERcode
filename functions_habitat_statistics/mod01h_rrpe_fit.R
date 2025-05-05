@@ -41,7 +41,7 @@
 #' @include mod01h_rrpe_nll.R
 #' @include mod01h_rrpe_scan.R
 #' 
-#' @return Returns a single negative log-likelihood value.
+#' @return returns a single negative log-likelihood value.
 #' 
 #' @examples
 #' 

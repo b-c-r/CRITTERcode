@@ -17,109 +17,31 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
 ################################################################################
 #' 
-#' @description `gen_fr_parms_scan` creates Latin hypercube samples for the
-#'     functional response parameters in a reasonable range and calculates the
-#'     according negative log-likelihood values. It returns the parameter values
-#'     with the lowest negative log likelihood of these samples. Non-linear
-#'     maximum likelihood fitting procedures require starting parameters,
-#'     generally based on an educated guess (e.g., Bolker 2008). Moreover,
-#'     these fits may end up in local best fits, and users should re-fit the
-#'     data using different starting parameters (Bolker 2008). To overcome
-#'     manually eyeballing as well as re-shuffling the starting parameters,
-#'     Jager and Ashauer (2018) suggested creating samples in a reasonable
-#'     parameter range using and choosing the starting parameters (from the
-#'     lowest nll value) from these samples. To reduce the number of required
-#'     samples by keeping the variance of parameter values as wide as possible,
-#'     it is recommended to use Latin hypercube sampling. `gen_fr_parms_scan`
-#'     requires the lhs package (Carnell 2024). See also the description of
-#'     `gen_fr_nll` for further information.
-#' 
-#'     Required packages and their dependencies to be installed:
-#'       - `foreach` (Microsoft and Weston 2022)
-#'       - `lhs` (Carnell 2024)
-#'       - `odin` (FitzJohn and Jombart 2024)
-#'     Required packages to be attached:
-#'       - `foreach` (Microsoft and Weston 2022)
-#' 
-#' @references Bolker (2008) Ecological models and data in R, Princeton
-#'     University Press, Princeton, New Jersey.
-#'     https://math.mcmaster.ca/~bolker/emdbook/index.html
-#' @references Carnell (2024) lhs: latin hypercube samples. Version 1.2.0.
-#'     https://CRAN.R-project.org/package=lhs
-#' @references FitzJohn and Jombart (2024) odin: ODE generation and integration.
-#'     Ver. 1.2.6. https://doi.org/10.32614/CRAN.package.odin
-#'     see also: https://github.com/mrc-ide/odin
-#' @references Microsoft and Weston (2022) foreach: provides foreach looping
-#'     construct. Version 1.5.2. https://doi.org/10.32614/CRAN.package.foreach
-#' @references Jager and Ashauer (2018) Modelling survival under chemical stress
-#'     Leanpub. https://leanpub.com/guts_book
+#' @description
+#'     find the description including parameters here:
+#'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
+#'     
+#'     find further details including the full statistics here:
+#'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
+#'     
+#'     if you are interested in the full scientific paper follow:
+#'         https://doi.org/10.1101/2025.02.22.639633
+#'     
+#'     if you use this code, please cite:
+#'         Rall et al. (2025): Habitat complexity reduces feeding strength of
+#'         freshwater predators (CRITTER) - Code. Zenodo.
+#'         https://doi.org/10.5281/zenodo.14894598
 #' 
 #' @include gen_fr_compile.R
 #' @include gen_fr_sim.R
 #' @include gen_fr_nll.R
-#' 
-#' @param n_eaten integer (or float); the prey items that were eaten throughout
-#'     the experimental trial. A vector.
-#' @param n_initial integer (or float); the initial prey density. A vector of
-#'     the same length as n_eaten.
-#' @param p The predator density. A single value
-#' @param f_max_range_log10 float; a range (2 values) of the log10 of the
-#'     maximum feeding rate.
-#' @param n_half_range_log10 float; a range (2 values) of the log10 of the half
-#'     saturation density.
-#' @param q_range float; shape parameter, a range (2 values). A strict type II
-#'     functional has q = 0, a strict type III functional response has q = 1.
-#'     The values should match the values q_low and q_up below.
-#'     Default is c(0,1).
-#' @param t_start integer or float; the time were the feeding starts. A single
-#'     value; default = 0.
-#' @param t_end integer or float; the time were the feeding ends. A single
-#'     value; default = 1 (e.g. 1 day).
-#' @param t_length integer or float; the number of time steps that should be
-#'     generated. The more time steps, the more precise the simulation. A single
-#'     value; default = 1000.
-#' @param penalty a penalty that is added to the nll if the value of q is below
-#'     q_low or above q_up. The default= 1000. Equation:
-#'         if(q < q_low) nll + penalty*(q-q_low)^2
-#'         if(q > q_up) nll + penalty*(q-q_up)^2
-#' @param q_low lower soft boundary of q, default = 0 (Type II FR).
-#' @param q_up upper soft boundary of q, default = 1 (Type III FR).
-#' @param no_lhs_sample a single integer value; the number of random latin
-#'     hypercube samplings. Default = 1000.
 #'     
 #' @return Returns a data frame with a single row of parameter values.
 #' 
 #' @examples
 #' 
-#' 
-#' library("foreach")
-#' 
-#' source(here::here("functions_gen_fr", "gen_fr_compile.R"))
-#' source(here::here("functions_gen_fr", "gen_fr_sim.R"))
-#' source(here::here("functions_gen_fr", "gen_fr_nll.R"))
-#' source(here::here("functions_gen_fr", "gen_fr_parms_scan.R"))
-#' 
-#' gen_fr_compile()
-#' 
-#' fr_data <- read.csv("data/fr_data.csv")
-#' treats <- sort(unique(fr_data$treatment))
-#' fr_data_treat <- subset(fr_data, treatment == treats[1])
-#' 
-#' gen_fr_parms_scan(
-#'   n_eaten = fr_data_treat$n_eaten,
-#'   n_initial = fr_data_treat$n_initial,
-#'   p = 1,
-#'   f_max_range_log10 = log10(c(1, max(fr_data_treat$n_eaten))),
-#'   n_half_range_log10 = log10(c(1, max(fr_data_treat$n_initial))),
-#'   q_range = c(0, 1),
-#'   t_start = 0,
-#'   t_end = 1,
-#'   t_length = 100,
-#'   penalty = 1000,
-#'   q_low = 0,
-#'   q_up = 1,
-#'   no_lhs_samples = 1000
-#' )
+#' # find an executable example here:
+#' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/gen_fr_parms_scan_examples.R
 #' 
 
 gen_fr_parms_scan <- function(

@@ -16,37 +16,29 @@
 #    You should have received a copy of the GNU General Public License         #
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
 ################################################################################
-#' 
-#' @description “gen_fr_table” creates a nice-looking table from the output
-#'     created by “gen_fr_fit_all”. Hard-coded and only useful in this project.
+' 
+#' @description
+#'     find the description including parameters here:
+#'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
 #'     
-#'     Required packages and their dependencies to be installed:
-#'       - `bbmle` (Bolker et al 2023)
-#'       - `dplyr` (Wickham et al. 2023)
-#'       - `foreach` (Microsoft and Weston 2022)
-#'       - `kableExtra` (Zhu et al. 2024)
-#'       - `knitr` (Xie 2024)
-#'     Required packages to be attached:
-#'       - `dplyr` (Wickham et al. 2023)
-#'       - `foreach` (Microsoft and Weston 2022)
+#'     find further details including the full statistics here:
+#'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
+#'     
+#'     if you are interested in the full scientific paper follow:
+#'         https://doi.org/10.1101/2025.02.22.639633
+#'     
+#'     if you use this code, please cite:
+#'         Rall et al. (2025): Habitat complexity reduces feeding strength of
+#'         freshwater predators (CRITTER) - Code. Zenodo.
+#'         https://doi.org/10.5281/zenodo.14894598
 #' 
-#' @references Bolker (2023) bbmle: tools for general Maximum Likelihood
-#'     Estimation. Version 1.0.25.1. https://doi.org/10.32614/CRAN.package.bbmle
-#' @references Microsoft and Weston (2022) foreach: provides foreach looping
-#'     construct. Version 1.5.2. https://CRAN.R-project.org/package=foreach
-#' @references Wickham et al. (2023) dplyr: a grammar of data manipulation.
-#'     1.1.4. https://CRAN.R-project.org/package=dplyr
-#' @references Xie (2024) knitr: a general-purpose package for dynamic report
-#'     generation in R. Version 1.49. https://yihui.org/knitr/
-#' @references Zhu et al. (2024) kableExtra: construct complex table with
-#'     'kable' and pipe syntax. Version 1.4.0.
-#'     https://doi.org/10.32614/CRAN.package.kableExtra
 #'
-#' 
-#' @param gen_fr_results an object created by “gen_fr_fit_all”.
-#' @param caption_text your caption test as a string.
-#' @param output_style decide on the output format of the Rmd file. Can be
-#'     "github_document" (default) or "pdf".
+#' @return Creates a nice table for a report.
+#'
+#' @examples
+#'
+#' # find an example in our report:
+#' # https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.Rmd
 #' 
 
 gen_fr_table <- function(

@@ -1,5 +1,5 @@
 ################################################################################
-#   Example code for run_all_hab_fits                                          #
+#    Example code for gen_fr_fit                                               #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #
@@ -20,7 +20,7 @@
 # find a description including here:
 #     https://github.com/b-c-r/CRITTERcode/blob/main/README.md
 #     
-# if you prefer to download a pdf, including the full statistics, follow:
+# find further details including the full statistics here:
 #     https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
 #     
 # if you are interested in the full scientific paper follow:
@@ -35,42 +35,28 @@
 ## Setup
 
 # please install following packages, if not already done:
-
 # install.packages("bbmle")
 # install.packages("dplyr")
-# install.packages("emdbook")
 # install.packages("foreach")
 # install.packages("lhs")
-
+# install.packages("odin")
 
 # empty environment:
 rm(list=ls())
 
-# attach libraries
-library("dplyr")
+# attach packages
 library("foreach")
+library("dplyr")
 
 # import the functions from GitHub:
-hab_stats_files <- supportR::github_ls(
-  "https://github.com/b-c-r/CRITTERcode",
-  "functions_habitat_statistics"
-)$name
-
 gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERcode/refs/heads/main/"
-f_path <- "functions_habitat_statistics/"
-for(i in 1:length(hab_stats_files)){
-  source(paste(gh_path, f_path, hab_stats_files[i], sep = ""))
-}
+f_path <- "functions_type_statistics/"
 
-report_files <- supportR::github_ls(
-  "https://github.com/b-c-r/CRITTERcode",
-  "functions_report"
-)$name
-
-f_path <- "functions_report/"
-for(i in 1:length(report_files)){
-  source(paste(gh_path, f_path, report_files[i], sep = ""))
-}
+source(paste(gh_path, f_path, "gen_fr_compile.R", sep = ""))
+source(paste(gh_path, f_path, "gen_fr_sim.R", sep = ""))
+source(paste(gh_path, f_path, "gen_fr_nll.R", sep = ""))
+source(paste(gh_path, f_path, "gen_fr_parms_scan.R", sep = ""))
+source(paste(gh_path, f_path, "gen_fr_fit.R", sep = ""))
 
 ################################################################################
 ## Data
@@ -80,32 +66,13 @@ fr_data <- read.csv(
   "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/critter_data.csv"
 )
 
-# select a predator
-fr_data_ie <- subset(fr_data, predator == "Ischnura elegans")
+# select a predator and complexity level
+fr_data_ie <- subset(fr_data, predator == "Ischnura elegans" & complexity_level == "0")
 
-################################################################################
-## example for: mod15h_rrpe_nll.R
-
-hab_results <- run_all_hab_fits(
-  x = fr_data,
-  model_numbers = 15,
-  style_letters = "h",
-  predator_spec = "Ischnura elegans",
-  no_threads = 1
+# fit the data
+fit_out <- gen_fr_fit(
+ n_eaten = fr_data_ie$n_eaten,
+ n_initial = fr_data_ie$n_initial
 )
 
-################################################################################
-## example for: plot_mod15h.R
-
-plot_mod15h(
-  model_fit = hab_results[[1]],                                                 # the mle2 fit object
-  include_habitat_pics = T,                                                     # include the habitat pictograms, default = True
-  pic_x1 = rep(100.0, 4),                                                       # lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms
-  pic_x2 = rep(120.0, 4),                                                       # upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms
-  pic_y1 = rep( 22.0, 4),                                                       # lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms
-  pic_y2 = rep( 25.0, 4),                                                       # upper (right) y values for the 4 habitat pictures, the vector has values for 4 pictograms  
-  ylim = c(0, 25),
-  ci_reps = 100,                                                                # number of samples for the confidence interval lines, default for publication is 10000
-  ci_levels = c(0.025, 0.975),                                                  # lower and upper confidence limits
-  x_res = 100,                                                                  # number of x values for regression line (200+ for a smooth shape, default = 1000)
-)
+bbmle::summary(fit_out)

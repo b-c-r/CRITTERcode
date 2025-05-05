@@ -21,7 +21,7 @@
 #'     find the description including parameters here:
 #'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
 #'     
-#'     if you prefer to download a pdf, including the full statistics, follow:
+#'     find further details including the full statistics here:
 #'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
 #'     
 #'     if you are interested in the full scientific paper follow:
@@ -31,13 +31,13 @@
 #'         Rall et al. (2025): Habitat complexity reduces feeding strength of
 #'         freshwater predators (CRITTER) - Code. Zenodo.
 #'         https://doi.org/10.5281/zenodo.14894598
-#' 
-#' @return Creates a nice plot for a pdf report.
+#'
+#' @return Creates a nice table for a pdf report.
 #'
 #' @examples
-#' 
-#' # find an executable example here:
-#' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod15h_examples.R
+#'
+#' # find an example in our report:
+#' # https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.Rmd
 #' 
 
 plot_mod15h <- function(

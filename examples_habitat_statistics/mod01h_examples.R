@@ -1,5 +1,5 @@
 ################################################################################
-#   Example code to fit mod01h to data                                         #
+#    Example code to fit mod01h to data                                        #
 #                                                                              #
 #    Copyright (C) 2025 Björn C. Rall (https://orcid.org/0000-0002-3191-8389)  #
 #                                                                              #

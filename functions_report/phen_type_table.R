@@ -17,56 +17,28 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
 ################################################################################
 #' 
-#' @description `phen_type_table` takes a `phen_type_test` output and creates a
-#'     nice table for the statistical report. Note that the function uses
-#'     options from `kableEXTRA` (Zhu et al. 2024) that will only work for
-#'     LaTeX/PDF outputs. This function is rather hard-coded and only useful in
-#'     the CRITTER project.
+#' @description
+#'     find the description including parameters here:
+#'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
 #'     
-#'     Required packages and their dependencies to be installed:
-#'       - `foreach` (Microsoft and Weston 2022)
-#'       - `kableExtra` (Zhu et al. 2024)
-#'     Required packages to be attached:
-#'       - `foreach` (Microsoft and Weston 2022)
-#'
-#' @references Microsoft and Weston (2022) foreach: provides foreach looping
-#'     construct. Version 1.5.2. https://doi.org/10.32614/CRAN.package.foreach
-#' @references Zhu et al. (2024) kableExtra: construct complex table with
-#'     'kable' and pipe syntax. Version 1.4.0.
-#'     https://doi.org/10.32614/CRAN.package.kableExtra
-#'
-#' @include phen_type_test.R
-#'
-#' @param phen_test_results a object created by create_phen_test
-#' @param add_caption add a caption? Default is "TRUE"
-#' @param caption_text the caption text if add_caption = TRUE
+#'     find further details including the full statistics here:
+#'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
+#'     
+#'     if you are interested in the full scientific paper follow:
+#'         https://doi.org/10.1101/2025.02.22.639633
+#'     
+#'     if you use this code, please cite:
+#'         Rall et al. (2025): Habitat complexity reduces feeding strength of
+#'         freshwater predators (CRITTER) - Code. Zenodo.
+#'         https://doi.org/10.5281/zenodo.14894598
 #'
 #' @return Creates a nice table for a report.
 #'
 #' @examples
-#' 
-#' library("foreach")
-#' source(here::here("functions_phen_test", "phen_type_test.R"))
-#' source(here::here("functions_phen_test", "phen_type_table.R"))
-#' 
-#' fr_data <- data.frame(
-#'   n_start =   rep(c(1, 2, 4, 8, 16), 4),
-#'   n_eaten =   c(0,0,2,7,8,1,2,4,6,7,1,1,3,4,4,1,1,4,4,4),
-#'   treatment = c(rep("A", 5), rep("B", 5), rep("A", 5), rep("B", 5)),
-#'   predator = c(rep("Avicularia avicularia", 10), rep("Cicindela gallica", 10))
-#' )
-#' 
-#' fr_type_test <- phen_type_test(
-#'   data = fr_data,
-#'   name_initial, = "n_start",
-#'   name_eaten = "n_eaten",
-#'   name_treatments = "treatment"
-#' )
-#' 
-#' phen_type_table(
-#'   phen_test_results = fr_type_test
-#' )
 #'
+#' # find an example in our report:
+#' # https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.Rmd
+#' 
 
 phen_type_table <- function(
     phen_test_results,

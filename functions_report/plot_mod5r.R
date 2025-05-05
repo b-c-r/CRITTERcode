@@ -21,7 +21,7 @@
 #'     find the description including parameters here:
 #'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
 #'     
-#'     if you prefer to download a pdf, including the full statistics, follow:
+#'     find further details including the full statistics here:
 #'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
 #'     
 #'     if you are interested in the full scientific paper follow:
@@ -31,18 +31,18 @@
 #'         Rall et al. (2025): Habitat complexity reduces feeding strength of
 #'         freshwater predators (CRITTER) - Code. Zenodo.
 #'         https://doi.org/10.5281/zenodo.14894598
-#' 
-#' @return Creates a nice plot for a pdf report.
+#'
+#' @return Creates a nice table for a pdf report.
 #'
 #' @examples
-#' 
-#' # find an executable example here:
-#' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/mod05r_examples.R
+#'
+#' # find an example in our report:
+#' # https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.Rmd
 #' 
 
 plot_mod05r <- function(
     model_fit,                                                                  # the mle2 fit object
-    include_habitat_pics = T,                                                   # include the habitat pictograms, default = True
+    include_habitat_pics = T,                                                   # include the habitat pictograms, default = TRUE
     pic_x1 = c( 70.0,  95.0,  70.0,  95.0),                                     # lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms
     pic_x2 = c( 95.0, 120.0,  95.0, 120.0),                                     # upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms
     pic_y1 = c( 22.6,  22.6,  19.4,  19.4),                                     # lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms

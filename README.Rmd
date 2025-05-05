@@ -4,6 +4,9 @@ bibliography: references/CRITTERcode.bib
 csl: "https://raw.githubusercontent.com/citation-style-language/styles/refs/heads/master/dependent/journal-of-animal-ecology.csl"
 date: "`r Sys.Date()`"
 output: github_document
+editor_options: 
+  markdown: 
+    wrap: sentence
 ---
 
 ```{r setup, include=FALSE}
@@ -24,27 +27,30 @@ This code is published under a [**GNU General Public License 3**](https://www.gn
 
 If you use our code, please cite us:
 
-Rall et al. (2025): Habitat complexity reduces feeding strength of freshwater predators (CRITTER) - Code. Zenodo. https://doi.org/10.5281/zenodo.14894598
+Rall et al. (2025): Habitat complexity reduces feeding strength of freshwater predators (CRITTER) - Code.
+Zenodo.
+<https://doi.org/10.5281/zenodo.14894598>
 
 ## Authors
 
 -   Björn C. Rall ([0000-0002-3191-8389](https://orcid.org/0000-0002-3191-8389))
-    -   [bjoern.rall@uni-konstanz.de](mailto:bjoern.rall@uni-konstanz.de)
+    -   [bjoern.rall\@uni-konstanz.de](mailto:bjoern.rall@uni-konstanz.de)
     -   Aquatic Ecology and Evolution Group, Limnological Institute, University of Konstanz, Mainaustraße 252, 78464 Konstanz/Egg, Germany
 -   Mireia Aranbarri ([0009-0001-3506-0914](https://orcid.org/0009-0001-3506-0914))
-    -   [mireia.arambarri@ehu.eus](mailto:mireia.arambarri@ehu.eus)
+    -   [mireia.arambarri\@ehu.eus](mailto:mireia.arambarri@ehu.eus)
     -   Laboratory of Stream Ecology, Department of Plant Biology and Ecology, Faculty of Science and Technology, University of the Basque Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 -   Lorea Flores ([0000-0002-0082-4072](https://orcid.org/0000-0002-0082-4072))
-    -   [lflorescompains@gmail.com](mailto:lflorescompains@gmail.com)
+    -   [lflorescompains\@gmail.com](mailto:lflorescompains@gmail.com)
     -   Laboratory of Stream Ecology, Department of Plant Biology and Ecology, Faculty of Science and Technology, University of the Basque Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 -   Ioar de Guzmán ([0000-0001-8894-8477](https://orcid.org/0000-0001-8894-8477))
-    -   [mirenioar.deguzman@ehu.eus](mailto:mirenioar.deguzman@ehu.eus)
+    -   [mirenioar.deguzman\@ehu.eus](mailto:mirenioar.deguzman@ehu.eus)
     -   Laboratory of Stream Ecology, Department of Plant Biology and Ecology, Faculty of Science and Technology, University of the Basque Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
+    -   INRAE, UMR 1224, Ecologie Comportementale et Biologie des Populations de Poissons, Aquapôle, quartier Ibarron, 64310 Saint-Pée sur Nivelle, France.
 -   Aitor Larrañaga ([0000-0002-0185-9154](https://orcid.org/0000-0002-0185-9154))
-    -   [aitor.larranagaa@ehu.eus](mailto:aitor.larranagaa@ehu.eus)
+    -   [aitor.larranagaa\@ehu.eus](mailto:aitor.larranagaa@ehu.eus)
     -   Laboratory of Stream Ecology, Department of Plant Biology and Ecology, Faculty of Science and Technology, University of the Basque Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
 -   Julia Reiss ([0000-0002-3740-0046](https://orcid.org/0000-0002-3740-0046))
-    -   [julia.reiss@brunel.ac.uk](mailto:julia.reiss@brunel.ac.uk)
+    -   [julia.reiss\@brunel.ac.uk](mailto:julia.reiss@brunel.ac.uk)
     -   Centre for Pollution Research and Policy, Brunel University of London, Uxbridge, UB8 3PH, UK
 
 ## Related Works
@@ -65,30 +71,37 @@ Rall et al. (2025): Habitat complexity reduces feeding strength of freshwater pr
 
 ## Code Description
 
-We predominantly used functions to organize our R code for this project. Each function is saved in a separate \*.R-file and documented approximately in roxygen2 style [@WickhamEtAl2024Roxygen2InLineDocumentation]. The functions depend mostly hierarchically on each other. All functions are saved in the project's sub folders called functions_*.
+We predominantly used functions to organize our R code for this project. Each function is saved in a separate \*.R-file and documented approximately in roxygen2 style [@WickhamEtAl2024Roxygen2InLineDocumentation] and in this README. The functions depend mostly hierarchically on each other. All functions are saved in the project's sub folders called functions\_\*.
 
 ### Functions to identify the functional response type
 
-The functions are located in `/functions_type_statistics/`.
+These functions are located in `/functions_type_statistics/`. Please find examples in `/examples_type_statistics/`.
 
 #### `phen_type_test`
-**`phen_type_test`** is a wrapper around the function `frair_test` [@PritchardEtAl2017FrairToolsFunctional; @PritchardEtAl2017FrairPackageFitting] to test for the type of the functional response using the proportion of prey eaten as response to the initial prey density. If the proportion of prey eaten increases at low prey densities and decreases after reaching a maximum, there is evidence for a type III functional response [@Juliano2001NonlinearCurveFitting]. Proportion data is fitted using a binomial GLM, but see @Crawley2012Book, chapter 16 for an introduction to this topic.
 
-Required packages and their dependencies to be installed:
+***Description***:
 
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `purrr` [@WickhamHenry2025PurrrFunctionalProgramming]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `frair` [@PritchardEtAl2017FrairToolsFunctional]
+**`phen_type_test`** is a wrapper around the function `frair_test` [@PritchardEtAl2017FrairPackageFitting; @Pritchard2025FrairToolsFunctional] to test for the type of the functional response using the proportion of prey eaten as response to the initial prey density (also known as predation risk). If the proportion of prey eaten increases at low prey densities and decreases after reaching a maximum, there is evidence for a type III functional response [@Juliano2001NonlinearCurveFitting]. Proportion data is fitted using a binomial GLM, but see @Crawley2012Book, chapter 16 for an introduction to this topic.
 
-Required packages to be attached:
+***Parameters***:
 
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `data` the input data
+-   `name_initial` the column name for initial prey items
+-   `name_eaten` the column name for eate prey items
+-   `name_treatments` the column name for treatments
 
+***Required packages***:
+
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `frair` [@PritchardEtAl2017FrairPackageFitting; @Pritchard2025FrairToolsFunctional]
+-   `purrr` [@WickhamHenry2025PurrrFunctionalProgramming]
 
 #### `gen_fr_compile`
-`gen_fr_compile` compiles the ordinary differential equation (ODE) describing the decay of resource items over time during a feeding functional response trial. The functional response model has a free shape parameter [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional], allowing a continuous shift of the shape of a classic type II functional response [@Holling1959CharacteristicsSimpleTypes] to a type III functional response [@Holling1959ComponentsPredationRevealed]. The feeding rate, $F$, depends on the resource density, $N$, and the parameters of the model are the maximum feeding rate, $F_{max}$, the half saturation density, $N_{half}$, and the shape parameter $q$ [@WilliamsMartinez2004StabilizationChaoticNonpermanent; @Vucic-PesticEtAl2010AllometricFunctionalResponse]:
+
+***Description***:
+
+`gen_fr_compile` compiles the ordinary differential equation (ODE) describing the decay of resource items over time during a feeding functional response trial. The functional response model has a free shape parameter [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional], allowing a continuous shift from a classic type II functional response [@Holling1959CharacteristicsSimpleTypes] to a type III functional response [@Holling1959ComponentsPredationRevealed]. The feeding rate, $F$, depends on the resource density, $N$, and the parameters of the model are the maximum feeding rate, $F_{max}$, the half saturation density, $N_{half}$, and the shape parameter $q$ [@WilliamsMartinez2004StabilizationChaoticNonpermanent; @Vucic-PesticEtAl2010AllometricFunctionalResponse]:
 
 $$
 F = \frac{F_{max}  N^{(1+q)}}{N_{half}^{(1+q)} + N^{(1+q)}}.
@@ -100,33 +113,44 @@ $$
 \frac{dN}{dt} =  \frac{-F_{max}  N^{(1+q)}}{N_{half}^{(1+q)} + N^{(1+q)}}.
 $$
 
-A numerical simulation is required as there is no analytical solution for this problem [@RosenbaumRall2018FittingFunctionalResponses]. We use the R package “odin” [@FitzJohn2024OdinODEGeneration] to create a fast simulation model in C. This model can be used to estimate the exact shape of the functional response or test if a functional response is type II or type III [@RosenbaumRall2018FittingFunctionalResponses].
+A numerical simulation is required as there is no analytical solution for this problem [@RosenbaumRall2018FittingFunctionalResponses]. We use the R package “odin” [@FitzJohn2025OdinODEGeneration] to create a fast simulation model in C. This model can be used to estimate the exact shape of the functional response or test if a functional response is type II or type III [@RosenbaumRall2018FittingFunctionalResponses].
 
-Required packages and their dependencies to be installed:
+***Parameters***:
 
-- `odin` [@FitzJohn2024OdinODEGeneration]
+None
 
-Required packages to be attached:
+***Required packages***:
 
-- None
+-   `odin` [@FitzJohn2025OdinODEGeneration]
 
 #### `gen_fr_sim`
 
-**`gen_fr_sim`** simulates time series across different initial prey densities. It returns only the number of initial prey items and the number of prey eaten at the end of the time series, mimicking common functional response laboratory experiments. The underlying functional response model is the generalized functional response model [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional]. Note that not integers, but floating numbers are returned by **`gen_fr_sim`**. **`gen_fr_sim`** depends on **`gen_fr_compile`**. Please find details more above.
+***Description***:
 
+**`gen_fr_sim`** simulates time series across different initial prey densities. It returns only the number of initial prey items and the number of prey eaten at the end of the time series, mimicking common functional response laboratory experiments. The underlying functional response model is the generalized functional response model [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional]. Note that not integers, but floating numbers are returned by **`gen_fr_sim`**. **`gen_fr_sim`** depends on **`gen_fr_compile`**.
+Please find details more above.
 
-Required packages and their dependencies to be installed:
+***Parameters***:
 
-- `odin` [@FitzJohn2024OdinODEGeneration]
+-   `n_initial` (integer or float); a vector of initial prey densities.
+-   `p` (integer or float); a single value of a fixed predator density. The default value is 1.
+-   `f_max` (float); maximum feeding rate, a single value.
+-   `n_half` (float); half saturation density, a single value.
+-   `q float`; shape parameter, a single value. A strict type II functional has q = 0, a strict type III functional response has q = 1.
+-   `t_start` (integer or float); the time were the feeding starts. A single value; default = 0.
+-   `t_end` (integer or float); the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `t_length` (integer or float); the number of time steps that should be generated. The more time steps, the more precise the simulation. A single value; default = 1000.
 
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+***Required packages***:
 
-Required packages to be attached:
-
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `odin` [@FitzJohn2025OdinODEGeneration]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
 
 #### `gen_fr_nll`
-**`gen_fr_nll`** calculates the negative log likelihood of the generalized functional response model [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional], but see the description of **`gen_fr_compile`** for further information. We calculated the likelihood assuming a binomial distribution, as every prey item has a chance to be eaten or not to be eaten throughout the experimental trial. For further details on the methodology, please read chapter eight of “Ecological models and data in R” [@Bolker2008EcologicalModelsData]. To restrict the fitting to reasonable values of the shape parameter $q$ [@WilliamsMartinez2004StabilizationChaoticNonpermanent; @Vucic-PesticEtAl2010AllometricFunctionalResponse; @RosenbaumRall2018FittingFunctionalResponses] we applied a quadratic penalty on the negative log-likelihood following:
+
+***Description***:
+
+**`gen_fr_nll`** calculates the negative log likelihood of the generalized functional response model [@Real1977KineticsFunctionalResponse; @Real1979EcologicalDeterminantsFunctional], but see the description of [gen_fr_compile] for further information. We calculated the likelihood assuming a binomial distribution, as every prey item has a chance to be eaten or not to be eaten throughout the experimental trial. For further details on the methodology, please read chapter eight of “Ecological models and data in R” [@Bolker2008EcologicalModelsData]. To restrict the fitting to reasonable values of the shape parameter $q$ [@WilliamsMartinez2004StabilizationChaoticNonpermanent; @Vucic-PesticEtAl2010AllometricFunctionalResponse; @RosenbaumRall2018FittingFunctionalResponses] we applied a quadratic penalty on the negative log-likelihood following:
 
 ```{r eval=FALSE, include=TRUE}
 if(q < q_low){
@@ -142,66 +166,127 @@ if(q < q_low){
 
 `q_low` is set to “0” by default (a type II functional response), `q_up` is set to “1” by default (a “strict” type III functional response), and `penalty` is set to 1000 by default. Especially `q_low` is important, as negative values may lead to an unsolvable time series for `gen_fr_sim` leading to a crash of the fitting process. Even with this restriction, the simulation may fail for extreme values of $F_{max}$ or $N_{half}$; in this case, the function returns `Inf`. Alternative solutions would be that the function returns `NA` [@Bolker2008EcologicalModelsData]. Moreover, the functions require the model parameters $F_{max}$ and $N_{half}$ to be on log10-scale, as this transformation (1) accelerates the fitting procedure and (2) prevents biologically irrelevant negative estimations that would crash the fitting algorithm.
 
-Required packages and their dependencies to be installed:
+***Parameters***:
 
-- `odin` [@FitzJohn2024OdinODEGeneration]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `n_eaten` (integer or float); the prey items that were eaten throughout the experimental trial. A vector.
+-   `n_initial` (integer or float); the initial prey density. A vector of the same length as n_eaten.
+-   `p` (integer or float), the predator density. A single value
+-   `f_max_log10` (float); the log10 maximum feeding rate.
+-   `n_half_log10` (float); the log10 half saturation density.
+-   `q` (float); shape parameter, a single value. A strict type II functional has q = 0, a strict type III functional response has q = 1.
+-   `t_start` (integer or float); the time were the feeding starts. A single value; default = 0.
+-   `t_end` (integer or float); the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `t_length` (integer or float); the number of time steps that should be generated. The more time steps, the more precise the simulation. A single value; default = 100.
+-   `penalty` a penalty that is added to the nll if the value of q is below q_low or above q_up (see details above). The default= 1000.
+-   `q_low` lower soft boundary of q, default = 0 (Type II FR).
+-   `q_up` upper soft boundary of q, default = 1 (Type III FR).
 
-Required packages to be attached:
+***Required packages***:
 
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `odin` [@FitzJohn2025OdinODEGeneration]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
 
 #### `gen_fr_parms_scan`
 
- **`gen_fr_parms_scan`** creates Latin hypercube samples for the functional response parameters in a reasonable range and calculates the according negative log-likelihood values. It returns the parameter values with the lowest negative log likelihood of these samples. Non-linear maximum likelihood fitting procedures require starting parameters, generally based on an educated guess [@Bolker2008EcologicalModelsData]. Moreover, these fits may end up in local best fits, and users should re-fit the data using different starting parameters [@Bolker2008EcologicalModelsData]. To overcome manually eyeballing as well as re-shuffling the starting parameters, @JagerAshauer2018ModellingSurvivalChemical suggested creating samples in a reasonable parameter range using and choosing the starting parameters (from the lowest nll value) from these samples. To reduce the number of required samples by keeping the variance of parameter values as wide as possible, it is recommended to use Latin hypercube sampling. `gen_fr_parms_scan` requires the lhs package [@Carnell2024LhsLatinHypercubea]. See also the description of `gen_fr_nll` for further information.
+***Description***:
 
-Required packages and their dependencies to be installed:
+**`gen_fr_parms_scan`** creates Latin hypercube samples for the functional response parameters in a reasonable range and calculates the according negative log-likelihood values. It returns the parameter values with the lowest negative log likelihood of these samples. Non-linear maximum likelihood fitting procedures require starting parameters, generally based on an educated guess [@Bolker2008EcologicalModelsData]. Moreover, these fits may end up in local best fits, and users should re-fit the data using different starting parameters [@Bolker2008EcologicalModelsData]. To overcome manually eyeballing as well as re-shuffling the starting parameters, @JagerAshauer2018ModellingSurvivalChemical suggested creating samples in a reasonable parameter range using and choosing the starting parameters (from the lowest nll value) from these samples. To reduce the number of required samples by keeping the variance of parameter values as wide as possible, it is recommended to use Latin hypercube sampling. `gen_fr_parms_scan` requires the lhs package [@Carnell2024LhsLatinHypercubea]. See also the description of [gen_fr_nll] for further information.
 
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `lhs` [@Carnell2024LhsLatinHypercubea]
-- `odin` [@FitzJohn2024OdinODEGeneration]
+***Parameters***:
 
-Required packages to be attached:
+-   `n_eaten` (integer or float); the prey items that were eaten throughout the experimental trial. A vector.
+-   `n_initial` (integer or float); the initial prey density. A vector of the same length as n_eaten.
+-   `p` The predator density. A single value
+-   `f_max_range_log10` (float); a range (2 values) of the log10 of the maximum feeding rate.
+-   `n_half_range_log10` (float); a range (2 values) of the log10 of the half saturation density.
+-   `q_range` (float); shape parameter, a range (2 values). A strict type II functional has q = 0, a strict type III functional response has q = 1. The values should match the values q_low and q_up below. Default is c(0,1).
+-   `t_start` (integer or float); the time were the feeding starts. A single value; default = 0.
+-   `t_end` (integer or float); the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `t_length` (integer or float); the number of time steps that should be generated. The more time steps, the more precise the simulation. A single value; default = 1000.
+-   `penalty` a penalty that is added to the nll if the value of q is below q_low or above q_up. The default= 1000. See details above.
+-   `q_low` lower soft boundary of q, default = 0 (Type II FR).
+-   `q_up` upper soft boundary of q, default = 1 (Type III FR).
+-   `no_lhs_sample` a single integer value; the number of random latin hypercube samplings. Default = 1000.
 
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+***Required packages***:
+
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `lhs` [@Carnell2024LhsLatinHypercubea]
+-   `odin` [@FitzJohn2025OdinODEGeneration]
 
 #### `gen_fr_fit`
 
-**`gen_fr_fit`** automatically fits the generalized functional response model [@Real1977KineticsFunctionalResponse; @RosenbaumRall2018FittingFunctionalResponses] to data. In the simplest case, you only need to provide the number of resources eaten (count data) and the initial resource density (count data): the function does the rest, including initial parameter value guessing. See the parameters section and the code example for more options. If your experiment ran a day, but you want to have the maximum feeding rate on an hourly basis, you can enter t_end = 24. See also the description of `gen_fr_nll` and `gen_fr_parms_scan` for further information.
+***Description***:
 
-Required packages and their dependencies to be installed:
+**`gen_fr_fit`** automatically fits the generalized functional response model [@Real1977KineticsFunctionalResponse; @RosenbaumRall2018FittingFunctionalResponses] to data. In the simplest case, you only need to provide the number of resources eaten (count data) and the initial resource density (count data): the function does the rest, including initial parameter value guessing. See the parameters section and the code example for more options. If your experiment ran a day, but you want to have the maximum feeding rate on an hourly basis, you can enter t_end = 24. See also the description of `gen_fr_nll` and [gen_fr_parms_scan] for further information.
 
-- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `lhs` [@Carnell2024LhsLatinHypercubea]
-- `odin` [@FitzJohn2024OdinODEGeneration]
+***Parameters***:
 
-Required packages to be attached:
+-   `n_eaten` (integer or float); the prey items that were eaten throughout the experimental trial. A vector.
+-   `n_initial` (integer or float); the initial prey density. A vector of the same length as n_eaten.
+-   `p` The predator density. A single value
+-   `t_start` (integer or float); the time were the feeding starts. A single value; default = 0.
+-   `t_end` (integer or float); the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `t_length` (integer or float); the number of time steps that should be generated. The more time steps, the more precise the simulation. A single value; default = 1000.
+-   `penalty` a penalty that is added to the nll if the value of q is below q_low or above q_up. The default= 1000. See details above.
+-   `q_low` lower soft boundary of q, default = 0 (Type II FR).
+-   `q_up` upper soft boundary of q, default = 1 (Type III FR).
+-   `no_lhs_sample` a single integer value; the number of random latin hypercube samplings. Default = 1000. parameters should be multiplied for the validation random latin hypercube sampling. Default = c(1.0001, 1.001, 1.1, 1.5, 2).
+-   `rel_f_max_range` These two values are multiplied by the largest feeding value of n_eaten to set the initial boundaries to seek for a reasonable starting value of f_max, default = c(0.6, 0.95)
+-   `rel_n_half_range` These two values are multiplied by the largest starting density value, n_initial, to set the initial boundaries to seek for a reasonable starting value of n_half, default = c(0.2, 0.8)
+-   `witer_max` How many fits should be performed without convergence? Default = 25.
+-   `val_tol` The tolerance of the validation. Default = 6 (decimal places).
+-   `mle2_tol` The tolerance of a single mle2 fit. Default = 1e-12.
+-   `maxit` the maximum number of iterations of a single mle2-fit. Default here is 5000 (the mle2 default is 500, but the generalized functional response model requires more iterations)
 
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+***Required packages***:
+
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `lhs` [@Carnell2024LhsLatinHypercubea]
+-   `odin` [@FitzJohn2025OdinODEGeneration]
 
 #### `gen_fr_fit_all`
 
+***Description***:
+
 **`gen_fr_fit_all`** fits the generalized functional response model [@Real1977KineticsFunctionalResponse; @RosenbaumRall2018FittingFunctionalResponses] by running `gen_fr_fit` for all treatments in parallel.
 
-Required packages and their dependencies to be installed:
+***Parameters***:
 
-- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
-- `doParallel` [@MicrosoftWeston2022DoParallelForeachParallel]
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `lhs` [@Carnell2024LhsLatinHypercubea]
-- `odin` [@FitzJohn2024OdinODEGeneration]
-- `purrr` [@WickhamHenry2025PurrrFunctionalProgramming]
+-   `data` the input data - should be pipeable in the tidyverse (not tested)
+-   `name_initial` the column name of the initial resource density. The data must be integer; the prey items at the start of the  experimental trial.
+-   `name_eaten` the column name of the resource items eaten. The data must be integer; the prey items that were eaten throughout the experimental trial.
+-   `name_treatments` the column name of the treatments column.
+-   `p` The predator density. A single value
+-   `t_start` integer or float; the time were the feeding starts. A single value; default = 0.
+-   `t_end` integer or float; the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `t_length` integer or float; the number of time steps that should be generated. The more time steps, the more precise the simulation. A single value; default = 1000.
+-   `penalty` a penalty that is added to the nll if the value of q is below q_low or above q_up. The default= 1000. See details above.
+-   `q_low` lower soft boundary of q, default = 0 (Type II FR).
+-   `q_up` upper soft boundary of q, default = 1 (Type III FR).
+-   `no_lhs_sample` a single integer value; the number of random latin hypercube samplings. Default = 1000.
+-   `range_multiplier` The multipliers with which the current best parameters should be multiplied for the validation random latin hypercube sampling. Default = c(1.0001, 1.001, 1.1, 1.5, 2).
+-   `witer_max` How many fits should be performed without convergence? Default = 25.
+-   `val_tol` The tolerance of the validation. Default = 6 (decimal places).
+-   `mle2_tol` The tolerance of a single mle2 fit. Default = 1e-12.
+-   `maxit` the maximum number of iterations of a single mle2-fit. Default here is 5000 (the mle2 default is 500, but the generalized functional response model requires more iterations)
+-   `no_threads` Number of threads that should be used to compute the tests in parallel. Default is to ten, as 10 tests should be computed. Most modern computers, even laptops should be able to run 10 thread in parallel. if you're unsure run parallel::detectCores().
 
-Required packages to be attached:
+***Required packages***:
 
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+-   `doParallel` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `lhs` [@Carnell2024LhsLatinHypercubea]
+-   `odin` [@FitzJohn2025OdinODEGeneration]
+-   `purrr` [@WickhamHenry2025PurrrFunctionalProgramming]
 
 ### Habitat Complexity Statistics Functions
+
+These functions are located in `/functions_habitat_statistics/`. Please find examples in `/examples_habitat_statistics/`.
 
 #### `rrpe_sim`
 
@@ -219,8 +304,7 @@ $$
 N_{eaten} = N_{initial} (1 - e^{a (N_{eaten}T_{h} - P  T_{end})}) = N_{initial} (1 - e^{\frac{N_{eaten} - F_{max} P  T_{end}}{N_{half}}}),
 $$
 
-where N_eaten are the eaten resource items, N_initial is the initial resource density, P is the predator density, and T_end is the experimental duration (time). These equations contain N_eaten on both sides and are only solvable iteratively [@Juliano2001NonlinearCurveFitting; @VoneshBolker2005CompensatoryLarvalResponses]. Alternatively, @Bolker2008EcologicalModelsData solved this issue by using the Lambert $W$
-function [@CorlessEtAl1996LambertWFunction]:
+where N_eaten are the eaten resource items, N_initial is the initial resource density, P is the predator density, and T_end is the experimental duration (time). These equations contain N_eaten on both sides and are only solvable iteratively [@Juliano2001NonlinearCurveFitting; @VoneshBolker2005CompensatoryLarvalResponses]. Alternatively, @Bolker2008EcologicalModelsData solved this issue by using the Lambert $W$ function [@CorlessEtAl1996LambertWFunction]:
 
 $$
 N_{eaten} = N_{initial} - \frac{W(a T_h N_{initial} e^{a(T_h N_{initial} - P T_{end})})}{a T_h}  = N_{initial} - N_{half} W(\frac{N_{initial}}{N_{half}}  e^{-\frac{F_{max} P T_{end}- N_{initial}}{N_{half}}})
@@ -231,144 +315,139 @@ We apply these functions to compute the type II functional response.
 ***Parameters***:
 
 -   `fr_style` [string]: either "Holling" or "Real".
--   `n_initial` [numeric]: a vector of initial prey densities (can also be a single value).
--   `p` [numeric]: a single value of a fixed predator density. The default value is 1.
--   `a` [numeric]: the attack rate, a single value. Only for Holling-style.
--   `t_h` [numeric]: the handling time, a single value. Only for Holling-style.
--   `f_max` [numeric]: the maximum feeding rate, a single value. Only for Real-style.
--   `n_half` [numeric]: the half saturation density, a single value. Only for Real-style.
--   `t_end` [numeric]: the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
-
+-   `n_initial` (numeric): a vector of initial prey densities (can also be a single value).
+-   `p` (numeric): a single value of a fixed predator density. The default value is 1.
+-   `a` (numeric): the attack rate, a single value. Only for Holling-style.
+-   `t_h` (numeric): the handling time, a single value. Only for Holling-style.
+-   `f_max` (numeric): the maximum feeding rate, a single value. Only for Real-style.
+-   `n_half` (numeric): the half saturation density, a single value. Only for Real-style.
+-   `t_end` (numeric): the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
 
 ***Required packages***:
 
-- `emdbook` [@Bolker2023EmdbookSupportFunctions]
-
+-   `emdbook` [@Bolker2023EmdbookSupportFunctions]
 
 #### `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and `rrpe_nll_mod01h` to `rrpe_nll_mod16h`
 
 ***Description***:
 
-All functions from `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and `rrpe_nll_mod01h` to `rrpe_nll_mod16h` calculate the negative log likelihood of using experimental functional response data (eaten resource items as a function of resource density) using the Michaelis-Menten Type II functional response [@Real1977KineticsFunctionalResponse] from the `rrpe_sim` function. Functions having `r` in their name return the parameters for the Real-style functional response [@Real1977KineticsFunctionalResponse]: $F_{max}$ and $N_{half}$. Functions having `h` in their name return the parameters for the Holling-style functional response [@Holling1959CharacteristicsSimpleTypes]: $T_{handling}$ and $a$.
-We calculated the likelihood by assuming a binomial distribution of the depended data, i.e., whether a resource item can be eaten or not at the end of the experimental trial. See @Bolker2008EcologicalModelsData, chapter 8 for details. Moreover, the functions require the model parameters on log-scale, as this transformation (1) accelerates the fitting procedure and (2) prevents biologically irrelevant negative estimations that would crash the fitting algorithm.
+All functions from `rrpe_nll_mod01r` to `rrpe_nll_mod16r` and `rrpe_nll_mod01h` to `rrpe_nll_mod16h` calculate the negative log likelihood of using experimental functional response data (eaten resource items as a function of resource density) using the Michaelis-Menten Type II functional response [@Real1977KineticsFunctionalResponse] from the `rrpe_sim` function. Functions having `r` in their name return the parameters for the Real-style functional response [@Real1977KineticsFunctionalResponse]: $F_{max}$ and $N_{half}$. Functions having `h` in their name return the parameters for the Holling-style functional response [@Holling1959CharacteristicsSimpleTypes]: $T_{handling}$ and $a$. We calculated the likelihood by assuming a binomial distribution of the depended data, i.e., whether a resource item can be eaten or not at the end of the experimental trial. See @Bolker2008EcologicalModelsData, chapter 8 for details. Moreover, the functions require the model parameters on log-scale, as this transformation (1) accelerates the fitting procedure and (2) prevents biologically irrelevant negative estimations that would crash the fitting algorithm.
 
 ***Parameters***:
 
--   `n_eaten` [numeric]: a data vector of initial prey densities. **MUST BE INTEGERS (i.e. 0, 1, 2, ...)!**
--   `n_initial` [numeric]: a data vector initial prey densities. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)! MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `n_rings` [numeric]: a data vector of number of rings provided as habitat structure. **MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `complexity` [numeric]: a data vector of level of complexity. **MUST BE ON OF THE FOLLOWING: 0, 1, 2, 3, 4! MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `p` [numeric]: a single value of a fixed predator density. The default value is 1. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)!**
--   `a_log10` [numeric]: the $log_{10}$ of the attack rate across treatments, a single value. Only for Holling-style functions and if habitat has no effect on attack rate.
--   `a_hab0_log10` [numeric]: the $log_{10}$ of the attack rate for habitat being absent, a single value. Only for Holling-style functions and if habitat presence is considered for attack rate.
--   `a_hab1_log10` [numeric]: the $log_{10}$ of the attack rate for habitat being present, a single value. Only for Holling-style functions and if habitat presence is considered for attack rate.
--   `a_0_log10` [numeric]: the $log_{10}$ of the attack rate for complexity level 0, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_1_log10` [numeric]: the $log_{10}$ of the attack rate for complexity level 1, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_2_log10` [numeric]: the $log_{10}$ of the attack rate for complexity level 2, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_3_log10` [numeric]: the $log_{10}$ of the attack rate for complexity level 3, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_4_log10` [numeric]: the $log_{10}$ of the attack rate for complexity level 4, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_intercept_log10` [numeric]: the $log_{10}$ of the intercept of the attack rate, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
--   `a_slope` [numeric]: the slope of the attack rate, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
--   `t_h_log10` [numeric]: the $log_{10}$ of the handling time across treatments, a single value. Only for Holling-style functions and if habitat has no effect on handling time.
--   `t_h_hab0_log10` [numeric]: the $log_{10}$ of the handling time for habitat being absent, a single value. Only for Holling-style functions and if habitat presence is considered for handling time.
--   `t_h_hab1_log10` [numeric]: the $log_{10}$ of the handling time for habitat being present, a single value. Only for Holling-style functions and if habitat presence is considered for handling time.
--   `t_h_0_log10` [numeric]: the $log_{10}$ of the handling time for complexity level 0, a single value. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_1_log10` [numeric]: the $log_{10}$ of the handling time for complexity level 1, a single value. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_2_log10` [numeric]: the $log_{10}$ of the handling time for complexity level 2, a single value. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_3_log10` [numeric]: the $log_{10}$ of the handling time for complexity level 3, a single value. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_4_log10` [numeric]: the $log_{10}$ of the handling time for complexity level 4, a single value. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_intercept_log10` [numeric]: the $log_{10}$ of the intercept of the handling time, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
--   `t_h_slope` [numeric]: the slope of the handling time, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
--   `n_half_log10` [numeric]: the $log_{10}$ of the half saturation density across treatments, a single value. Only for Real-style functions and if habitat has no effect on half saturation density.
--   `n_half_hab0_log10` [numeric]: the $log_{10}$ of the half saturation density for habitat being absent, a single value. Only for Real-style functions and if habitat presence is considered for half saturation density.
--   `n_half_hab1_log10` [numeric]: the $log_{10}$ of the half saturation density for habitat being present, a single value. Only for Real-style functions and if habitat presence is considered for half saturation density.
--   `n_half_0_log10` [numeric]: the $log_{10}$ of the half saturation density for complexity level 0, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_1_log10` [numeric]: the $log_{10}$ of the half saturation density for complexity level 1, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_2_log10` [numeric]: the $log_{10}$ of the half saturation density for complexity level 2, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_3_log10` [numeric]: the $log_{10}$ of the half saturation density for complexity level 3, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_4_log10` [numeric]: the $log_{10}$ of the half saturation density for complexity level 4, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_intercept_log10` [numeric]: the $log_{10}$ of the intercept of the half saturation density, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
--   `n_half_slope` [numeric]: the slope of the half saturation density, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
--   `f_max_log10` [numeric]: the $log_{10}$ of the maximum feeding rate across treatments, a single value. Only for Real-style functions and if habitat has no effect on maximum feeding rate.
--   `f_max_hab0_log10` [numeric]: the $log_{10}$ of the maximum feeding rate for habitat being absent, a single value. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
--   `f_max_hab1_log10` [numeric]: the $log_{10}$ of the maximum feeding rate for habitat being present, a single value. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
--   `f_max_0_log10` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 0, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_1_log10` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 1, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_2_log10` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 2, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_3_log10` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 3, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_4_log10` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 4, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_intercept_log10` [numeric]: the $log_{10}$ of the intercept of the maximum feeding rate, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
--   `f_max_slope` [numeric]: the slope of the maximum feeding rate, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
--   `t_end` [numeric]: the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
-
+-   `n_eaten` (numeric): a data vector of initial prey densities. **MUST BE INTEGERS (i.e. 0, 1, 2, ...)!**
+-   `n_initial` (numeric): a data vector initial prey densities. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)! MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `n_rings` (numeric): a data vector of number of rings provided as habitat structure. **MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `complexity` (numeric): a data vector of level of complexity. **MUST BE ON OF THE FOLLOWING: 0, 1, 2, 3, 4! MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `p` (numeric): a single value of a fixed predator density. The default value is 1. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)!**
+-   `a_log10` (numeric): the $log_{10}$ of the attack rate across treatments, a single value. Only for Holling-style functions and if habitat has no effect on attack rate.
+-   `a_hab0_log10` (numeric): the $log_{10}$ of the attack rate for habitat being absent, a single value. Only for Holling-style functions and if habitat presence is considered for attack rate.
+-   `a_hab1_log10` (numeric): the $log_{10}$ of the attack rate for habitat being present, a single value. Only for Holling-style functions and if habitat presence is considered for attack rate.
+-   `a_0_log10` (numeric): the $log_{10}$ of the attack rate for complexity level 0, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_1_log10` (numeric): the $log_{10}$ of the attack rate for complexity level 1, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_2_log10` (numeric): the $log_{10}$ of the attack rate for complexity level 2, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_3_log10` (numeric): the $log_{10}$ of the attack rate for complexity level 3, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_4_log10` (numeric): the $log_{10}$ of the attack rate for complexity level 4, a single value. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_intercept_log10` (numeric): the $log_{10}$ of the intercept of the attack rate, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
+-   `a_slope` (numeric): the slope of the attack rate, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
+-   `t_h_log10` (numeric): the $log_{10}$ of the handling time across treatments, a single value. Only for Holling-style functions and if habitat has no effect on handling time.
+-   `t_h_hab0_log10` (numeric): the $log_{10}$ of the handling time for habitat being absent, a single value. Only for Holling-style functions and if habitat presence is considered for handling time.
+-   `t_h_hab1_log10` (numeric): the $log_{10}$ of the handling time for habitat being present, a single value. Only for Holling-style functions and if habitat presence is considered for handling time.
+-   `t_h_0_log10` (numeric): the $log_{10}$ of the handling time for complexity level 0, a single value. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_1_log10` (numeric): the $log_{10}$ of the handling time for complexity level 1, a single value. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_2_log10` (numeric): the $log_{10}$ of the handling time for complexity level 2, a single value. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_3_log10` (numeric): the $log_{10}$ of the handling time for complexity level 3, a single value. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_4_log10` (numeric): the $log_{10}$ of the handling time for complexity level 4, a single value. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_intercept_log10` (numeric): the $log_{10}$ of the intercept of the handling time, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
+-   `t_h_slope` (numeric): the slope of the handling time, a single value. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
+-   `n_half_log10` (numeric): the $log_{10}$ of the half saturation density across treatments, a single value. Only for Real-style functions and if habitat has no effect on half saturation density.
+-   `n_half_hab0_log10` (numeric): the $log_{10}$ of the half saturation density for habitat being absent, a single value. Only for Real-style functions and if habitat presence is considered for half saturation density.
+-   `n_half_hab1_log10` (numeric): the $log_{10}$ of the half saturation density for habitat being present, a single value. Only for Real-style functions and if habitat presence is considered for half saturation density.
+-   `n_half_0_log10` (numeric): the $log_{10}$ of the half saturation density for complexity level 0, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_1_log10` (numeric): the $log_{10}$ of the half saturation density for complexity level 1, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_2_log10` (numeric): the $log_{10}$ of the half saturation density for complexity level 2, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_3_log10` (numeric): the $log_{10}$ of the half saturation density for complexity level 3, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_4_log10` (numeric): the $log_{10}$ of the half saturation density for complexity level 4, a single value. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_intercept_log10` (numeric): the $log_{10}$ of the intercept of the half saturation density, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
+-   `n_half_slope` (numeric): the slope of the half saturation density, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
+-   `f_max_log10` (numeric): the $log_{10}$ of the maximum feeding rate across treatments, a single value. Only for Real-style functions and if habitat has no effect on maximum feeding rate.
+-   `f_max_hab0_log10` (numeric): the $log_{10}$ of the maximum feeding rate for habitat being absent, a single value. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
+-   `f_max_hab1_log10` (numeric): the $log_{10}$ of the maximum feeding rate for habitat being present, a single value. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
+-   `f_max_0_log10` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 0, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_1_log10` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 1, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_2_log10` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 2, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_3_log10` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 3, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_4_log10` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 4, a single value. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_intercept_log10` (numeric): the $log_{10}$ of the intercept of the maximum feeding rate, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
+-   `f_max_slope` (numeric): the slope of the maximum feeding rate, a single value. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
+-   `t_end` (numeric): the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
 
 ***Required packages***:
 
-- `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
 
 #### `rrpe_parms_scan_mod01r` to `rrpe_parms_scan_mod16r` and `rrpe_parms_scan_mod01h` to `rrpe_parms_scan_mod16h`
 
 ***Description***:
 
-All `rrpe_parms_scan_mod*` functions create Latin hypercube samples for the functional response parameters in a reasonable range and calculate the according negative log likelihood values. They return the parameter values with the lowest negative log likelihood of these samples. Non-linear maximum likelihood fitting procedures require starting parameters, generally based on an educated guess [@Bolker2008EcologicalModelsData]. Moreover, these fits may end up in local best fits, and users should re-fit the data using different starting parameters [@Bolker2008EcologicalModelsData]. To overcome manually eyeballing as well as re-shuffling the starting parameters, @JagerAshauer2018ModellingSurvivalChemical suggested creating samples in a reasonable parameter range using and choosing the starting parameters (from the lowest nll value) from these samples. To reduce the number of required samples by keeping the variance of parameter values as wide as possible, it is recommended to use Latin hypercube sampling. `rrpe_parms_scan_mod*16r*` require the lhs package [@Carnell2024LhsLatinHypercubea]. 
+All `rrpe_parms_scan_mod*` functions create Latin hypercube samples for the functional response parameters in a reasonable range and calculate the according negative log likelihood values. They return the parameter values with the lowest negative log likelihood of these samples. Non-linear maximum likelihood fitting procedures require starting parameters, generally based on an educated guess [@Bolker2008EcologicalModelsData]. Moreover, these fits may end up in local best fits, and users should re-fit the data using different starting parameters [@Bolker2008EcologicalModelsData]. To overcome manually eyeballing as well as re-shuffling the starting parameters, @JagerAshauer2018ModellingSurvivalChemical suggested creating samples in a reasonable parameter range using and choosing the starting parameters (from the lowest nll value) from these samples. To reduce the number of required samples by keeping the variance of parameter values as wide as possible, it is recommended to use Latin hypercube sampling. `rrpe_parms_scan_mod*16r*` require the lhs package [@Carnell2024LhsLatinHypercubea].
 
 ***Parameters***:
 
--   `n_eaten` [numeric]: a data vector of initial prey densities. **MUST BE INTEGERS (i.e. 0, 1, 2, ...)!**
--   `n_initial` [numeric]: a data vector initial prey densities. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)! MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `n_rings` [numeric]: a data vector of number of rings provided as habitat structure. **MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `complexity` [numeric]: a data vector of level of complexity. **MUST BE ON OF THE FOLLOWING: 0, 1, 2, 3, 4! MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `p` [numeric]: a single value of a fixed predator density. The default value is 1. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)!**
--   `a_log10_range` [numeric]: the $log_{10}$ of the attack rate across treatments, **two values**. Only for Holling-style functions and if habitat has no effect on attack rate.
--   `a_hab0_log10_range` [numeric]: the $log_{10}$ of the attack rate for habitat being absent, **two values**. Only for Holling-style functions and if habitat presence is considered for attack rate.
--   `a_hab1_log10_range` [numeric]: the $log_{10}$ of the attack rate for habitat being present, **two values**. Only for Holling-style functions and if habitat presence is considered for attack rate.
--   `a_0_log10_range` [numeric]: the $log_{10}$ of the attack rate for complexity level 0, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_1_log10_range` [numeric]: the $log_{10}$ of the attack rate for complexity level 1, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_2_log10_range` [numeric]: the $log_{10}$ of the attack rate for complexity level 2, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_3_log10_range` [numeric]: the $log_{10}$ of the attack rate for complexity level 3, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_4_log10_range` [numeric]: the $log_{10}$ of the attack rate for complexity level 4, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
--   `a_intercept_log10_range` [numeric]: the $log_{10}$ of the intercept of the attack rate, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
--   `a_slope_range` [numeric]: the slope of the attack rate, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
--   `t_h_log10_range` [numeric]: the $log_{10}$ of the handling time across treatments, **two values**. Only for Holling-style functions and if habitat has no effect on handling time.
--   `t_h_hab0_log10_range` [numeric]: the $log_{10}$ of the handling time for habitat being absent, **two values**. Only for Holling-style functions and if habitat presence is considered for handling time.
--   `t_h_hab1_log10_range` [numeric]: the $log_{10}$ of the handling time for habitat being present, **two values**. Only for Holling-style functions and if habitat presence is considered for handling time.
--   `t_h_0_log10_range` [numeric]: the $log_{10}$ of the handling time for complexity level 0, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_1_log10_range` [numeric]: the $log_{10}$ of the handling time for complexity level 1, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_2_log10_range` [numeric]: the $log_{10}$ of the handling time for complexity level 2, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_3_log10_range` [numeric]: the $log_{10}$ of the handling time for complexity level 3, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_4_log10_range` [numeric]: the $log_{10}$ of the handling time for complexity level 4, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
--   `t_h_intercept_log10_range` [numeric]: the $log_{10}$ of the intercept of the handling time, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
--   `t_h_slope_range` [numeric]: the slope of the handling time, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
--   `n_half_log10_range` [numeric]: the $log_{10}$ of the half saturation density across treatments, **two values**. Only for Real-style functions and if habitat has no effect on half saturation density.
--   `n_half_hab0_log10_range` [numeric]: the $log_{10}$ of the half saturation density for habitat being absent, **two values**. Only for Real-style functions and if habitat presence is considered for half saturation density.
--   `n_half_hab1_log10_range` [numeric]: the $log_{10}$ of the half saturation density for habitat being present, **two values**. Only for Real-style functions and if habitat presence is considered for half saturation density.
--   `n_half_0_log10_range` [numeric]: the $log_{10}$ of the half saturation density for complexity level 0, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_1_log10_range` [numeric]: the $log_{10}$ of the half saturation density for complexity level 1, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_2_log10_range` [numeric]: the $log_{10}$ of the half saturation density for complexity level 2, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_3_log10_range` [numeric]: the $log_{10}$ of the half saturation density for complexity level 3, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_4_log10_range` [numeric]: the $log_{10}$ of the half saturation density for complexity level 4, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
--   `n_half_intercept_log10_range` [numeric]: the $log_{10}$ of the intercept of the half saturation density, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
--   `n_half_slope_range` [numeric]: the slope of the half saturation density, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
--   `f_max_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate across treatments, **two values**. Only for Real-style functions and if habitat has no effect on maximum feeding rate.
--   `f_max_hab0_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate for habitat being absent, **two values**. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
--   `f_max_hab1_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate for habitat being present, **two values**. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
--   `f_max_0_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 0, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_1_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 1, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_2_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 2, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_3_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 3, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_4_log10_range` [numeric]: the $log_{10}$ of the maximum feeding rate for complexity level 4, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
--   `f_max_intercept_log10_range` [numeric]: the $log_{10}$ of the intercept of the maximum feeding rate, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
--   `f_max_slope_range` [numeric]: the slope of the maximum feeding rate, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
--   `t_end` [numeric]: the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
--   `no_lhs_samples` [numeric]: a single integer value; the number of random latin hypercube samplings. **MUST BE AN INTEGER, E.G. 100, 1000, 2000, ...**. Default = 1000.
+-   `n_eaten` (numeric): a data vector of initial prey densities. **MUST BE INTEGERS (i.e. 0, 1, 2, ...)!**
+-   `n_initial` (numeric): a data vector initial prey densities. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)! MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `n_rings` (numeric): a data vector of number of rings provided as habitat structure. **MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `complexity` (numeric): a data vector of level of complexity. **MUST BE ON OF THE FOLLOWING: 0, 1, 2, 3, 4! MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `p` (numeric): a single value of a fixed predator density. The default value is 1. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)!**
+-   `a_log10_range` (numeric): the $log_{10}$ of the attack rate across treatments, **two values**. Only for Holling-style functions and if habitat has no effect on attack rate.
+-   `a_hab0_log10_range` (numeric): the $log_{10}$ of the attack rate for habitat being absent, **two values**. Only for Holling-style functions and if habitat presence is considered for attack rate.
+-   `a_hab1_log10_range` (numeric): the $log_{10}$ of the attack rate for habitat being present, **two values**. Only for Holling-style functions and if habitat presence is considered for attack rate.
+-   `a_0_log10_range` (numeric): the $log_{10}$ of the attack rate for complexity level 0, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_1_log10_range` (numeric): the $log_{10}$ of the attack rate for complexity level 1, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_2_log10_range` (numeric): the $log_{10}$ of the attack rate for complexity level 2, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_3_log10_range` (numeric): the $log_{10}$ of the attack rate for complexity level 3, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_4_log10_range` (numeric): the $log_{10}$ of the attack rate for complexity level 4, **two values**. Only for Holling-style functions and if complexity is considered for attack rate.
+-   `a_intercept_log10_range` (numeric): the $log_{10}$ of the intercept of the attack rate, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
+-   `a_slope_range` (numeric): the slope of the attack rate, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for attack rate.
+-   `t_h_log10_range` (numeric): the $log_{10}$ of the handling time across treatments, **two values**. Only for Holling-style functions and if habitat has no effect on handling time.
+-   `t_h_hab0_log10_range` (numeric): the $log_{10}$ of the handling time for habitat being absent, **two values**. Only for Holling-style functions and if habitat presence is considered for handling time.
+-   `t_h_hab1_log10_range` (numeric): the $log_{10}$ of the handling time for habitat being present, **two values**. Only for Holling-style functions and if habitat presence is considered for handling time.
+-   `t_h_0_log10_range` (numeric): the $log_{10}$ of the handling time for complexity level 0, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_1_log10_range` (numeric): the $log_{10}$ of the handling time for complexity level 1, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_2_log10_range` (numeric): the $log_{10}$ of the handling time for complexity level 2, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_3_log10_range` (numeric): the $log_{10}$ of the handling time for complexity level 3, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_4_log10_range` (numeric): the $log_{10}$ of the handling time for complexity level 4, **two values**. Only for Holling-style functions and if complexity is considered for handling time.
+-   `t_h_intercept_log10_range` (numeric): the $log_{10}$ of the intercept of the handling time, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
+-   `t_h_slope_range` (numeric): the slope of the handling time, **two values**. Only for Holling-style functions and if the amount of habitat (number of rings) is considered for handling time.
+-   `n_half_log10_range` (numeric): the $log_{10}$ of the half saturation density across treatments, **two values**. Only for Real-style functions and if habitat has no effect on half saturation density.
+-   `n_half_hab0_log10_range` (numeric): the $log_{10}$ of the half saturation density for habitat being absent, **two values**. Only for Real-style functions and if habitat presence is considered for half saturation density.
+-   `n_half_hab1_log10_range` (numeric): the $log_{10}$ of the half saturation density for habitat being present, **two values**. Only for Real-style functions and if habitat presence is considered for half saturation density.
+-   `n_half_0_log10_range` (numeric): the $log_{10}$ of the half saturation density for complexity level 0, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_1_log10_range` (numeric): the $log_{10}$ of the half saturation density for complexity level 1, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_2_log10_range` (numeric): the $log_{10}$ of the half saturation density for complexity level 2, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_3_log10_range` (numeric): the $log_{10}$ of the half saturation density for complexity level 3, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_4_log10_range` (numeric): the $log_{10}$ of the half saturation density for complexity level 4, **two values**. Only for Real-style functions and if complexity is considered for half saturation density.
+-   `n_half_intercept_log10_range` (numeric): the $log_{10}$ of the intercept of the half saturation density, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
+-   `n_half_slope_range` (numeric): the slope of the half saturation density, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for half saturation density.
+-   `f_max_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate across treatments, **two values**. Only for Real-style functions and if habitat has no effect on maximum feeding rate.
+-   `f_max_hab0_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate for habitat being absent, **two values**. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
+-   `f_max_hab1_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate for habitat being present, **two values**. Only for Real-style functions and if habitat presence is considered for maximum feeding rate.
+-   `f_max_0_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 0, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_1_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 1, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_2_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 2, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_3_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 3, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_4_log10_range` (numeric): the $log_{10}$ of the maximum feeding rate for complexity level 4, **two values**. Only for Real-style functions and if complexity is considered for maximum feeding rate.
+-   `f_max_intercept_log10_range` (numeric): the $log_{10}$ of the intercept of the maximum feeding rate, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
+-   `f_max_slope_range` (numeric): the slope of the maximum feeding rate, **two values**. Only for Real-style functions and if the amount of habitat (number of rings) is considered for maximum feeding rate.
+-   `t_end` (numeric): the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `no_lhs_samples` (numeric): a single integer value; the number of random latin hypercube samplings. **MUST BE AN INTEGER, E.G. 100, 1000, 2000, ...**. Default = 1000.
 
 ***Required packages***:
 
-- `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `lhs` [@Carnell2024LhsLatinHypercubea]
-
+-   `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `lhs` [@Carnell2024LhsLatinHypercubea]
 
 #### `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`
 
@@ -378,106 +457,297 @@ All functions from `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` 
 
 ***Parameters***:
 
--   `n_eaten` [numeric]: a data vector of initial prey densities. **MUST BE INTEGERS (i.e. 0, 1, 2, ...)!**
--   `n_initial` [numeric]: a data vector initial prey densities. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)! MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `n_rings` [numeric]: a data vector of number of rings provided as habitat structure. **MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `complexity` [numeric]: a data vector of level of complexity. **MUST BE ON OF THE FOLLOWING: 0, 1, 2, 3, 4! MUST BE OF SAME LENGTH AS `n_eaten`!**
--   `p` [numeric]: a single value of a fixed predator density. The default value is 1. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)!**
--   `t_end` [numeric]: the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
--   `no_lhs_samples` [numeric]: a single integer value; the number of random latin hypercube samplings. **MUST BE AN INTEGER, E.G. 100, 1000, 2000, ...**. Default = 1000.
--   `range_multiplier` [numeric]: the multipliers with which the current best parameters should be multiplied for the validation random latin hypercube sampling.
--   `rel_f_max_range` [numeric]: these two values are multiplied by the largest feeding value of n_eaten to set the initial boundaries to seek for a reasonable starting value of f_max, default = c(0.6, 0.95)
--   `rel_n_half_range` [numeric]: these two values are multiplied by the largest starting density value, n_initial, to set the initial boundaries to seek for a reasonable starting value of n_half, default = c(0.2, 0.8)
--   `slope_range` [numeric]: the range of initial slopes tested for the log-linear relationship with number of rings. It applies for any FR variable if fitted to number of rings. The intercept is calculated using complexity level = 0. Default is c(-0.05, 0.05).
--   `witer_max` [numeric]: how many fits should be performed without convergence?
--   `mle2_tol` [numeric]: the tolerance of a single mle2 fit.
--   `val_tol` [numeric]: the tolerance of the validation.
--   `set_seed` [numeric]: set seed for better reproducibility? default = TRUE.
--   `seed_value` [numeric]: seed value, default = 123.
+-   `n_eaten` (numeric): a data vector of initial prey densities. **MUST BE INTEGERS (i.e. 0, 1, 2, ...)!**
+-   `n_initial` (numeric): a data vector initial prey densities. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)! MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `n_rings` (numeric): a data vector of number of rings provided as habitat structure. **MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `complexity` (numeric): a data vector of level of complexity. **MUST BE ON OF THE FOLLOWING: 0, 1, 2, 3, 4! MUST BE OF SAME LENGTH AS `n_eaten`!**
+-   `p` (numeric): a single value of a fixed predator density. The default value is 1. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)!**
+-   `t_end` (numeric): the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `no_lhs_samples` (numeric): a single integer value; the number of random latin hypercube samplings. **MUST BE AN INTEGER, E.G. 100, 1000, 2000, ...**. Default = 1000.
+-   `range_multiplier` (numeric): the multipliers with which the current best parameters should be multiplied for the validation random latin hypercube sampling.
+-   `rel_f_max_range` (numeric): these two values are multiplied by the largest feeding value of n_eaten to set the initial boundaries to seek for a reasonable starting value of f_max, default = c(0.6, 0.95)
+-   `rel_n_half_range` (numeric): these two values are multiplied by the largest starting density value, n_initial, to set the initial boundaries to seek for a reasonable starting value of n_half, default = c(0.2, 0.8)
+-   `slope_range` (numeric): the range of initial slopes tested for the log-linear relationship with number of rings. It applies for any FR variable if fitted to number of rings. The intercept is calculated using complexity level = 0. Default is c(-0.05, 0.05).
+-   `witer_max` (numeric): how many fits should be performed without convergence?
+-   `mle2_tol` (numeric): the tolerance of a single mle2 fit.
+-   `val_tol` (numeric): the tolerance of the validation.
+-   `set_seed` (numeric): set seed for better reproducibility? default = TRUE.
+-   `seed_value` (numeric): seed value, default = 123.
 
 ***Required packages***:
 
-- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
-- `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `lhs` [@Carnell2024LhsLatinHypercubea]
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
+-   `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `lhs` [@Carnell2024LhsLatinHypercubea]
+
+
+#### `run_all_hab_fits`
+
+***Description***:
+
+Runs all habitat fitting functions in parallel. Se further descriptions above.
+
+***Parameters***:
+
+-   `x` (numeric): a data frame of your functional response data, find details above.
+-   `model_numbers` [counts]: a vector including the numbers of models that should be fitted. The default (`rep(sort(rep(1:16, 2)),2)`) fits all models.
+-   `style_letters` [character]: a vector of letter if Holling or Real types of FR should be fitted. Must be the length of `model_numbers`. The default setting is set to fit all possible models (`rep(c("h","r"), 64)`). 
+-   `predator_spec` [character]: a vector of predator names Must be the length of `model_numbers`. The default setting is set to fit all possible models (`c(rep("Ischnura elegans", 32), rep("Notonecta glauca", 32))`). 
+-   `no_threads` (numeric):number of available threads that should be use, default to `max(2^(0:6)[2^(0:6) <= parallel::detectCores()])`.
+-   `p` (numeric): a single value of a fixed predator density. The default value is 1. **SHOULD BE INTEGERS (i.e. 0, 1, 2, ...)!**
+-   `t_end` (numeric): the time were the feeding ends. A single value; default = 1 (e.g. 1 day).
+-   `no_lhs_samples` (numeric): a single integer value; the number of random latin hypercube samplings. **MUST BE AN INTEGER, E.G. 100, 1000, 2000, ...**. Default = 1000.
+-   `range_multiplier` (numeric): the multipliers with which the current best parameters should be multiplied for the validation random latin hypercube sampling.
+-   `rel_f_max_range` (numeric): these two values are multiplied by the largest feeding value of n_eaten to set the initial boundaries to seek for a reasonable starting value of f_max, default = c(0.6, 0.95)
+-   `rel_n_half_range` (numeric): these two values are multiplied by the largest starting density value, n_initial, to set the initial boundaries to seek for a reasonable starting value of n_half, default = c(0.2, 0.8)
+-   `slope_range` (numeric): the range of initial slopes tested for the log-linear relationship with number of rings. It applies for any FR variable if fitted to number of rings. The intercept is calculated using complexity level = 0. Default is c(-0.05, 0.05).
+-   `witer_max` (numeric): how many fits should be performed without convergence?
+-   `mle2_tol` (numeric): the tolerance of a single mle2 fit.
+-   `val_tol` (numeric): the tolerance of the validation.
+-   `set_seed` (numeric): set seed for better reproducibility? default = TRUE.
+-   `seed_value` (numeric): seed value, default = 123.
+
+***Required packages***:
+
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
+-   `emdbook` [@Bolker2023EmdbookSupportFunctions; @Bolker2008EcologicalModelsData]
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `lhs` [@Carnell2024LhsLatinHypercubea]
 
 ### Functions for creating a pdf report using Rmarkdown
 
-The functions described below are especially programmed for the purpose of our statistical report [@RallEtAl2025ComplexityReducesFeedingStatistics] and our scienitif publication [@AranbarriEtAl2025ComplexityReducesFeeding]. They are likely only usable in this context.
+The functions described below are especially programmed for the purpose of our statistical report [@RallEtAl2025ComplexityReducesFeedingStatistics] and our scientific publication [@AranbarriEtAl2025ComplexityReducesFeeding]. They are likely only usable in this context. These functions are located in `/functions_report/`. Please find examples in our statistical report: https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.Rmd.
 
 #### `phen_type_table`
-**`phen_type_table`** takes a `phen_type_test` output and creates a nice table for the statistical report. Note that the function uses options from `kableEXTRA` [@Zhu2024KableExtraConstructComplex] that will only work for LaTeX/PDF outputs. This function is rather hard-coded and only useful in the CRITTER project.
 
-Required packages and their dependencies to be installed:
+***Description***:
 
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `kableExtra` [@Zhu2024KableExtraConstructComplex]
+**`phen_type_table`** takes a `phen_type_test` output and creates a nice table for the statistical report.
+Note that the function uses options from `kableEXTRA` [@Zhu2024KableExtraConstructComplex] that will only work for LaTeX/PDF outputs. This function is rather hard-coded and only useful in the CRITTER project.
 
-Required packages to be attached:
+***Parameters***:
 
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `phen_test_results` a object created by create_phen_test
+-   `add_caption` add a caption? Default is "TRUE"
+-   `caption_text` the caption text if add_caption = TRUE
+
+***Required packages***:
+
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `kableExtra` [@Zhu2024KableExtraConstructComplex]
 
 #### `gen_fr_table`
 
-**`gen_fr_table`** creates a nice-looking table using the output from `gen_fr_fit_all`. Hard-coded and only useful in this project.
+***Description***:
 
-Required packages and their dependencies to be installed:
+**`gen_fr_table`** creates a nice-looking table using the output from `gen_fr_fit_all`. Hard-coded and only useful in this project.
 
-- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `kableExtra` [@Zhu2024KableExtraConstructComplex]
-- `knitr` [@Xie2024KnitrGeneralpurposePackage]
+-   `gen_fr_results` an object created by “gen_fr_fit_all”.
+-   `caption_text` your caption test as a string.
+-   `output_style decide` on the output format of the Rmd file. Can be `github_document` (default) or `pdf`.
 
-Required packages to be attached:
+***Required packages***:
 
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `kableExtra` [@Zhu2024KableExtraConstructComplex]
+-   `knitr` [@Xie2025KnitrGeneralPurposePackage; @Xie2015DynamicDocumentsKnitr]
+
 
 #### `create_h_table`
+
+***Description***:
 
 **`create_h_table`** creates a nice-looking table using the output from all fits using functions `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`. Hard-coded and only useful in this project.
 
 ***Parameters***:
--   `h_test_results`: a list of mle2 objects created by running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`.
--   `cut_after`: the number of results that should be displayed.
--   `caption_text`: the tables caption text.
+
+- `h_test_results`: a list of mle2 objects created by running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`.
+- `cut_after`: the number of results that should be displayed.
+- `caption_text`: the tables caption text.
 
 ***Required packages***:
 
-- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
-- `dplyr` [@WickhamEtAl2023DplyrGrammarData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `kableExtra` [@Zhu2024KableExtraConstructComplex]
-- `knitr` [@Xie2024KnitrGeneralpurposePackage]
-
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `kableExtra` [@Zhu2024KableExtraConstructComplex]
+-   `knitr` [@Xie2025KnitrGeneralPurposePackage; @Xie2015DynamicDocumentsKnitr]
 
 #### `create_summary_table`
 
-**`create_summary_table`** creates a nice-looking table using a mle2 object from a fit of one of the models: `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`. In addition, it also calculates the confidence intervals using the *population prediction intervals* (see @Bolker2008EcologicalModelsData, chapter 7.5.3) based on the Hard-coded and only useful in this project.
+***Description***:
+
+**`create_summary_table`** creates a nice-looking table using a mle2 object from a fit of one of the models: `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`.
+In addition, it also calculates the confidence intervals using the *population prediction intervals* (see @Bolker2008EcologicalModelsData, chapter 7.5.3). Hard-coded and only useful in this project.
 
 ***Parameters***:
--   `h_test_results`: a list of mle2 objects created by running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`.
--   `ci_reps` [integer]: the number of CI samples that should be taken, default = 10000.
--   `ci_levels` [numeric]: a vector of two numbers, the lower and upper CI levels. Default is `c(0.025, 0.975)`.
--   `dec_places`: the number of decimal places that should be displayed. Default is 3.
--   `par_names`: a vector of parameter names that should be displayed. Default is `c($T_{h}$, $a$)`.
--   `unlog`: the fit was done using parameters on log-scale (not the slope). Should these be displayed on regular scale? Default is `c(TRUE, TRUE)`. **Note, that you must add `FALSE` if the parameter was a slope**.
--   `caption_text`: the tables caption text.
 
+- `h_test_results`: a list of mle2 objects created by running all tests from `rrpe_fit_mod01r` to `rrpe_fit_mod16r`.
+- `ci_reps` (integer): the number of CI samples that should be taken, default = 10000.
+- `ci_levels` (numeric): a vector of two numbers, the lower and upper CI levels.
+Default is `c(0.025, 0.975)`.
+- `dec_places`: the number of decimal places that should be displayed.
+Default is 3.
+- `par_names`: a vector of parameter names that should be displayed.
+Default is `c($T_{h}$, $a$)`.
+- `unlog`: the fit was done using parameters on log-scale (not the slope).
+Should these be displayed on regular scale?
+Default is `c(TRUE, TRUE)`.
+**Note, that you must add `FALSE` if the parameter was a slope**.
+- `caption_text`: the tables caption text.
 
 ***Required packages***:
 
-- `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
-- `foreach` [@MicrosoftWeston2022ForeachProvidesForeach]
-- `kableExtra` [@Zhu2024KableExtraConstructComplex]
-- `knitr` [@Xie2024KnitrGeneralpurposePackage]
-- `MASS` [@RipleyEtAl2025MASSSupportFunctions]
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `kableExtra` [@Zhu2024KableExtraConstructComplex]
+-   `knitr` [@Xie2025KnitrGeneralPurposePackage; @Xie2015DynamicDocumentsKnitr]
+-   `MASS` [@RipleyEtAl2025MASSSupportFunctions]
+
+
+#### `create_all_summary_tables`
+
+***Description***:
+
+**`create_all_summary_tables`** creates a nice-looking table using mle2 object from a fit of all of these models: `rrpe_fit_mod01r` to `rrpe_fit_mod16r` and `rrpe_fit_mod01h` to `rrpe_fit_mod16h`.
+In addition, it also calculates the confidence intervals using the *population prediction intervals* (see @Bolker2008EcologicalModelsData, chapter 7.5.3). Hard-coded and only useful in this project.
+
+***Parameters***:
+
+- `fit_results`: all fitting results as list
+- `ci_reps = 10000`: number of confidence interval samples
+- `caption_text`: the desired caption text, default is: "All 32 summary tables from \\textit{Ischnura elegans} model fits."
+
+***Required packages***:
+
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral; @Bolker2008EcologicalModelsData]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `kableExtra` [@Zhu2024KableExtraConstructComplex]
+-   `knitr` [@Xie2025KnitrGeneralPurposePackage; @Xie2015DynamicDocumentsKnitr]
+-   `MASS` [@RipleyEtAl2025MASSSupportFunctions]
+
+#### `create_package_info`
+
+***Description***:
+
+**`create_package_info`** creates a nice-looking table as a wrapper around the `sessioninfo` package [@CsardiEtAl2025SessioninfoSessionInformation].
+
+***Parameters***:
+
+- `include_base`: should base packages be included, default = `TRUE`
+- `dependencies`: number of confidence interval samples
+- `caption_text`: the desired caption text, default is: "All loaded R packages that we used in this report, including base packages and dependencies."
+
+***Required packages***:
+
+-   `dplyr` [@WickhamEtAl2023DplyrGrammarData], must be attached
+-   `kableExtra` [@Zhu2024KableExtraConstructComplex]
+-   `knitr` [@Xie2025KnitrGeneralPurposePackage; @Xie2015DynamicDocumentsKnitr]
+-   `sessioninfo` [@CsardiEtAl2025SessioninfoSessionInformation]
+
+#### `plot_mod05r`
+
+***Description***:
+
+**`plot_mod05r`** creates a nice-looking plot for our report and scientific publication. Hard-coded and only useful in this project.
+
+***Parameters***:
+
+- `model_fit`: the mle2 object from the fit performed earlier (must be model 05r!).
+- `include_habitat_pics`: include the habitat pictograms? Default = `TRUE`.
+- `pic_x1`: lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 70.0,  95.0,  70.0,  95.0)`.
+- `pic_x2`: upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 95.0, 120.0,  95.0, 120.0)`.
+- `pic_y1`: lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 22.6,  22.6,  19.4,  19.4)`.
+- `pic_y2`: upper (right) y values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 25.6,  25.6,  22.4,  22.4)`.
+- `ci_reps`: number of samples for the confidence interval lines. Default = `10000`.
+- `ci_levels`: lower and upper confidence limits. Default = `c(0.025, 0.975)`.
+- `x_res`: number of x values for regression line. Default = `1000`.
+- `ylim`: y axis limits. Default = `c(0, 25)`.
+- `pch`: point character. Default = `16`.
+- `cex`: = `0.5`,
+- `ci_col`: color of the confidence bands. Default = `"lightgrey"`.
+- `no_threads`: number of threads that should be used for simulation. Default = `max(c(1,2,5,10,20,40,50)[c(1,2,5,10,20,40,50) <= parallel::detectCores()])`.
+- `export_functions_to_workers`: which functions should be exported to the cpu workers? Default = `"rrpe_sim"`.
+- `journal_style`: Should be the specific journal style be applied? Default = `FALSE`.
+
+***Required packages***:
+
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+-   `doParallel` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `MASS` [@RipleyEtAl2025MASSSupportFunctions]
+-   `png` [@Urbanek2022PngReadWrite]
+-   `RCurl` [@TempleLang2025RCurlGeneralNetwork]
+
+
+#### `plot_mod15h`
+
+***Description***:
+
+**`plot_mod15h`** creates a nice-looking plot for our report and scientific publication. Hard-coded and only useful in this project.
+
+***Parameters***:
+
+- `model_fit`: the mle2 object from the fit performed earlier (must be model 15h!).
+- `include_habitat_pics`: include the habitat pictograms? Default = `TRUE`.
+- `pic_x1`: lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `rep(140.0, 4)`.
+- `pic_x2`: upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `rep(180.0, 4)`.
+- `pic_y1`: lower (left) y values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `rep( 30.0, 4)`.
+- `pic_y2`: upper (right) y values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `rep( 40.0, 4)`.
+- `ci_reps`: number of samples for the confidence interval lines. Default = `10000`.
+- `ci_levels`: lower and upper confidence limits. Default = `c(0.025, 0.975)`.
+- `x_res`: number of x values for regression line. Default = `1000`.
+- `ylim`: y axis limits. Default = `c(0, 40)`.
+- `pch`: point character. Default = `16`.
+- `cex`: = `0.5`,
+- `ci_col`: color of the confidence bands. Default = `"lightgrey"`.
+- `no_threads`: number of threads that should be used for simulation. Default = `max(c(1,2,5,10,20,40,50)[c(1,2,5,10,20,40,50) <= parallel::detectCores()])`.
+- `export_functions_to_workers`: which functions should be exported to the cpu workers? Default = `"rrpe_sim"`.
+- `journal_style`: Should be the specific journal style be applied? Default = `FALSE`.
 
 
 
+#### `plot_mod15h_vs_mod11h`
+
+***Description***:
+
+**`plot_mod15h_vs_mod11h`** creates a nice-looking plot for our report and scientific publication. Hard-coded and only useful in this project.
+
+***Parameters***:
+
+- `model_fit_15h`: the mle2 object from the fit performed earlier (must be model 15h!).
+- `model_fit_11h`: the mle2 object from the fit performed earlier (must be model 11h!).
+- `include_habitat_pics`: include the habitat pictograms? Default = `TRUE`.
+- `pic_x1`: lower (left) x values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 1.500,  1.600,  2.500,  2.600)`.
+- `pic_x2`: upper (right) x values for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 1.900,  2.000,  2.900,  3.000)`.
+- `pic_y1a`: lower (left) y values (plot a)  for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c(15.000, 30.000, 27.500, 14.000)`.
+- `pic_y2a`: upper (right) y values (plot a)  for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c(17.500, 32.500, 30.000, 16.500)`.
+- `pic_y1b`: lower (left) y values (plot b)  for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 0.050,  0.025,  0.030,  0.060)`.
+- `pic_y2b`: upper (right) y values (plot b)  for the 4 habitat pictures, the vector has values for 4 pictograms. Default = `c( 0.055,  0.030,  0.035,  0.065)`.
+- `ci_reps`: number of samples for the confidence interval lines. Default = `10000`.
+- `ci_levels`: lower and upper confidence limits. Default = `c(0.025, 0.975)`.
+- `x_res`: number of x values for regression line. Default = `1000`.
+- `ylim`: y axis limits. Default = `c(13, 40)`.
+- `pch`: point character. Default = `16`.
+- `cex`: = `0.5`,
+- `ci_col`: color of the confidence bands. Default = `"lightgrey"`.
+- `no_threads`: number of threads that should be used for simulation. Default = `max(c(1,2,5,10,20,40,50)[c(1,2,5,10,20,40,50) <= parallel::detectCores()])`.
+- `export_functions_to_workers`: which functions should be exported to the cpu workers? Default = `"rrpe_sim"`.
+- `journal_style`: Should be the specific journal style be applied? Default = `FALSE`.
+
+***Required packages***:
+
+-   `bbmle` [@BolkerEtAl2023BbmleToolsGeneral]
+-   `doParallel` [@MicrosoftWeston2022ForeachProvidesForeach]
+-   `foreach` [@MicrosoftWeston2022ForeachProvidesForeach], must be attached
+-   `MASS` [@RipleyEtAl2025MASSSupportFunctions]
+-   `png` [@Urbanek2022PngReadWrite]
+-   `RCurl` [@TempleLang2025RCurlGeneralNetwork]
 
 ## Funding Information
 

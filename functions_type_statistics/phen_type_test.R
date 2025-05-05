@@ -21,65 +21,28 @@
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>.    #
 ################################################################################
 #' 
-#' @description `phen_type_test` is a wrapper around `frair_test` Pritchard et
-#'     al. (2017a, b) to test for the type of the functional response using the
-#'     proportion of prey eaten as response to the initial prey density. If the
-#'     proportion of prey eaten increases at low prey densities and decreases
-#'     after reaching a maximum, there is evidence for a type III functional
-#'     response (see Juliano 2001). Proportion data is fitted using a binomial
-#'     GLM, but see Crawley (2012), chapter 16 for an introduction to this
-#'     topic.
+#' @description
+#'     find the description including parameters here:
+#'         https://github.com/b-c-r/CRITTERcode/blob/main/README.md
 #'     
-#'     Required packages and their dependencies to be installed:
-#'       - `dplyr` (Wickham et al. 2023)
-#'       - `purrr` (Wickham and Henry 2025)
-#'       - `foreach` (Microsoft and Weston 2022)
-#'       - `frair` (Pritchard et al. 2017b)
-#'     Required packages to be attached:
-#'       - `dplyr` (Wickham et al. 2023)
-#'       - `foreach` (Microsoft and Weston 2022)
+#'     find further details including the full statistics here:
+#'         https://github.com/b-c-r/CRITTERstatistics/blob/main/statisticsReport.pdf
+#'     
+#'     if you are interested in the full scientific paper follow:
+#'         https://doi.org/10.1101/2025.02.22.639633
+#'     
+#'     if you use this code, please cite:
+#'         Rall et al. (2025): Habitat complexity reduces feeding strength of
+#'         freshwater predators (CRITTER) - Code. Zenodo.
+#'         https://doi.org/10.5281/zenodo.14894598
 #' 
-#' @references Crawley (2012) The R Book. Wiley, Chichester, West Sussex, UK
-#' @references Juliano (2001) Nonlinear curve fitting: predation and functional
-#'     response curves. In: Scheiner, Gurevitch (eds.). Design and analysis of
-#'     ecological experiments. 178–196
-#' @references Microsoft and Weston (2022) foreach: provides foreach looping
-#'     construct. Version 1.5.2. https://doi.org/10.32614/CRAN.package.foreach
-#' @references Pritchard et al. (2017a) frair: an R package for fitting and
-#'     comparing consumer functional responses. Methods Ecol Evol 8, 1528-1534.
-#'     https://doi.org/10.1111/2041-210X.12784
-#' @references Pritchard et al. (2017b) frair: tools for functional response
-#'     analysis. Version 0.5.100. https://cran.r-project.org/web/packages/frair/
-#' @references Wickham et al. (2023) dplyr: a grammar of data manipulation.
-#'     Version 1.1.4. https://doi.org/10.32614/CRAN.package.dplyr  
-#' @references Wickham et al. (2023) purrr: functional programming tools.
-#'     Version 1.0.4. https://doi.org/10.32614/CRAN.package.purrr 
-#' 
-#' @param data the input data
-#' @param name_initial the column name
-#' @param name_eaten
-#' @param name_treatments
+#' @return returns a list of frair test results
 #'
 #' @examples
 #' 
-#' library("foreach")
-#' library("dplyr")
-#' source(here::here("functions_phen_test", "phen_type_test.R"))
+#' # find an executable example here:
+#' # https://github.com/b-c-r/CRITTERcode/examples_habitat_statistics/examples_habitat_statistics/phen_type_test_examples.R
 #' 
-#' fr_data <- data.frame(
-#'   n_start =   rep(c(1, 2, 4, 8, 16), 4),
-#'   n_eaten =   c(0,0,2,7,8,1,2,4,6,7,1,1,3,4,4,1,1,4,4,4),
-#'   treatment = c(rep("A", 5), rep("B", 5), rep("A", 5), rep("B", 5)),
-#'   predator = c(rep("Avicularia avicularia", 10), rep("Cicindela gallica", 10))
-#' )
-#' 
-#' phen_type_test(
-#'   data = fr_data,
-#'   name_initial = "n_start",
-#'   name_eaten = "n_eaten",
-#'   name_treatments = "treatment"
-#' )
-#'
 
 phen_type_test <- function(
     data,
