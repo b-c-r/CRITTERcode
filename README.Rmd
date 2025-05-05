@@ -1,7 +1,7 @@
 ---
 title: "Habitat *c*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater p*r*edators (CRITTER) — Code"
 bibliography: references/CRITTERcode.bib
-csl: references/methods-in-ecology-and-evolution.csl
+csl: "https://raw.githubusercontent.com/citation-style-language/styles/refs/heads/master/dependent/journal-of-animal-ecology.csl"
 date: "`r Sys.Date()`"
 output: github_document
 ---
