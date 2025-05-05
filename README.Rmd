@@ -749,6 +749,28 @@ In addition, it also calculates the confidence intervals using the *population p
 -   `png` [@Urbanek2022PngReadWrite]
 -   `RCurl` [@TempleLang2025RCurlGeneralNetwork]
 
+#### `plot_introduction`
+
+***Description***:
+
+**`plot_introduction`** creates a nice-looking overview plot for our scientific publication. Hard-coded and only useful in this project.
+
+***Parameters***:
+
+- `fmax`: maximum feeding rate for example plots. Default = 20.
+- `nhalf`: half saturation density for example plots. Default = 50.
+- `q`: q values for gen FR examples plot. Default = c(0, 0.2, 0.5, 1).
+- `maxN`: maximum prey density. Default = 200.
+- `xres`: number of x-axis values. Default = 1000.
+- `ylim`: y-axis limits. Default = c(0, 30).
+- `xlim`: x-axis limits. Default = c(0, 200).
+- `journal_style`: Should be the specific journal style be applied? Default = `FALSE`.
+
+***Required packages***:
+
+-   `png` [@Urbanek2022PngReadWrite]
+-   `RCurl` [@TempleLang2025RCurlGeneralNetwork]
+
 ## Funding Information
 
 -   Mireia Aranbarri was funded by the **Investigo Programm funded by the NextGenerationEU initiative**.
