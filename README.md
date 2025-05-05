@@ -1469,9 +1469,10 @@ functional response analysis*. CRAN.
 <div id="ref-PritchardEtAl2017FrairPackageFitting" class="csl-entry">
 
 Pritchard, D. W., Paterson, R. A., Bovy, H. C., & Barrios-O’Neill, D.
-(2017). Frair: An R package for fitting and comparing consumer
-functional responses. *Methods in Ecology and Evolution*, *8*(11),
-1528–1534. <https://doi.org/10.1111/2041-210X.12784>
+(2017). <span class="nocase">frair</span>: An R package for fitting and
+comparing consumer functional responses. *Methods in Ecology and
+Evolution*, *8*(11), 1528–1534.
+<https://doi.org/10.1111/2041-210X.12784>
 
 </div>
 
@@ -1547,8 +1548,7 @@ parasitism. *Researches on Population Ecology*, *13*(1), 1–91.
 <div id="ref-TempleLang2025RCurlGeneralNetwork" class="csl-entry">
 
 Temple Lang, D. (2025). *RCurl: General network (HTTP/FTP/...) client
-interface for R*. CRAN. [https://doi.org/
-10.32614/CRAN.package.RCurl](https://doi.org/	10.32614/CRAN.package.RCurl)
+interface for R*. CRAN. <https://doi.org/10.32614/CRAN.package.RCurl>
 
 </div>
 
