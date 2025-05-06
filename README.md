@@ -1,7 +1,8 @@
 Habitat *c*omplexity *r*educes feed*i*ng s*t*reng*t*h of fr*e*shwater
 p*r*edators (CRITTER) — Code
 ================
-2025-05-05
+
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15346225.svg)](https://doi.org/10.5281/zenodo.15346225)
 
 ## Summary
 
@@ -9,8 +10,6 @@ This code is supplementing our preprint article by Aranbarri et al.
 (2025) investigating the effect of habitat complexity on the feeding
 functional response of two freshwater invertebrate predators. Find below
 information on related works.
-
-**Note that this code is still under construction!**
 
 ## License
 
@@ -21,9 +20,27 @@ This code is published under a [**GNU General Public License
 
 If you use our code, please cite us:
 
-Rall et al. (2025): Habitat complexity reduces feeding strength of
-freshwater predators (CRITTER) - Code. Zenodo.
+Rall, B.C., Aranbarri, M., Flores, L., de Guzmán, I., Larrañaga, A., and
+Reiss, J. (2025): Habitat complexity reduces feeding strength of
+freshwater predators (CRITTER) — Code. Zenodo.
 <https://doi.org/10.5281/zenodo.14894598>
+
+Specific version(s):
+
+Rall, B.C., Aranbarri, M., Flores, L., de Guzmán, I., Larrañaga, A., and
+Reiss, J. (2025): Habitat complexity reduces feeding strength of
+freshwater predators (CRITTER) — Code (v0.1.2). Zenodo.
+<https://doi.org/10.5281/zenodo.15346225>
+
+Rall, B.C., Aranbarri, M., Flores, L., de Guzmán, I., Larrañaga, A., and
+Reiss, J. (2025): Complexity reduces feeding strength of freshwater
+predators (CRITTER) - Code (v0.1.1). Zenodo.
+<https://doi.org/10.5281/zenodo.14907486>
+
+Rall, B.C., Aranbarri, M., Flores, L., de Guzmán, I., Larrañaga, A., and
+Reiss, J. (2025): Complexity reduces feeding strength of freshwater
+predators (CRITTER) - Code (v0.1.0). Zenodo.
+<https://doi.org/10.5281/zenodo.14894599>
 
 ## Authors
 
@@ -48,9 +65,9 @@ freshwater predators (CRITTER) - Code. Zenodo.
 - Ioar de Guzmán
   ([0000-0001-8894-8477](https://orcid.org/0000-0001-8894-8477))
   - <mirenioar.deguzman@ehu.eus>
-  - Laboratory of Stream Ecology, Department of Plant Biology and
-    Ecology, Faculty of Science and Technology, University of the Basque
-    Country, UPV/EHU PO Box 644, 48080 Bilbao, Spain
+  - Laboratory of Stream Ecology, Dept. of Plant Biology and Ecology,
+    Faculty of Science and Technology, University of the Basque Country,
+    UPV/EHU PO Box 644, 48080 Bilbao, Spain.
   - INRAE, UMR 1224, Ecologie Comportementale et Biologie des
     Populations de Poissons, Aquapôle, quartier Ibarron, 64310 Saint-Pée
     sur Nivelle, France.
@@ -76,12 +93,12 @@ freshwater predators (CRITTER) - Code. Zenodo.
 - [R-Code on Zenodo](https://doi.org/10.5281/zenodo.14894598) (Rall et
   al., 2025a)
 
-- [R-Code on GitHub](https://github.com/b-c-r/CRITTERdata)
+- [R-Code on GitHub](https://github.com/b-c-r/CRITTERcode)
 
-- [Statistical Report on
+- [Supplemental Statistics Report on
   Zenodo](https://doi.org/10.5281/zenodo.14898819) (Rall et al., 2025b)
 
-- [Statistical Report on
+- [Supplemental Statistics Report on
   GitHub](https://github.com/b-c-r/CRITTERstatistics)
 
 - [Scientific Preprint
@@ -290,9 +307,9 @@ parameters, Jager & Ashauer (2018) suggested creating samples in a
 reasonable parameter range using and choosing the starting parameters
 (from the lowest nll value) from these samples. To reduce the number of
 required samples by keeping the variance of parameter values as wide as
-possible, it is recommended to use Latin hypercube sampling.
+possible, it is recommended to use Latin Hypercube sampling.
 `gen_fr_parms_scan` requires the lhs package (Carnell, 2024). See also
-the description of \[gen_fr_nll\] for further information.
+the description of `gen_fr_nll` for further information.
 
 ***Parameters***:
 
@@ -341,7 +358,7 @@ the rest, including initial parameter value guessing. See the parameters
 section and the code example for more options. If your experiment ran a
 day, but you want to have the maximum feeding rate on an hourly basis,
 you can enter t_end = 24. See also the description of `gen_fr_nll` and
-\[gen_fr_parms_scan\] for further information.
+`gen_fr_parms_scan` for further information.
 
 ***Parameters***:
 
@@ -1302,13 +1319,13 @@ scientific publication. Hard-coded and only useful in this project.
 
 ***Parameters***:
 
-- `fmax`: maximum feeding rate for example plots. Default = 20.
-- `nhalf`: half saturation density for example plots. Default = 50.
-- `q`: q values for gen FR examples plot. Default = c(0, 0.2, 0.5, 1).
-- `maxN`: maximum prey density. Default = 200.
-- `xres`: number of x-axis values. Default = 1000.
-- `ylim`: y-axis limits. Default = c(0, 30).
-- `xlim`: x-axis limits. Default = c(0, 200).
+- `fmax`: maximum feeding rate for example plots. Default = `20`.
+- `nhalf`: half saturation density for example plots. Default = `50`.
+- `q`: q values for gen FR examples plot. Default = `c(0, 0.2, 0.5, 1)`.
+- `maxN`: maximum prey density. Default = `200`.
+- `xres`: number of x-axis values. Default = `1000`.
+- `ylim`: y-axis limits. Default = `c(0, 30)`.
+- `xlim`: x-axis limits. Default = `c(0, 200)`.
 - `journal_style`: Should be the specific journal style be applied?
   Default = `FALSE`.
 
@@ -1408,10 +1425,10 @@ and integration*. CRAN. <https://doi.org/10.32614/CRAN.package.odin>
 <div id="ref-FloresEtAl2025ComplexityReducesFeedingData"
 class="csl-entry">
 
-Flores, L., Reiss, J., Larrañaga, A., Rall, B. C., Aranbarri, M., &
-Guzmán, I. de. (2025). *Habitat complexity reduces feeding strength of
-freshwater predators (CRITTER) — Data*. Zenodo.
-<https://doi.org/10.5281/zenodo.14891980>
+Flores, L., Reiss, J., Larrañaga, A., Rall, B. C., Aranbarri, M., & de
+Guzmán, I. (2025). *Habitat complexity reduces feeding strength of
+freshwater predators (CRITTER) — Data (v0.1.2)*. Zenodo.
+<https://doi.org/10.5281/zenodo.15348769>
 
 </div>
 
@@ -1481,8 +1498,8 @@ class="csl-entry">
 
 Rall, B. C., Aranbarri, M., Flores, L., de Guzmán, I., Larrañaga, A., &
 Reiss, J. (2025a). *Habitat complexity reduces feeding strength of
-freshwater predators (CRITTER) — Code*. Zenodo.
-<https://doi.org/10.5281/zenodo.14894598>
+freshwater predators (CRITTER) — Code (v0.1.2)*. Zenodo.
+<https://doi.org/10.5281/zenodo.15346225>
 
 </div>
 
@@ -1491,8 +1508,8 @@ class="csl-entry">
 
 Rall, B. C., Aranbarri, M., Flores, L., de Guzmán, I., Larrañaga, A., &
 Reiss, J. (2025b). *Habitat complexity reduces feeding strength of
-freshwater predators (CRITTER) — Supplemental Statistics Report*.
-Zenodo. <https://doi.org/10.5281/zenodo.14898820>
+freshwater predators (CRITTER) — Supplemental Statistics Report
+(v.0.1.2)*. Zenodo. <https://doi.org/10.5281/zenodo.15348995>
 
 </div>
 
@@ -1514,7 +1531,7 @@ Real, L. A. (1979). Ecological determinants of functional response.
 <div id="ref-RipleyEtAl2025MASSSupportFunctions" class="csl-entry">
 
 Ripley, B., & Venables, B. (2025). *MASS: Support functions and datasets
-for venables and ripley’s MASS*. CRAN.
+for Venables and Ripley’s MASS*. CRAN.
 <https://doi.org/10.32614/CRAN.package.MASS>
 
 </div>
