@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## Summary
 
-This code is supplementing our preprint article by @AranbarriEtAl2025ComplexityReducesFeeding investigating the effect of habitat complexity on the feeding functional response of two freshwater invertebrate predators. Find below information on related works.
+This code is supplementing our [scientific preprint article](https://doi.org/10.1101/2025.02.22.639633) by @AranbarriEtAl2025ComplexityReducesFeeding investigating the effect of habitat complexity on the feeding functional response of two freshwater invertebrate predators. Find below information on related works.
 
 ## License
 
