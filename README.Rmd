@@ -743,8 +743,6 @@ In addition, it also calculates the confidence intervals using the *population p
 - `pch`: point character. Default = `16`.
 - `cex`: = `0.5`,
 - `ci_col`: color of the confidence bands. Default = `"lightgrey"`.
-- `no_threads`: number of threads that should be used for simulation. Default = `max(c(1,2,5,10,20,40,50)[c(1,2,5,10,20,40,50) <= parallel::detectCores()])`.
-- `export_functions_to_workers`: which functions should be exported to the cpu workers? Default = `"rrpe_sim"`.
 - `journal_style`: Should be the specific journal style be applied? Default = `FALSE`.
 
 ***Required packages***:
