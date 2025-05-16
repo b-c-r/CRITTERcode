@@ -762,8 +762,6 @@ In addition, it also calculates the confidence intervals using the *population p
 
 ***Parameters***:
 
-- `fmax`: maximum feeding rate for example plots. Default = `20`.
-- `nhalf`: half saturation density for example plots. Default = `50`.
 - `q`: q values for gen FR examples plot. Default = `c(0, 0.2, 0.5, 1)`.
 - `maxN`: maximum prey density. Default = `200`.
 - `xres`: number of x-axis values. Default = `1000`.
@@ -773,8 +771,7 @@ In addition, it also calculates the confidence intervals using the *population p
 
 ***Required packages***:
 
--   `png` [@Urbanek2022PngReadWrite]
--   `RCurl` [@TempleLang2025RCurlGeneralNetwork]
+-   `odin` [@FitzJohn2025OdinODEGeneration]
 
 ## Funding Information
 
