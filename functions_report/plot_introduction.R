@@ -41,8 +41,6 @@
 #' 
 
 plot_introduction <- function(
-  fmax = 20,                                                                    # maximum feeding rate
-  nhalf = 50,                                                                   # half saturation density
   q = c(0, 0.2, 0.5, 1),                                                        # q values for gen FR
   maxN = 200,                                                                   # maximum prey density
   xres = 1000,                                                                  # number of points for lines
@@ -55,12 +53,15 @@ plot_introduction <- function(
   # simulate a type II functional response
   ##############################################################################
   
+  fmax = 20
+  nhalf = 50
+  
   N <- seq(0, maxN, length = 1000)
   t2 <- fmax * N / (nhalf + N)
+  t2d1 <- fmax * N / (0.8*nhalf + N)
+  t2d2 <- fmax * N / (0.5*nhalf + N)
   t2e1 <- 0.75*fmax * N / (nhalf + N)
   t2e2 <- 0.50*fmax * N / (nhalf + N)
-  t2f1 <- fmax * N / (0.8*nhalf + N)
-  t2f2 <- fmax * N / (0.4*nhalf + N)
   
   ##############################################################################
   # simulate a generalized functional response
@@ -75,11 +76,11 @@ plot_introduction <- function(
   ##############################################################################
   
   par(
-    mfrow=c(2,3),
-    oma = c( .1,   .1,  .1,  .1),
-    mar = c(4.25, 4.25, .25, .25),
+    mfrow=c(2,2),
+    oma = c( .25,   .25,  .25,  .25),
+    mar = c(4.25, 4.25, 1, 1),
     las = 1,
-    pty = "s"
+    pty = "m"
   )
 
   ##############################################################################
@@ -89,11 +90,13 @@ plot_introduction <- function(
   plot(
     N,
     t2,
-    xlab = expression(paste("prey density ", N, sep ="")),
-    ylab = expression(paste("feeding rate ", F, sep ="")),
+    xlab = "",
+    ylab = "",
     type = "l",
     xlim = xlim,
     ylim = ylim,
+    xaxs = "i",
+    yaxs = "i",
     bty = ifelse(journal_style, "l", "o"),
     tck = ifelse(journal_style, -0.01, NA),
     lwd=3
@@ -127,7 +130,16 @@ plot_introduction <- function(
     labels = expression(paste(aN, sep ="")),
     pos = 4
   )
-
+  
+  title(
+    ylab = expression(paste("feeding rate ", F, sep ="")),
+    line = 2.5,
+  )
+  title(
+    xlab = expression(paste("prey density ", N, sep ="")),
+    line = 2.5,
+  )
+  
   # add plot identifier
   mtext(
     "(a)",
@@ -143,11 +155,13 @@ plot_introduction <- function(
   plot(
     N,
     tg[[1]],
-    xlab = expression(paste("prey density ", N, sep ="")),
-    ylab = expression(paste("feeding rate ", F, sep ="")),
+    xlab = "",
+    ylab = "",
     type = "n",
     xlim = xlim,
     ylim = ylim,
+    xaxs = "i",
+    yaxs = "i",
     bty = ifelse(journal_style, "l", "o"),
     tck = ifelse(journal_style, -0.01, NA),
     lwd=3
@@ -172,6 +186,15 @@ plot_introduction <- function(
     cex = 0.75
   )
   
+  title(
+    ylab = expression(paste("feeding rate ", F, sep ="")),
+    line = 2.5,
+  )
+  title(
+    xlab = expression(paste("prey density ", N, sep ="")),
+    line = 2.5,
+  )
+  
   # add plot identifier
   mtext(
     "(b)",
@@ -183,37 +206,46 @@ plot_introduction <- function(
   ##############################################################################
   # Plot (c)
   ##############################################################################
+
   
   plot(
     N,
-    tg[[1]]/N,
-    xlab = expression(paste("prey density ", N, sep ="")),
-    ylab = expression(paste("predation risk ", F, "/",N, sep ="")),
-    type = "n",
+    t2,
+    xlab = "",
+    ylab = "",
+    type = "l",
     xlim = xlim,
-    ylim = c(0,1),
+    ylim = ylim,
+    xaxs = "i",
+    yaxs = "i",
     bty = ifelse(journal_style, "l", "o"),
     tck = ifelse(journal_style, -0.01, NA),
     lwd=3
   ) # create the plot
   
+  lines(N, t2d1, col = "darkgrey", lty = 2, lwd = 2)
+  lines(N, t2d2, col = "lightgrey", lty = 3, lwd = 2)
   
-  for(i in 1:length(q)){
-    lines(N, tg[[i]]/N, col = rainbow(length(q))[i])
-  }
-  
-  qnames <- foreach(
-    i = 1:length(q),
-    .combine = "c"
-  ) %do% {
-    paste("q = ", q[i], sep = "")
-  }
   legend(
-    "right",
-    legend = qnames,
-    lty = 1,
-    col = rainbow(length(q)),
-    cex = 0.75
+    "topright",
+    legend = c(
+      expression(paste(N[half], " = 50, a = 0.4", sep = "")),
+      expression(paste(N[half], " = 40, a = 0.5", sep = "")),
+      expression(paste(N[half], " = 25, a = 0.8", sep = "")),
+      expression(paste(F[max], " = 20, ", T[h], " = 0.05", sep = ""))
+    ),
+    lty = c(1,2,3, 1),
+    col = c("black","darkgrey","lightgrey", "white"),
+    cex = 0.8
+  )
+  
+  title(
+    ylab = expression(paste("feeding rate ", F, sep ="")),
+    line = 2.5,
+  )
+  title(
+    xlab = expression(paste("prey density ", N, sep ="")),
+    line = 2.5,
   )
   
   # add plot identifier
@@ -222,54 +254,22 @@ plot_introduction <- function(
     adj = .05,
     line = -1.5
   )
-
+  
+  
   ##############################################################################
   # Plot (d)
-  ##############################################################################
-  
-  plot(
-    c(0,1),
-    c(0,1),
-    xlab = "",
-    ylab = "",
-    xaxt = "n",
-    yaxt = "n",
-    type = "n",
-    bty = "n",
-    xaxs = "i"
-  ) # create the plot
-  
-  gh_path <- "https://raw.githubusercontent.com/b-c-r/CRITTERdata/refs/heads/main/"
-  f_path <- "pictures/"
-  png_url <- paste(gh_path, f_path, "all_habitat_levels_numbered.png", sep ="")
-  
-  graphics::rasterImage(
-    png::readPNG(RCurl::getURLContent(png_url)),
-    0,
-    0,
-    1,
-    1
-  )
-  
-  # add plot identifier
-  mtext(
-    "(d)",
-    adj = -.2,
-    line = -1.5
-  )
-  
-  ##############################################################################
-  # Plot (e)
-  ##############################################################################
-  
+  ############################################################################## 
+
   plot(
     N,
     t2,
-    xlab = expression(paste("prey density ", N, sep ="")),
-    ylab = expression(paste("feeding rate ", F, sep ="")),
+    xlab = "",
+    ylab = "",
     type = "l",
     xlim = xlim,
     ylim = ylim,
+    xaxs = "i",
+    yaxs = "i",
     bty = ifelse(journal_style, "l", "o"),
     tck = ifelse(journal_style, -0.01, NA),
     lwd=3
@@ -277,67 +277,99 @@ plot_introduction <- function(
   
   lines(N, t2e1, col = "darkgrey", lty = 2, lwd = 2)
   lines(N, t2e2, col = "lightgrey", lty = 3, lwd = 2)
-
+  
   legend(
     "topright",
     legend = c(
-      paste(expression(F[max]), " = ",     fmax, ", a = ",     fmax/nhalf, sep = ""),
-      paste(expression(F[max]), " = ", .75*fmax, ", a = ", .75*fmax/nhalf, sep = ""),
-      paste(expression(F[max]), " = ", .50*fmax, ", a = ", .50*fmax/nhalf, sep = ""),
-      paste(expression(N[half]), " = ", nhalf, sep = "")
+      expression(paste(F[max], " = 20, ", T[h], " = 0.050, a = 0.4", sep = "")),
+      expression(paste(F[max], " = 15, ", T[h], " = 0.066, a = 0.3", sep = "")),
+      expression(paste(F[max], " = 10, ", T[h], " = 0.100, a = 0.2", sep = "")),
+      expression(paste(N[half], " = 50", sep = ""))
     ),
     lty = c(1,2,3, 1),
     col = c("black","darkgrey","lightgrey", "white"),
-    cex = 0.5
+    cex = 0.8
   )
   
-  # add attack rate:
-  #xa  <- c(0, nhalf*0.8)
-  #ya  <-      fmax/nhalf * xa
-  #ya1 <- 0.75*fmax/nhalf * xa
-  #ya2 <- 0.50*fmax/nhalf * xa
-  #lines(xa, ya,  col = "black", lty = 1)
-  #lines(xa, ya1, col = "darkgrey", lty = 2)
-  #lines(xa, ya2, col = "lightgrey", lty = 3)
+  title(
+    ylab = expression(paste("feeding rate ", F, sep ="")),
+    line = 2.5,
+  )
+  title(
+    xlab = expression(paste("prey density ", N, sep ="")),
+    line = 2.5,
+  )
   
   # add plot identifier
   mtext(
-    "(e)",
+    "(d)",
     adj = .05,
     line = -1.5
   )
   
   
+  
+  
   ##############################################################################
-  # Plot (f)
+  # Plot Inlay 
   ##############################################################################
+  
+  par(fig=c(0.7,0.95,0.83,0.99),
+      new=T,
+      oma = c(0,0,0,0),
+      mar = c(2,2,0,0),
+      pty = "m",
+      cex.axis = 0.5)
   
   plot(
     N,
-    t2,
+    tg[[1]]/N,
     xlab = expression(paste("prey density ", N, sep ="")),
-    ylab = expression(paste("feeding rate ", F, sep ="")),
+    ylab = expression(paste("predation risk ", F, "/",N, sep ="")),
     type = "l",
     xlim = xlim,
-    ylim = ylim,
-    bty = ifelse(journal_style, "l", "o"),
+    ylim = c(0,.41),
+    bty = "l",
     tck = ifelse(journal_style, -0.01, NA),
-    lwd=3
+    lwd=1,
+    xaxt = "n",
+    yaxt = "n"
   ) # create the plot
   
-  lines(N, t2f1, col = "darkgrey", lty = 2, lwd = 2)
-  lines(N, t2f2, col = "lightgrey", lty = 3, lwd = 2)
   
-  legend(
-    "topright",
-    legend = c(
-      paste(expression(N[half]), " = ",    nhalf, ", a = ", fmax/nhalf, sep = ""),
-      paste(expression(N[half]), " = ", .8*nhalf, ", a = ", fmax/(.8*nhalf), sep = ""),
-      paste(expression(N[half]), " = ", .4*nhalf, ", a = ", fmax/(.4*nhalf), sep = ""),
-      paste(expression(F[max]), " = ", fmax, sep = "")
-    ),
-    lty = c(1,2,3, 1),
-    col = c("black","darkgrey","lightgrey", "white"),
+  for(i in 1:length(q)){
+    lines(N, tg[[i]]/N, col = rainbow(length(q))[i])
+  }
+  
+  axis(1, at = seq(0,200,50), labels = rep("",5), tck = -0.01)
+  axis(2, at = seq(0,0.5,0.1), labels = rep("",6), tck = -0.01)
+  
+  text(
+    seq(0,200,50),
+    -0.05,
+    adj = 0.5,
+    labels = seq(0,200,50),
+    xpd = T,
     cex = 0.5
   )
+  text(
+    -18,
+    seq(0,0.5,0.1),
+    adj = 0.5,
+    labels = seq(0,0.5,0.1),
+    xpd = T,
+    cex = 0.5
+  )
+  title(
+    ylab = "predation risk F/N",
+    line = 1,
+    cex.lab = 0.7
+  )
+  title(
+    xlab = "prey density N",
+    line = .4,
+    cex.lab = 0.7
+  )
+
+  
 }
