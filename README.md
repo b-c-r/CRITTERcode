@@ -1293,11 +1293,6 @@ and scientific publication. Hard-coded and only useful in this project.
 - `pch`: point character. Default = `16`.
 - `cex`: = `0.5`,
 - `ci_col`: color of the confidence bands. Default = `"lightgrey"`.
-- `no_threads`: number of threads that should be used for simulation.
-  Default =
-  `max(c(1,2,5,10,20,40,50)[c(1,2,5,10,20,40,50) <= parallel::detectCores()])`.
-- `export_functions_to_workers`: which functions should be exported to
-  the cpu workers? Default = `"rrpe_sim"`.
 - `journal_style`: Should be the specific journal style be applied?
   Default = `FALSE`.
 
@@ -1319,8 +1314,6 @@ scientific publication. Hard-coded and only useful in this project.
 
 ***Parameters***:
 
-- `fmax`: maximum feeding rate for example plots. Default = `20`.
-- `nhalf`: half saturation density for example plots. Default = `50`.
 - `q`: q values for gen FR examples plot. Default = `c(0, 0.2, 0.5, 1)`.
 - `maxN`: maximum prey density. Default = `200`.
 - `xres`: number of x-axis values. Default = `1000`.
@@ -1331,8 +1324,7 @@ scientific publication. Hard-coded and only useful in this project.
 
 ***Required packages***:
 
-- `png` (Urbanek, 2022)
-- `RCurl` (Temple Lang, 2025)
+- `odin` (FitzJohn, 2025)
 
 ## Funding Information
 
