@@ -183,7 +183,7 @@ plot_introduction <- function(
     legend = qnames,
     lty = 1,
     col = rainbow(length(q)),
-    cex = 0.75
+    cex = 0.9
   )
   
   title(
@@ -236,7 +236,7 @@ plot_introduction <- function(
     ),
     lty = c(1,2,3, 1),
     col = c("black","darkgrey","lightgrey", "white"),
-    cex = 0.8
+    cex = 0.9
   )
   
   title(
@@ -288,7 +288,7 @@ plot_introduction <- function(
     ),
     lty = c(1,2,3, 1),
     col = c("black","darkgrey","lightgrey", "white"),
-    cex = 0.8
+    cex = 0.9
   )
   
   title(
@@ -317,9 +317,9 @@ plot_introduction <- function(
   par(fig=c(0.7,0.95,0.83,0.99),
       new=T,
       oma = c(0,0,0,0),
-      mar = c(2,2,0,0),
+      mar = c(2,2,2,2),
       pty = "m",
-      cex.axis = 0.5)
+      cex.axis = 0.75)
   
   plot(
     N,
@@ -342,33 +342,33 @@ plot_introduction <- function(
   }
   
   axis(1, at = seq(0,200,50), labels = rep("",5), tck = -0.01)
-  axis(2, at = seq(0,0.5,0.1), labels = rep("",6), tck = -0.01)
+  axis(2, at = seq(0,0.4,0.1), labels = rep("",5), tck = -0.01)
   
   text(
     seq(0,200,50),
-    -0.05,
+    -0.075,
     adj = 0.5,
     labels = seq(0,200,50),
     xpd = T,
-    cex = 0.5
+    cex = 0.75
   )
   text(
-    -18,
-    seq(0,0.5,0.1),
+    -25,
+    seq(0,0.4,0.1),
     adj = 0.5,
-    labels = seq(0,0.5,0.1),
+    labels = seq(0,0.4,0.1),
     xpd = T,
-    cex = 0.5
+    cex = 0.75
   )
   title(
     ylab = "predation risk F/N",
-    line = 1,
-    cex.lab = 0.7
+    line = 1.2,
+    cex.lab = 0.85
   )
   title(
     xlab = "prey density N",
-    line = .4,
-    cex.lab = 0.7
+    line = .5,
+    cex.lab = 0.85
   )
 
   
