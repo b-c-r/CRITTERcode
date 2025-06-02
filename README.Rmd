@@ -777,7 +777,7 @@ In addition, it also calculates the confidence intervals using the *population p
 
 -   Mireia Aranbarri was funded by the **Investigo Programm funded by the NextGenerationEU initiative**.
 -   Lorea Flores was funded by a grant by the **Spanish Ministry of Education and Culture**.
--   Ioar de Guzmán was funded by the **Spanish Ministry of Science, Innovation and Universities (TED2021-129966B-C31)**.
+-   Ioar de Guzmán was funded by the **Spanish Ministry of Science, Innovation and Universities (TED2021-129966B-C31)** and by the **University of the Basque Country (POSTUPV24/47)**.
 -   Julia Reiss was supported by a **Royal Society of London Starting Grant**.
 -   Björn C. Rall gratefully acknowledges the funding by the **German Science Foundation (DFG) to the Research Unit DynaSym (FOR 5064)**.
 
